@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>notLogView</title>
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="imgFront">
+    <div class="linkFront">
+        <a href="#">Sign up</a>
+        <a href="#">Log in</a>
+    </div>
+    <div class="divLogoFront">
+        <a href="#"><img class="logoFront" src="images/logonotedevantcrop.png" alt="logo épuré"></a>
+    </div>
+    <h1>Where is my band</h1>
+    <h2>Maybe Here</h2>
+</div>
+<section class="searchFront">
+    <label for="groupeSearch">Groupes à proximité</label>
+    <div class="recherche">
+        <input type="search" id="groupeSearch" name="q"
+               aria-label="Search through site content" placeholder="Code postal">
+        <button type="submit">&#x1F50D</button>
+    </div>
+    <section class="noLogResults">
+        <div class="noLogGroupe1">
+            <h2>Nom du groupe 1</h2>
+            <p>distance | style1, style2, style3</p>
+        </div>
+    </section>
+</section>
+</body>
+</html>
