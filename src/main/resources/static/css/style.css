@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.formulaireInscription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    margin: auto;
+}
+
+.formulaireInscription h2 {
+    color: #D6390C;
+    width: 100%;
+    font-family: 'Muli', sans-serif;
+}
+
+.formulaireInscription form {
+    width: 100%;
+}
+
+.formulaireInscription label {
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 20px 7px 2px 7px;
+    background: transparent;
+    font-size: 16px;
+    height: 25px;
+    color : #D6390C;
+    font-weight: bold;
+}
+
+
+.formulaireInscription input[type="text"],
+.formulaireInscription input[type="email"],
+.formulaireInscription input[type="password"],
+.formulaireInscription select {
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font-size: 16px;
+    height: 40px;
+}
+
+.formulaireInscription select {
+    color: #666666;
+}
+
+.formulaireInscription select {
+    color: #666666;
+}
+
+.formulaireInscription input[type="submit"] {
+    background-color: #393E46;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+
+footer {
+    background-color: #222831;
+    color: #FFFFFF;
+}
+
+footer section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+}
+
+footer a {
+    text-decoration: none;
+    color: #FFFFFF
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5px;
+}
+
+footer li {
+    padding-top: 2px;
+}
+
+footer p {
+    margin: 5px 0px;
+    text-align: center;
+}
