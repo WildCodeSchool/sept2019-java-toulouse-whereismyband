@@ -2,82 +2,101 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../static/style.css">
     <title>Title</title>
 </head>
 <body>
     <header>
 
     </header>
-    <div>
-        <img src="https://via.placeholder.com/150"/>
-        <input type="file" id="avatar" name="avatar">
-        <label for="avatar">Avatar</label>
-    </div>
-    <div>
-        <label for="username">Nom d'utilisateur</label>
-        <input type="text" id="username" name="username">
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password">
-        <label for="newpassword">Confirmer le mot de passe</label>
-        <input type="password" id="newpassword" name="newpassword">
-    </div>
-    <div>
-        <select>
-            <option value="Saxophone">Saxophone</option>
-            <option value="Guitare">Guitare</option>
-        </select>
-        <select>
-            <option value="Débutant">Débutant</option>
-            <option value="Intermédiaire">Intermédiaire</option>
-            <option value="Avancé">Avancé</option>
-            <option value="Pro">Pro</option>
-        </select>
-        <select>
-            <option value=Saxophone">Saxophone</option>
-            <option value="Guitare">Guitare</option>
-        </select>
-        <select>
-            <option value="Débutant">Débutant</option>
-            <option value="Intermédiaire">Intermédiaire</option>
-            <option value="Avancé">Avancé</option>
-            <option value="Pro">Pro</option>
-        </select>
-    </div>
-    <div>
-        <span>Jours de disponibilité : </span>
-        <label for="lundi">Lu</label>
-        <input type="checkbox" id="lundi" name="lundi>">
-        <label for="mardi">Ma</label>
-        <input type="checkbox" id="mardi" name="mardi>">
-        <label for="mercredi">Me</label>
-        <input type="checkbox" id="mercredi" name="mercredi>">
-        <label for="jeudi">Je</label>
-        <input type="checkbox" id="jeudi" name="jeudi>">
-        <label for="vendredi">Ve</label>
-        <input type="checkbox" id="vendredi" name="vendredi>">
-        <label for="samedi">Sa</label>
-        <input type="checkbox" id="samedi" name="samedi>">
-        <label for="dimanche">Di</label>
-        <input type="checkbox" id="dimanche" name="dimanche>">
-
-    </div>
-    <div>
-        <label for="postcode">Code postal</label>
-        <input type="text" id="postcode" name="postcode">
-    </div>
-    <div>
-        <span>Je recherche... </span>
-        <div>
-            <label for="jam">une Jam Session !</label>
-            <input type="checkbox" id="jam" name="jam>">
-            <label for="groupe">un Groupe !</label>
-            <input type="checkbox" id="groupe" name="groupe>">
+    <form action="" method="post">
+        <div class="blockAvatarProfile">
+            <div class="avatarImg">
+                <img src="https://via.placeholder.com/90"/>
+            </div>
+            <div class="userAvatar">
+                <label for="avatar">Avatar</label>
+                <input type="file" id="avatar" name="avatar">
+            </div>
         </div>
-    </div>
-    <div>
-        <label for="bio">Ma vie mon oeuvre</label>
-        <input type=textarea" id="bio" name="bio">
-    </div>
+        <div class="blockUserInfo">
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" id="username" name="username" class="fieldAccountInfo">
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" name="password" class="fieldAccountInfo">
+            <label for="newpassword">Confirmation mdp</label>
+            <input type="password" id="newpassword" name="newpassword" class="fieldAccountInfo">
+        </div>
+        <div class="blockUserInstrument">
+            <div class="userSingleInstrument">
+                <select class="fieldInstrument">
+                    <option value="Saxophone">Saxophone</option>
+                    <option value="Guitare">Guitare</option>
+                </select>
+                <select class="fieldLevel">
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                    <option value="Pro">Pro</option>
+                </select>
+            </div>
+            <div class="userSingleInstrument">
+                <select class="fieldInstrument">
+                    <option value=Saxophone">Saxophone</option>
+                    <option value="Guitare">Guitare</option>
+                </select>
+                <select class="fieldLevel"t>
+                    <option value="Débutant">Débutant</option>
+                    <option value="Intermédiaire">Intermédiaire</option>
+                    <option value="Avancé">Avancé</option>
+                    <option value="Pro">Pro</option>
+                </select>
+            </div>
+        </div>
+        <div class="blockUserWeek">
+            <span>Jours de disponibilité</span><br/>
+            <div  class="blockUserDays">
+                <label for="lundi">Lu</label>
+                <input type="checkbox" id="lundi" name="lundi" class="checkbox">
+                <label for="mardi">Ma</label>
+                <input type="checkbox" id="mardi" name="mardi" class="checkbox">
+                <label for="mercredi">Me</label>
+                <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
+                <label for="jeudi">Je</label>
+                <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
+                <label for="vendredi">Ve</label>
+                <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
+                <label for="samedi">Sa</label>
+                <input type="checkbox" id="samedi" name="samedi" class="checkbox">
+                <label for="dimanche">Di</label>
+                <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+            </div>
+        </div>
+        <div class="userPostCode">
+            <label for="postcode">Code postal</label>
+            <input type="text" id="postcode" name="postcode">
+        </div>
+        <div class="userSearch">
+            <span>Je recherche... </span>
+           <div class="test">
+                <div class="searchCheckbox">
+                    <input type="checkbox" id="jam" name="jam" class="checkbox">
+                    <label for="jam">une Jam Session !</label>
+                </div>
+                <div class="searchCheckbox">
+                    <input type="checkbox" id="groupe" name="groupe" class="checkbox">
+                    <label for="groupe">un Groupe !</label>
+                </div>
+           </div>
+        </div>
+        <div class="userBiography">
+            <label for="bio">Ma vie mon oeuvre</label>
+            <input type=textarea" id="bio" name="bio" class="fieldUserBiography">
+        </div>
+        <div class="saveProfile">
+            <input type="submit" value="Sauvegarder" class="saveButton">
+        </div>
+    </form>
     <footer>
 
     </footer>
