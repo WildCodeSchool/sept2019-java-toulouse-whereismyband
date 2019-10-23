@@ -1,21 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-        <meta charset="UTF-8">
-        <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
-        <meta name="description" content="WhereIsMyBand">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-        <script src="../static/JS/modernizr.custom.js"></script>
-        <title>WhereIsMyBand</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="../static/JS/modernizr.custom.js"></script>
+    <title>WhereIsMyBand</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="../static/JS/responsiveslides.min.js"></script>
+    <script>
+        $(function () {
+            // Slideshow 1
+            $("#slider1").responsiveSlides({
+                maxwidth: 800,
+                speed: 800
+            });
+            // Slideshow 2
+            $("#slider2").responsiveSlides({
+                auto: false,
+                pager: true,
+                speed: 300,
+                maxwidth: 540
+            });
+            // Slideshow 3
+            $("#slider3").responsiveSlides({
+                manualControls: '#slider3-pager',
+                maxwidth: 540
+            });
+            // Slideshow 4
+            $("#slider4").responsiveSlides({
+                auto: false,
+                pager: false,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-<div class="newsCarrousel">
-    <!-- TODO : Carrousel-->
-    Ici il doit y avoir un superbe carrousel de news
+<div id="wrapper">
+    <ul class="rslides" id="slider1">
+        <li>
+            <div class="news"><img src="../static/images/musiqueimg.png"/></div>
+        </li>
+        <li>
+            <div class="news"><img src="../static/images/musiqueimg2.png"/></div>
+        </li>
+        <li>
+            <div class="news"><img src="../static/images/musiqueimg3.png"/></div>
+        </li>
+    </ul>
 </div>
 <div class="searchResult">
     <h3>Résultats correspondant à votre profil</h3>
@@ -77,23 +124,37 @@
             <div class="blockUserWeek">
                 <span>Jours de disponibilité</span>
                 <div class="blockUserDays">
-                    <label for="lundi">Lu</label>
-                    <input type="checkbox" id="lundi" name="lundi" class="checkbox">
-                    <label for="mardi">Ma</label>
-                    <input type="checkbox" id="mardi" name="mardi" class="checkbox">
-                    <label for="mercredi">Me</label>
-                    <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
-                    <label for="jeudi">Je</label>
-                    <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
-                    <label for="vendredi">Ve</label>
-                    <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
-                    <label for="samedi">Sa</label>
-                    <input type="checkbox" id="samedi" name="samedi" class="checkbox">
-                    <label for="dimanche">Di</label>
-                    <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+
+                    <div class="eachDay">
+                        <label for="lundi">Lu</label>
+                        <input type="checkbox" id="lundi" name="lundi" class="checkbox">
+                    </div>
+                    <div class="eachDay">
+                        <label for="mardi">Ma</label>
+                        <input type="checkbox" id="mardi" name="mardi" class="checkbox">
+                    </div>
+                    <div class="eachDay">
+                        <label for="mercredi">Me</label>
+                        <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
+                    </div>
+                    <div class="eachDay">
+                        <label for="jeudi">Je</label>
+                        <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
+                    </div>
+                    <div class="eachDay">
+                        <label for="vendredi">Ve</label>
+                        <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
+                    </div>
+                    <div class="eachDay">
+                        <label for="samedi">Sa</label>
+                        <input type="checkbox" id="samedi" name="samedi" class="checkbox">
+                    </div>
+                    <div class="eachDay">
+                        <label for="dimanche">Di</label>
+                        <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+                    </div>
                 </div>
             </div>
-
             <div class="saveProfile">
                 <input type="submit" value="Valider" class="saveButton">
             </div>

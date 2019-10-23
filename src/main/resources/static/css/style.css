@@ -5,7 +5,6 @@
 }
 
 /* page profile disposition*/
-
 .blockAvatarProfile {
     display: flex;
     flex-direction: column;
@@ -69,8 +68,14 @@
 .blockUserDays {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     flex-wrap: wrap;
     margin: 20px 0 15px 0;
+}
+
+.eachDay {
+    display: flex;
+    align-items: center;
 }
 
 .userPostCode {
@@ -265,7 +270,6 @@ input[type="submit"] {
     font-weight: bold;
 }
 
-
 .formulaireInscription input[type="text"],
 .formulaireInscription input[type="email"],
 .formulaireInscription input[type="password"],
@@ -286,7 +290,6 @@ input[type="submit"] {
     color: #666666;
 }
 
-
 .formulaireInscription input[type="submit"] {
     background-color: #393E46;
     display: block;
@@ -298,7 +301,6 @@ input[type="submit"] {
     text-decoration: none;
     border-radius: 10px;
 }
-
 
 footer {
     background-color: #222831;
@@ -457,10 +459,14 @@ a {
     width: 160px;
 }
 
-.newsCarrousel {
+.news {
     height: 30vh;
     border: solid 1px #D6390C;
     margin: 30px 10px;
+}
+
+.news img {
+    width: 100%;
 }
 
 .searchResult {
@@ -469,7 +475,6 @@ a {
     align-items: center;
     margin: 10px;
 }
-
 
 .searchResult h3 {
     color: #D6390C;
@@ -493,16 +498,14 @@ a {
 #searchResultName {
     font-size: 24px;
     font-weight: bold;
-    padding:5px;
+    padding: 5px;
 }
 
 #searchResultDistanceStyle {
-    text-align:right;
-    padding:5px;
+    text-align: right;
+    padding: 5px;
 }
 
-
-/* Overlay style */
 .overlay {
     position: fixed;
     width: 100%;
@@ -512,7 +515,6 @@ a {
     background: #EEEEEE;
 }
 
-/* Overlay closing cross */
 .overlay .overlay-close {
     background-color: #393E46;
     cursor: pointer;
@@ -523,10 +525,8 @@ a {
     position: absolute;
     right: 20px;
     top: 20px;
-
 }
 
-/* Menu style */
 .overlay nav {
     text-align: center;
     position: relative;
@@ -536,7 +536,6 @@ a {
     transform: translateY(-50%);
 }
 
-/* Effects */
 .overlay-slidedown {
     visibility: hidden;
     -webkit-transform: translateY(-100%);
@@ -554,7 +553,7 @@ a {
 }
 
 .searchFilter {
-    width:100%;
+    width: 100%;
 }
 
 #trigger-overlay {
@@ -569,7 +568,6 @@ a {
 .searchForm {
     background-color: transparent;
 }
-
 
 
 #groupSearchNoLog {
@@ -605,22 +603,27 @@ a {
     background-color: #393E46;
 }
 
+.rslides {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: -1;
+}
 
+.rslides li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.rslides li:first-child {
+    position: relative;
+    display: block;
+    float: left;
+}
