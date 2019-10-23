@@ -160,15 +160,15 @@ header {
 .imgFront {
     font-family: 'Muli', sans-serif;
     font-weight: bolder;
-    font-size: 0.8em;
-    background-color: #eeeeee;
+    font-size: 0.9em;
     display: flex;
     flex-flow: column wrap;
     align-items: center;
     width: 100%;
     height: 290px;
-    color: #D6390C;
-    -webkit-text-stroke: 0.5px black;
+    color: whitesmoke;
+    background-image: url("../images/imgFront.png");
+    background-size:cover;
 }
 
 .linkFront {
@@ -182,12 +182,12 @@ header {
 }
 
 .linkFront a {
-    color: #D6390C;
+    color: whitesmoke;
     font-size: medium;
 }
 
 .divLogoFront {
-    width: 80px;
+    width: 90px;
     height: auto;
     font-family: 'Montserrat', sans-serif;
 }
