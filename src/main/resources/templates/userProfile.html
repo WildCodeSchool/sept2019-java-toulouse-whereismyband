@@ -6,7 +6,7 @@
     <title>Where Is My Band</title>
 </head>
 <body>
-<header>
+<header th:replace="header :: header">
     <!-- TO DO : coller le header -->
 </header>
 <h2 class="profilH2">Edition du profil</h2>
@@ -43,10 +43,10 @@
         </div>
         <div class="userSingleInstrument">
             <select id="secondInstrument" class="fieldInstrument">
-                <option value=Saxophone">Saxophone</option>
+                <option value="Saxophone">Saxophone</option>
                 <option value="Guitare">Guitare</option>
             </select>
-            <select id="secondInstrumentLevel" class="fieldLevel" t>
+            <select id="secondInstrumentLevel" class="fieldLevel">
                 <option value="Débutant">Débutant</option>
                 <option value="Intermédiaire">Intermédiaire</option>
                 <option value="Avancé">Avancé</option>
@@ -100,7 +100,7 @@
         <input type="submit" value="Sauvegarder" class="saveButton">
     </div>
 </form>
-<footer>
+<footer th:replace="footer :: footer">
 <!-- TO DO, coller le footer -->
 </footer>
 </body>

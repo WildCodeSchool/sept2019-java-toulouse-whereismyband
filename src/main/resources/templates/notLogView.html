@@ -10,22 +10,22 @@
 <body>
 <div class="imgFront">
     <div class="linkFront">
-        <a href="#">Sign up</a>
-        <a href="#">Log in</a>
+        <a th:href="@{/signup}">Sign up</a>
+        <a th:href="@{/login}">Log in</a>
     </div>
     <div class="divLogoFront">
-        <a href="#"><img class="logoFront" src="images/logonotedevantcrop.png" alt="logo épuré"></a>
+        <a th:href="@{/}"><img class="logoFront" src="images/logonotedevantcrop.png" alt="logo épuré"></a>
     </div>
     <h1>Where is my band</h1>
     <h2>Maybe Here</h2>
 </div>
 <section class="searchNoLog">
     <section class="noLogResults">
-        <div class="searchBarNoLog">
+        <form method="get" th:action="@{/notLogView}" class="searchBarNoLog">
             <input type="search" id="groupSearchNoLog" name="q"
                    aria-label="Search through site content" placeholder="Code postal">
             <button type="submit">&#x1F50D</button>
-        </div>
+        </form>
         <div class="noLogGroup">
             <h2>Nom du groupe 1</h2>
             <p>distance | style1, style2, style3</p>
@@ -36,5 +36,7 @@
         </div>
     </section>
 </section>
+<footer th:replace="footer :: footer">
+</footer>
 </body>
 </html>
