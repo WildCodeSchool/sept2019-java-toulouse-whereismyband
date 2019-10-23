@@ -501,95 +501,75 @@ a {
     padding:5px;
 }
 
-.searchFilter {
-    height: 50vh;
-    width:100%;
-    margin-left:90%
+
+/* Overlay style */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #EEEEEE;
 }
 
-.searchFilterButton {
-    background-color: #D6390C;
+/* Overlay closing cross */
+.overlay .overlay-close {
+    background-color: #393E46;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 10px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+}
+
+/* Menu style */
+.overlay nav {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    height: 60%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* Effects */
+.overlay-slidedown {
+    visibility: hidden;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+    -webkit-transition: -webkit-transform 0.4s ease-in-out, visibility 0s 0.4s;
+    transition: transform 0.4s ease-in-out, visibility 0s 0.4s;
+}
+
+.overlay-slidedown.open {
+    visibility: visible;
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+    -webkit-transition: -webkit-transform 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out;
+}
+
+.searchFilter {
+    width:100%;
+}
+
+#trigger-overlay {
+    background-color: #393E46;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 10px;
 }
 
 .searchForm {
     background-color: transparent;
 }
 
-nav{
-    height: 32px;
-}
-
-#menuToggle
-{
-    display: block;
-    position: relative;
-    top: 0px;
-    right: 0px;
-
-    z-index: 1;
-
-    -webkit-user-select: none;
-    user-select: none;
-}
-
-#menuToggle input
-{
-    display: block;
-    width: 40px;
-    height: 32px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-
-    cursor: pointer;
-
-    opacity: 0; /* hide this */
-    z-index: 2; /* and place it over the hamburger */
-
-    -webkit-touch-callout: none;
-}
-
-#menuToggle img
-{
-    display: block;
-    width: 40px;
-    height: 32px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-}
-
-/*
- * Make this absolute positioned
- * at the top left of the screen
- */
-#menu
-{
-    position: absolute;
-    width: 300px;
-    margin: 0px 50px 0px 0px;
-    padding: 50px;
-    padding-top: 125px;
-
-    background: #ededed;
-    list-style-type: none;
-    -webkit-font-smoothing: antialiased;
-    /* to stop flickering of text in safari */
-
-    transform-origin: 0% 0%;
-    transform: translate(100%, 0);
-
-    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-}
-
-
-/*
- * And let's slide it in from the left
- */
-#menuToggle input:checked ~ div
-{
-    transform: none;
-}
 
 
 #groupSearchNoLog {
@@ -624,3 +604,23 @@ nav{
     justify-content: space-between;
     background-color: #393E46;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
