@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>WhereIsMyBand</title>
+</head>
+<body>
+<div class="formulaireInscription">
+    <h2>Inscription</h2>
+    <form method="post" action="#">
+        <label for="userMail">Email</label>
+        <input type="email" id="userMail" name="userMail" placeholder="votre email"/>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="userPassword" placeholder="Choisissez un mot de passe"/>
+        <input type="password" name="userConfirmPassword" placeholder="Confirmez votre mot de passe"/>
+        <label for="mainInstrument">Instrument principal</label>
+        <select id="mainInstrument" name="mainInstrument">
+            <option value="" disabled selected>Votre instrument principal</option>
+            <option value="1">Instrument 1</option>
+            <option value="2">Instrument 2</option>
+            <option value="3">Instrument 3</option>
+        </select>
+        <select id="level" name="level">
+            <option value="" disabled selected>Votre niveau (pour cet instrument)</option>
+            <option value="1">Amateur</option>
+            <option value="2">Semi-pro</option>
+            <option value="3">Pro</option>
+        </select>
+        <label for="codePostal">Code Postal</label>
+        <input type="text" id="codePostal" placeholder="Entrez votre code postal"/>
+        <input type="submit" value="Valider"/>
+    </form>
+</div>
+</body>
+</html>

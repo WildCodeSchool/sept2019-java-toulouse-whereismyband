@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>WhereIsMyBand</title>
+</head>
+<body>
+<div class="formulaireInscription">
+    <h2>Login</h2>
+    <form method="post" action="#">
+        <label for="userMail">Email</label>
+        <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="userPassword" placeholder="Votre mot de passe"/>
+        <input type="submit" value="Login"/>
+    </form>
+</div>
+</body>
+</html>
