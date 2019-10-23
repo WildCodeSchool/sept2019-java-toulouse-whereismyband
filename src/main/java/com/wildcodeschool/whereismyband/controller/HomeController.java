@@ -11,4 +11,9 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/notLogView")
+    public String notLogView(){
+        return "notLogView";
+    }
+
 }

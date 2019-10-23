@@ -103,7 +103,7 @@ footer li {
 }
 
 footer p {
-    margin: 5px 0px;
+    margin: 5px 0;
     text-align: center;
 }
 
@@ -154,14 +154,16 @@ header {
     padding: 0;
     list-style: none;
     text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .imgFront {
     font-family: 'Muli', sans-serif;
     font-weight: bolder;
+    font-size: 0.8em;
     background-color: #eeeeee;
     display: flex;
-    flex-direction: column;
+    flex-flow: column wrap;
     align-items: center;
     width: 100%;
     height: 290px;
@@ -187,6 +189,7 @@ header {
 .divLogoFront {
     width: 80px;
     height: auto;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .searchFront {
@@ -210,6 +213,47 @@ header {
     text-align: center;
 }
 
+.searchNoLog {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 #groupeSearch {
     width: 160px;
+}
+
+#groupSearchNoLog {
+    width: 110px;
+}
+
+.searchBarNoLog {
+    display: flex;
+    align-self: flex-start;
+}
+
+.noLogResults {
+    width: 90%;
+    max-width: 410px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.noLogGroup {
+    color: #eeeeee;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    height: 100px;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #393E46;
 }
