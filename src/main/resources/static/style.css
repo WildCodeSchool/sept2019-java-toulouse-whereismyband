@@ -1,23 +1,28 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Montserrat', sans-serif;
 }
 
-/* page profile */
+/* page profile disposition*/
 
 .blockAvatarProfile {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
-    margin: 1em 8%;
+    margin: 1rem 8%;
 }
 
 .userAvatar {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.fieldAvatar {
+    margin: 0.4em;
 }
 
 .blockUserInfo {
@@ -29,15 +34,15 @@
 }
 
 .fieldAccountInfo {
-    width: 33%;
-    margin: 0.1em 0;
+    width: 95%;
+    margin: 0.2em 0 0.4em 0;
 }
 
 .blockUserInstrument {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 1em 8%;
+    margin: 1rem 8%;
 }
 
 .userSingleInstrument {
@@ -46,29 +51,30 @@
 }
 
 .fieldInstrument {
-    width: 70%;
+    width: 65%;
     margin: 0.2em 0;
 }
 
 .fieldLevel {
-    width: 30%;
+    width: 35%;
     margin: 0.2em 0;
 }
 
 .blockUserWeek {
-    margin: 1em 8%;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 8%;
 }
 
 .blockUserDays {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin:  0.4em 0;
+    margin: 20px 0 15px 0;
 }
 
 .userPostCode {
-    margin: 1em 8%;
-
+    margin: 1rem 8%;
 }
 
 .userSearch {
@@ -76,7 +82,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    margin: 1em 8%;
+    margin: 1rem 8%;
 }
 
 .test {
@@ -94,23 +100,123 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin: 1em 8%;
-}
-
-.fieldUserBiography {
-    width: 95%;
-    height: 100px;
-    margin: 0.4em 0;
+    margin: 1rem 8%;
 }
 
 .saveProfile {
     display: flex;
     justify-content: flex-end;
-    margin: 1em 8%;
+    margin: 1rem 8%;
+}
+
+.saveButton {
+    width: 100%;
 }
 
 .checkbox {
     margin: 2px;
 }
 
-/* fin css page profil */
+/* fin css page profil disposition*/
+
+/* Stylisation du contenu */
+
+.profilH2 {
+    color: #D6390C;
+    width: 84%;
+    font-family: 'Muli', sans-serif;
+    margin: 1rem 8%;
+    text-align: center;
+}
+
+.blockUserWeek span,
+.userSearch span,
+.blockUserInfo label,
+.blockUserInstrument label,
+.userBiography label,
+.userPostCode label {
+    outline: none;
+    padding: 20px 7px 2px 0px;
+    background: transparent;
+    font-size: 16px;
+    height: 25px;
+    color: #D6390C;
+    font-weight: bold;
+}
+
+.blockUserDays label {
+    color: #393E46;
+    padding: 0;
+}
+
+.userSingleInstrument label {
+    width: 100%;
+}
+
+.blockUserInstrument label {
+    margin-bottom: 10px;
+}
+
+.userSearch span {
+    padding: 0;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="textarea"],
+select {
+    outline: none;
+    width: 100%;
+    padding: 7px 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font-size: 16px;
+    height: 40px;
+    max-width: 638px;
+}
+
+.fieldPostCode {
+    width: 95%;
+}
+
+input[type="textarea"] {
+    outline: none;
+    width: 100%;
+    padding: 7px 0;
+    border: none;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font-size: 16px;
+    height: 100px;
+    max-width: 638px;
+}
+
+.flexBio {
+    display: flex;
+    flex-direction: column;
+
+}
+
+select {
+    color: #666666;
+}
+
+input[type="submit"],
+input[type="file"] {
+    background-color: #393E46;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 10px;
+}

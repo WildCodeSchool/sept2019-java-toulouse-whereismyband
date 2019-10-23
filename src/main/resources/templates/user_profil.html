@@ -6,99 +6,100 @@
     <title>Title</title>
 </head>
 <body>
-    <header>
-
-    </header>
-    <form action="" method="post">
-        <div class="blockAvatarProfile">
-            <div class="avatarImg">
-                <img src="https://via.placeholder.com/90"/>
+<header>
+    <!-- TO DO : coller le header -->
+</header>
+<h2 class="profilH2">Edition du profil</h2>
+<form action="" method="post">
+    <div class="blockAvatarProfile">
+        <div class="avatarImg">
+            <img src="https://via.placeholder.com/90" alt="Avatar User"/>
+        </div>
+        <div class="userAvatar">
+            <label for="avatar">Avatar</label>
+            <input type="file" id="avatar" name="avatar" class="fieldAvatar">
+        </div>
+    </div>
+    <div class="blockUserInfo">
+        <label for="username">Nom d'utilisateur</label>
+        <input type="text" id="username" name="username" class="fieldAccountInfo" placeholder="Votre pseudo">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" class="fieldAccountInfo" placeholder="Mot de passe">
+        <input type="password" id="newpassword" name="newpassword" class="fieldAccountInfo" placeholder="Confirmer le mot de passe">
+    </div>
+    <div class="blockUserInstrument">
+        <label for="mainInstrument">Instrument principal</label>
+        <div class="userSingleInstrument">
+            <select id="mainInstrument" class="fieldInstrument">
+                <option value="Saxophone">Saxophone</option>
+                <option value="Guitare">Guitare</option>
+            </select>
+            <select id="mainInstrumentLevel" class="fieldLevel">
+                <option value="Débutant">Débutant</option>
+                <option value="Intermédiaire">Intermédiaire</option>
+                <option value="Avancé">Avancé</option>
+                <option value="Pro">Pro</option>
+            </select>
+        </div>
+        <div class="userSingleInstrument">
+            <select id="secondInstrument" class="fieldInstrument">
+                <option value=Saxophone">Saxophone</option>
+                <option value="Guitare">Guitare</option>
+            </select>
+            <select id="secondInstrumentLevel" class="fieldLevel" t>
+                <option value="Débutant">Débutant</option>
+                <option value="Intermédiaire">Intermédiaire</option>
+                <option value="Avancé">Avancé</option>
+                <option value="Pro">Pro</option>
+            </select>
+        </div>
+    </div>
+    <div class="blockUserWeek">
+        <span>Jours de disponibilité</span>
+        <div class="blockUserDays">
+            <label for="lundi">Lu</label>
+            <input type="checkbox" id="lundi" name="lundi" class="checkbox">
+            <label for="mardi">Ma</label>
+            <input type="checkbox" id="mardi" name="mardi" class="checkbox">
+            <label for="mercredi">Me</label>
+            <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
+            <label for="jeudi">Je</label>
+            <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
+            <label for="vendredi">Ve</label>
+            <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
+            <label for="samedi">Sa</label>
+            <input type="checkbox" id="samedi" name="samedi" class="checkbox">
+            <label for="dimanche">Di</label>
+            <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+        </div>
+    </div>
+    <div class="userPostCode">
+        <label for="postcode">Code postal</label>
+        <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
+    </div>
+    <div class="userSearch">
+        <span>Je recherche... </span>
+        <div class="test">
+            <div class="searchCheckbox">
+                <input type="checkbox" id="jam" name="jam" class="checkbox">
+                <label for="jam">une Jam Session !</label>
             </div>
-            <div class="userAvatar">
-                <label for="avatar">Avatar</label>
-                <input type="file" id="avatar" name="avatar">
+            <div class="searchCheckbox">
+                <input type="checkbox" id="groupe" name="groupe" class="checkbox">
+                <label for="groupe">un Groupe !</label>
             </div>
         </div>
-        <div class="blockUserInfo">
-            <label for="username">Nom d'utilisateur</label>
-            <input type="text" id="username" name="username" class="fieldAccountInfo">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" name="password" class="fieldAccountInfo">
-            <label for="newpassword">Confirmation mdp</label>
-            <input type="password" id="newpassword" name="newpassword" class="fieldAccountInfo">
-        </div>
-        <div class="blockUserInstrument">
-            <div class="userSingleInstrument">
-                <select class="fieldInstrument">
-                    <option value="Saxophone">Saxophone</option>
-                    <option value="Guitare">Guitare</option>
-                </select>
-                <select class="fieldLevel">
-                    <option value="Débutant">Débutant</option>
-                    <option value="Intermédiaire">Intermédiaire</option>
-                    <option value="Avancé">Avancé</option>
-                    <option value="Pro">Pro</option>
-                </select>
-            </div>
-            <div class="userSingleInstrument">
-                <select class="fieldInstrument">
-                    <option value=Saxophone">Saxophone</option>
-                    <option value="Guitare">Guitare</option>
-                </select>
-                <select class="fieldLevel"t>
-                    <option value="Débutant">Débutant</option>
-                    <option value="Intermédiaire">Intermédiaire</option>
-                    <option value="Avancé">Avancé</option>
-                    <option value="Pro">Pro</option>
-                </select>
-            </div>
-        </div>
-        <div class="blockUserWeek">
-            <span>Jours de disponibilité</span><br/>
-            <div  class="blockUserDays">
-                <label for="lundi">Lu</label>
-                <input type="checkbox" id="lundi" name="lundi" class="checkbox">
-                <label for="mardi">Ma</label>
-                <input type="checkbox" id="mardi" name="mardi" class="checkbox">
-                <label for="mercredi">Me</label>
-                <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
-                <label for="jeudi">Je</label>
-                <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
-                <label for="vendredi">Ve</label>
-                <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
-                <label for="samedi">Sa</label>
-                <input type="checkbox" id="samedi" name="samedi" class="checkbox">
-                <label for="dimanche">Di</label>
-                <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
-            </div>
-        </div>
-        <div class="userPostCode">
-            <label for="postcode">Code postal</label>
-            <input type="text" id="postcode" name="postcode">
-        </div>
-        <div class="userSearch">
-            <span>Je recherche... </span>
-           <div class="test">
-                <div class="searchCheckbox">
-                    <input type="checkbox" id="jam" name="jam" class="checkbox">
-                    <label for="jam">une Jam Session !</label>
-                </div>
-                <div class="searchCheckbox">
-                    <input type="checkbox" id="groupe" name="groupe" class="checkbox">
-                    <label for="groupe">un Groupe !</label>
-                </div>
-           </div>
-        </div>
-        <div class="userBiography">
-            <label for="bio">Ma vie mon oeuvre</label>
-            <input type=textarea" id="bio" name="bio" class="fieldUserBiography">
-        </div>
-        <div class="saveProfile">
-            <input type="submit" value="Sauvegarder" class="saveButton">
-        </div>
-    </form>
-    <footer>
-
-    </footer>
+    </div>
+    <div class="userBiography">
+        <label for="bio">Ma vie mon oeuvre</label>
+        <input type="textarea" id="bio" name="bio" class="fieldUserBiography" placeholder="Votre bio musicale">
+    </div>
+    <div class="saveProfile">
+        <input type="submit" value="Sauvegarder" class="saveButton">
+    </div>
+</form>
+<footer>
+<!-- TO DO, coller le footer -->
+</footer>
 </body>
 </html>
