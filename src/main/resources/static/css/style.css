@@ -71,6 +71,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin: 20px 0 15px 0;
+    justify-content: space-between;
+}
+
+.eachDay {
+    display: flex;
+    align-items: center;
 }
 
 .userPostCode {
