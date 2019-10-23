@@ -205,7 +205,6 @@ input[type="textarea"] {
 .flexBio {
     display: flex;
     flex-direction: column;
-
 }
 
 select {
