@@ -55,9 +55,6 @@
     color: #666666;
 }
 
-.formulaireInscription select {
-    color: #666666;
-}
 
 .formulaireInscription input[type="submit"] {
     background-color: #393E46;
@@ -154,6 +151,9 @@ header {
     padding: 0;
     list-style: none;
     text-decoration: none;
+}
+
+a {
     color: #FFFFFF;
 }
 
@@ -257,4 +257,94 @@ header {
 #searchResultDistanceStyle {
     text-align:right;
     padding:5px;
+}
+
+.searchFilter {
+    height: 50vh;
+    width:100%;
+    margin-left:90%
+}
+
+.searchFilterButton {
+    background-color: #D6390C;
+}
+
+.searchForm {
+    background-color: transparent;
+}
+
+nav{
+    height: 32px;
+}
+
+#menuToggle
+{
+    display: block;
+    position: relative;
+    top: 0px;
+    right: 0px;
+
+    z-index: 1;
+
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#menuToggle input
+{
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    cursor: pointer;
+
+    opacity: 0; /* hide this */
+    z-index: 2; /* and place it over the hamburger */
+
+    -webkit-touch-callout: none;
+}
+
+#menuToggle img
+{
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+    position: absolute;
+    width: 300px;
+    margin: 0px 50px 0px 0px;
+    padding: 50px;
+    padding-top: 125px;
+
+    background: #ededed;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    /* to stop flickering of text in safari */
+
+    transform-origin: 0% 0%;
+    transform: translate(100%, 0);
+
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ div
+{
+    transform: none;
 }
