@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+        <meta name="description" content="WhereIsMyBand">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <title>WhereIsMyBand</title>
+</head>
+<body>
+    <div class="newsCarrousel">
+        <!-- TODO : Carrousel-->
+        Ici il doit y avoir un superbe carrousel de news
+    </div>
+    <div class="searchFilter">
+        <!-- TODO filtre de recherche-->
+    </div>
+    <div class="searchResult">
+        <h3>Résultats correspondant à votre profil</h3>
+        <ul>
+            <!--
+            <li th:each="group : ${search}" th:text="${group.name}">Nom du groupe, Distance, Style</li>
+            TODO supprimer les li ci-dessous quand il y aura la bdd, utilisés pour la mise en page-->
+            <li><a href="#"><div id="searchResultName">Nom du groupe</div><div id="searchResultDistanceStyle">Distance | Style</div></a></li>
+            <li><a href="#"><div id="searchResultName">Nom du groupe</div><div id="searchResultDistanceStyle">Distance | Style</div></a></li>
+            <li><a href="#"><div id="searchResultName">Nom du groupe</div><div id="searchResultDistanceStyle">Distance | Style</div></a></li>
+            <!-- TODO Fin de la suppression-->
+        </ul>
+    </div>
+</body>
+</html>
