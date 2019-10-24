@@ -5,18 +5,10 @@
     <title>frontpage</title>
     <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="imgFront">
-    <div class="linkFront">
-        <a th:href="@{/signup}">Sign up</a>
-        <a th:href="@{/login}">Log in</a>
-    </div>
-    <div class="divLogoFront">
-        <a href="#"><img class="logoFront" src="images/leBonLogo.png" alt="logo épuré"></a>
-    </div>
-    <h1>Where is my band</h1>
-    <h2>Maybe Here</h2>
+<div th:replace="welcome :: welcome">
 </div>
 <section class="searchFront">
     <label for="groupeSearch">Groupes à proximité</label>

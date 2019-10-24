@@ -9,23 +9,24 @@
     <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <script src="../static/js/modernizr.custom.js"></script>
+    <script src="js/modernizr.custom.js"></script>
     <title>WhereIsMyBand</title>
-
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <script src="../static/js/responsiveslides.min.js"></script>
+    <script src="js/responsiveslides.min.js"></script>
 </head>
 <body>
+<header th:replace="header :: header">
+</header>
 <div id="wrapper">
     <ul class="rslides" id="slider1">
         <li>
-            <div class="news"><img src="../static/images/musiqueimg.png"/></div>
+            <div class="news"><img src="images/musiqueimg.png"/></div>
         </li>
         <li>
-            <div class="news"><img src="../static/images/musiqueimg2.png"/></div>
+            <div class="news"><img src="images/musiqueimg2.png"/></div>
         </li>
         <li>
-            <div class="news"><img src="../static/images/musiqueimg3.png"/></div>
+            <div class="news"><img src="images/musiqueimg3.png"/></div>
         </li>
     </ul>
 </div>
@@ -75,10 +76,10 @@
                 </div>
                 <div class="userSingleInstrument">
                     <select id="secondInstrument" class="fieldInstrument">
-                        <option value=Saxophone">Saxophone</option>
+                        <option value="Saxophone">Saxophone</option>
                         <option value="Guitare">Guitare</option>
                     </select>
-                    <select id="secondInstrumentLevel" class="fieldLevel" t>
+                    <select id="secondInstrumentLevel" class="fieldLevel">
                         <option value="Débutant">Débutant</option>
                         <option value="Intermédiaire">Intermédiaire</option>
                         <option value="Avancé">Avancé</option>
@@ -144,8 +145,8 @@
         <!-- TODO Fin de la suppression-->
     </ul>
 </div>
-<script src="../static/js/classie.js"></script>
-<script src="../static/js/demo1.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/demo1.js"></script>
 <script>
     $(function () {
         // Slideshow 1
@@ -181,5 +182,7 @@
         });
     });
 </script>
+<footer th:replace="footer :: footer">
+</footer>
 </body>
 </html>
