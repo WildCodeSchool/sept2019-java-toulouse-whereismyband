@@ -15,7 +15,7 @@
     <script src="js/responsiveslides.min.js"></script>
 </head>
 <body>
-<header th:replace="header :: header">
+<header th:replace="connectHeader :: connectheader">
 </header>
 <div id="wrapper">
     <ul class="rslides" id="slider1">
@@ -32,7 +32,6 @@
 </div>
 <div class="searchResult">
     <h3>Résultats correspondant à votre profil</h3>
-
     <div class="container">
         <section>
             <button id="trigger-overlay" type="button">Filtrer</button>
@@ -41,89 +40,91 @@
     <div class="overlay overlay-slidedown"><!-- effet ici -->
         <button type="button" class="overlay-close">Fermer</button>
         <nav>
-            <div class="userSearch">
-                <div class="userSearchSpan">
-                    <span>Je recherche... </span>
-                </div>
-                <div class="test">
-                    <div class="searchCheckbox">
-                        <input type="checkbox" id="jam" name="jam" class="checkbox">
-                        <label for="jam">une Jam Session !</label>
+            <form th:action="@{/search}" method="post">
+                <div class="userSearch">
+                    <div class="userSearchSpan">
+                        <span>Je recherche... </span>
                     </div>
-                    <div class="searchCheckbox">
-                        <input type="checkbox" id="groupe" name="groupe" class="checkbox">
-                        <label for="groupe">un Groupe !</label>
+                    <div class="test">
+                        <div class="searchCheckbox">
+                            <input type="checkbox" id="jam" name="jam" class="checkbox">
+                            <label for="jam">une Jam Session !</label>
+                        </div>
+                        <div class="searchCheckbox">
+                            <input type="checkbox" id="groupe" name="groupe" class="checkbox">
+                            <label for="groupe">un Groupe !</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="userPostCode">
-                <label for="postcode">Code postal</label>
-                <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
-            </div>
-            <div class="blockUserInstrument">
-                <label for="mainInstrument">Instrument principal</label>
-                <div class="userSingleInstrument">
-                    <select id="mainInstrument" class="fieldInstrument">
-                        <option value="Saxophone">Saxophone</option>
-                        <option value="Guitare">Guitare</option>
-                    </select>
-                    <select id="mainInstrumentLevel" class="fieldLevel">
-                        <option value="Débutant">Débutant</option>
-                        <option value="Intermédiaire">Intermédiaire</option>
-                        <option value="Avancé">Avancé</option>
-                        <option value="Pro">Pro</option>
-                    </select>
+                <div class="userPostCode">
+                    <label for="postcode">Code postal</label>
+                    <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
                 </div>
-                <div class="userSingleInstrument">
-                    <select id="secondInstrument" class="fieldInstrument">
-                        <option value="Saxophone">Saxophone</option>
-                        <option value="Guitare">Guitare</option>
-                    </select>
-                    <select id="secondInstrumentLevel" class="fieldLevel">
-                        <option value="Débutant">Débutant</option>
-                        <option value="Intermédiaire">Intermédiaire</option>
-                        <option value="Avancé">Avancé</option>
-                        <option value="Pro">Pro</option>
-                    </select>
+                <div class="blockUserInstrument">
+                    <label for="mainInstrument">Instrument principal</label>
+                    <div class="userSingleInstrument">
+                        <select id="mainInstrument" class="fieldInstrument">
+                            <option value="Saxophone">Saxophone</option>
+                            <option value="Guitare">Guitare</option>
+                        </select>
+                        <select id="mainInstrumentLevel" class="fieldLevel">
+                            <option value="Débutant">Débutant</option>
+                            <option value="Intermédiaire">Intermédiaire</option>
+                            <option value="Avancé">Avancé</option>
+                            <option value="Pro">Pro</option>
+                        </select>
+                    </div>
+                    <div class="userSingleInstrument">
+                        <select id="secondInstrument" class="fieldInstrument">
+                            <option value="Saxophone">Saxophone</option>
+                            <option value="Guitare">Guitare</option>
+                        </select>
+                        <select id="secondInstrumentLevel" class="fieldLevel">
+                            <option value="Débutant">Débutant</option>
+                            <option value="Intermédiaire">Intermédiaire</option>
+                            <option value="Avancé">Avancé</option>
+                            <option value="Pro">Pro</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="blockUserWeek">
-                <span>Jours de disponibilité</span>
-                <div class="blockUserDays">
+                <div class="blockUserWeek">
+                    <span>Jours de disponibilité</span>
+                    <div class="blockUserDays">
 
-                    <div class="eachDay">
-                        <label for="lundi">Lu</label>
-                        <input type="checkbox" id="lundi" name="lundi" class="checkbox">
-                    </div>
-                    <div class="eachDay">
-                        <label for="mardi">Ma</label>
-                        <input type="checkbox" id="mardi" name="mardi" class="checkbox">
-                    </div>
-                    <div class="eachDay">
-                        <label for="mercredi">Me</label>
-                        <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
-                    </div>
-                    <div class="eachDay">
-                        <label for="jeudi">Je</label>
-                        <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
-                    </div>
-                    <div class="eachDay">
-                        <label for="vendredi">Ve</label>
-                        <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
-                    </div>
-                    <div class="eachDay">
-                        <label for="samedi">Sa</label>
-                        <input type="checkbox" id="samedi" name="samedi" class="checkbox">
-                    </div>
-                    <div class="eachDay">
-                        <label for="dimanche">Di</label>
-                        <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+                        <div class="eachDay">
+                            <label for="lundi">Lu</label>
+                            <input type="checkbox" id="lundi" name="lundi" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="mardi">Ma</label>
+                            <input type="checkbox" id="mardi" name="mardi" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="mercredi">Me</label>
+                            <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="jeudi">Je</label>
+                            <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="vendredi">Ve</label>
+                            <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="samedi">Sa</label>
+                            <input type="checkbox" id="samedi" name="samedi" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="dimanche">Di</label>
+                            <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="saveProfile">
-                <input type="submit" value="Valider" class="saveButton">
-            </div>
+                <div class="saveProfile">
+                    <input type="submit" value="Valider" class="saveButton">
+                </div>
+            </form>
         </nav>
     </div>
     <ul>

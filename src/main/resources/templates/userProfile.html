@@ -2,16 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{css/style.css}" rel="stylesheet" type="text/css" href="../static/css/style.css">
     <title>Where Is My Band</title>
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
-<header th:replace="header :: header">
+<header th:replace="connectHeader :: connectheader">
 </header>
 <h2 class="profilH2">Edition du profil</h2>
-<form action="" method="post">
+<form th:action="@{/search}" method="post">
     <div class="blockAvatarProfile">
         <div class="avatarImg">
             <img src="https://via.placeholder.com/90" alt="Avatar User"/>

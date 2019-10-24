@@ -373,6 +373,10 @@ header {
     height: 120px;
 }
 
+.connectHeader {
+    font-size: 0.8em;
+}
+
 .flexHeader {
     display: flex;
     flex-direction: row-reverse;
