@@ -20,10 +20,4 @@ public class HomeController {
     public String signUp() {
         return "signUp";
     }
-
-
-    @GetMapping("/conHead")
-    public String head() {
-        return "connectHeader";
-    }
 }
