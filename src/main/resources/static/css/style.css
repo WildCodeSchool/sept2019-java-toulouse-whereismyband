@@ -6,7 +6,36 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-/* page profile disposition*/
+a {
+    color: #FFFFFF;
+}
+
+h2 {
+    color: #D6390C;
+    width: 84%;
+    font-family: 'Muli', sans-serif;
+    margin: 1rem 8%;
+    text-align: center;
+}
+
+/* LOGO */
+
+.logo {
+    width: 75px;
+    height: auto;
+}
+
+.logo img {
+    width: 100%;
+    height: 90px;
+}
+
+/* FIN LOGO */
+
+/* FORMULAIRES : sign, login search, user_profile*/
+
+/* dispositions */
+
 .blockAvatarProfile {
     display: flex;
     flex-direction: column;
@@ -81,11 +110,6 @@
     align-items: center;
 }
 
-.eachDay {
-    display: flex;
-    align-items: center;
-}
-
 .userPostCode {
     margin: 1rem 8%;
 }
@@ -130,17 +154,9 @@
     margin: 2px;
 }
 
-/* fin css page profil disposition*/
+/* fin disposition*/
 
-/* Stylisation du contenu */
-
-.profilH2 {
-    color: #D6390C;
-    width: 84%;
-    font-family: 'Muli', sans-serif;
-    margin: 1rem 8%;
-    text-align: center;
-}
+/* stylisation du contenu */
 
 .blockUserWeek span,
 .userSearch span,
@@ -199,21 +215,6 @@ select {
     width: 95%;
 }
 
-input[type="textarea"] {
-    outline: none;
-    width: 100%;
-    padding: 7px 0;
-    border: none;
-    border-bottom-color: currentcolor;
-    border-bottom-style: none;
-    border-bottom-width: medium;
-    border-bottom: 1px solid #ddd;
-    background: transparent;
-    margin-bottom: 10px;
-    font-size: 16px;
-    height: 100px;
-    max-width: 638px;
-}
 
 .flexBio {
     display: flex;
@@ -248,78 +249,11 @@ input[type="submit"] {
     border-radius: 10px;
 }
 
-.signUpForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    margin: auto;
-}
+/* fin stylisation du contenu */
 
-.signUpForm h2 {
-    color: #D6390C;
-    width: 100%;
-    font-family: 'Muli', sans-serif;
-}
+/* FIN FORMULAIRES : sign, login search, user_profile*/
 
-.signUpForm a {
-    align-self: flex-start;
-    margin-top: 0.4em;
-    color: #222831;
-}
-
-.signUpForm a:hover {
-    color: #D6390C;
-}
-
-.signUpForm form {
-    width: 100%;
-}
-
-.signUpForm label {
-    outline: none;
-    display: block;
-    width: 100%;
-    padding: 20px 7px 2px 7px;
-    background: transparent;
-    font-size: 16px;
-    height: 25px;
-    color: #D6390C;
-    font-weight: bold;
-}
-
-.signUpForm input[type="text"],
-.signUpForm input[type="email"],
-.signUpForm input[type="password"],
-.signUpForm select {
-    outline: none;
-    display: block;
-    width: 100%;
-    padding: 7px;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    background: transparent;
-    margin-bottom: 10px;
-    font-size: 16px;
-    height: 40px;
-}
-
-.signUpForm select {
-    color: #666666;
-}
-
-.signUpForm input[type="submit"] {
-    background-color: #393E46;
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    color: #FFFFFF;
-    font-size: 16px;
-    padding: 8px;
-    text-decoration: none;
-    border-radius: 10px;
-}
-
+/* FOOTER */
 footer {
     background-color: #222831;
     color: #FFFFFF;
@@ -355,15 +289,9 @@ footer p {
     text-align: center;
 }
 
-.logo {
-    width: 90px;
-    height: auto;
-}
+/* FIN FOOTER */
 
-.logo img {
-    width: 100%;
-    height: 90px;
-}
+/* HEADER */
 
 header {
     background-image: url("../images/headerTest.png");
@@ -396,9 +324,9 @@ header {
     justify-content: center;
 }
 
-a {
-    color: #FFFFFF;
-}
+/* FIN HEADER */
+
+/* FRAGMENT WELCOME */
 
 .imgFront {
     font-family: 'Muli', sans-serif;
@@ -411,7 +339,7 @@ a {
     height: 290px;
     color: whitesmoke;
     background-image: url("../images/imgFront.png");
-    background-size:cover;
+    background-size: cover;
 }
 
 .linkFront {
@@ -436,38 +364,14 @@ a {
     font-family: 'Montserrat', sans-serif;
 }
 
-.searchFront {
-    width: 100%;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-
 .logoFront {
     width: 100%;
     height: auto;
 }
 
-.searchFront {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
+/* FIN FRAGMENT WELCOME */
 
-.searchNoLog {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#searchGroup {
-    width: 160px;
-}
+/* CAROUSEL PAGE SEARCH */
 
 .news {
     height: 30vh;
@@ -478,6 +382,35 @@ a {
 .news img {
     width: 100%;
 }
+
+.rslides {
+    position: relative;
+    list-style: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: -1;
+}
+
+.rslides li {
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    display: none;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.rslides li:first-child {
+    position: relative;
+    display: block;
+    float: left;
+}
+
+/*FIN CAROUSEL */
+
+/*MISE EN FORME DES RESULTATS PAGES SEARCH ET NOTLOGVIEW*/
 
 .searchResult {
     display: flex;
@@ -505,17 +438,20 @@ a {
     border-radius: 10px;
 }
 
-#searchResultName {
+.searchResultName {
     font-size: 24px;
     font-weight: bold;
     padding: 5px;
 }
 
-#searchResultDistanceStyle {
+.searchResultDistanceStyle {
     text-align: right;
     padding: 5px;
 }
 
+/* FIN MISE EN FORME DES RESULTATS */
+
+/* SLIDE PAGE SEARCH MOBILE */
 .overlay {
     position: fixed;
     width: 100%;
@@ -562,9 +498,6 @@ a {
     transition: transform 0.4s ease-in-out;
 }
 
-.searchFilter {
-    width: 100%;
-}
 
 #trigger-overlay {
     background-color: #393E46;
@@ -575,65 +508,4 @@ a {
     border-radius: 10px;
 }
 
-.searchForm {
-    background-color: transparent;
-}
-
-
-#groupSearchNoLog {
-    width: 110px;
-}
-
-.searchBarNoLog {
-    display: flex;
-    align-self: flex-start;
-}
-
-.noLogResults {
-    width: 90%;
-    max-width: 410px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    align-content: space-around;
-}
-
-.noLogGroup {
-    color: #eeeeee;
-    width: 100%;
-    max-width: 400px;
-    margin-top: 10px;
-    height: 100px;
-    padding: 10px 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #393E46;
-}
-
-.rslides {
-    position: relative;
-    list-style: none;
-    overflow: hidden;
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    z-index: -1;
-}
-
-.rslides li {
-    -webkit-backface-visibility: hidden;
-    position: absolute;
-    display: none;
-    width: 100%;
-    left: 0;
-    top: 0;
-}
-
-.rslides li:first-child {
-    position: relative;
-    display: block;
-    float: left;
-}
+/* FIN SLIDE MOBILE */

@@ -10,21 +10,24 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>WhereIsMyBand</title>
+    <link rel="icon" type="image/png" href="images/leBonLogo.png"/>
 </head>
 <body>
 <header th:replace="header :: header">
 </header>
-<div class="signUpForm">
-    <h2>Login</h2>
-    <a th:href="@{/signup}">Je n'ai pas de compte</a>
-    <form method="post" th:action="@{/search}">
+<h2>Login</h2>
+<a th:href="@{/signup}">Je n'ai pas de compte</a>
+<form method="post" th:action="@{/search}">
+    <div class="blockUserInfo">
         <label for="userMail">Email</label>
         <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
         <label for="password">Mot de passe</label>
         <input type="password" id="password" name="userPassword" placeholder="Votre mot de passe"/>
-        <input type="submit" value="Login"/>
-    </form>
-</div>
+    </div>
+    <div class="saveProfile">
+        <input type="submit" value="Se conecter" class="saveButton">
+    </div>
+</form>
 <footer th:replace="footer :: footer">
 </footer>
 </body>

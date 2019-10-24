@@ -2,32 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>notLogView</title>
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>WhereIsMyBand</title>
+    <link rel="icon" type="image/png" href="images/leBonLogo.png"/>
 </head>
 <body>
 <div th:replace="welcome :: welcome">
 </div>
-<section class="searchNoLog">
-    <section class="noLogResults">
-        <form method="get" th:action="@{/notLogView}" class="searchBarNoLog">
-            <input type="search" id="groupSearchNoLog" name="q"
-                   aria-label="Search through site content" placeholder="Code postal">
-            <button type="submit">&#x1F50D</button>
-        </form>
-        <div class="noLogGroup">
-            <h2>Nom du groupe 1</h2>
-            <p>distance | style1, style2, style3</p>
-        </div>
-        <div class="noLogGroup">
-            <h2>Nom du groupe 2</h2>
-            <p>distance | style1, style2, style3</p>
-        </div>
-    </section>
-</section>
+<div class="searchResult">
+    <h3>Résultats correspondant à votre code postal</h3>
+    <ul>
+        <li><a href="#">
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
+        </a></li>
+        <li><a href="#">
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
+        </a></li>
+        <li><a href="#">
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
+        </a></li>
+    </ul>
+</div>
 <footer th:replace="footer :: footer">
 </footer>
 </body>
