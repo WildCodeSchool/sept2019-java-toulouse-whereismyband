@@ -16,4 +16,8 @@ public class HomeController {
         return "notLogView";
     }
 
+    @GetMapping("/signup")
+    public String signUp(){
+        return "signUp";
+    }
 }
