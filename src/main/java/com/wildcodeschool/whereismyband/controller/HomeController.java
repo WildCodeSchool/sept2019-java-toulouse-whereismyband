@@ -12,7 +12,7 @@ public class HomeController {
     }
 
     @GetMapping("/notLogView")
-    public String notLogView(){
+    public String notLogView() {
         return "notLogView";
     }
 
