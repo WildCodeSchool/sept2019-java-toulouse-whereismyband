@@ -10,35 +10,29 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>WhereIsMyBand</title>
+    <link rel="icon" type="image/png" href="images/leBonLogo.png" />
 </head>
 <body>
-<div class="imgFront">
-    <div class="linkFront">
-        <a href="#">Sign up</a>
-        <a href="#">Log in</a>
-    </div>
-    <div class="divLogoFront">
-        <a href="#"><img class="logoFront" src="images/leBonLogo.png" alt="logo épuré"></a>
-    </div>
-    <h1>Where is my band</h1>
-    <h2>Maybe Here</h2>
+<div th:replace="welcome :: welcome">
 </div>
 <div class="searchResult">
     <h3>Résultats correspondant à votre code postal</h3>
     <ul>
         <li><a href="#">
-            <div id="searchResultName">Nom du groupe</div>
-            <div id="searchResultDistanceStyle">Distance | Style</div>
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
         </a></li>
         <li><a href="#">
-            <div id="searchResultName">Nom du groupe</div>
-            <div id="searchResultDistanceStyle">Distance | Style</div>
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
         </a></li>
         <li><a href="#">
-            <div id="searchResultName">Nom du groupe</div>
-            <div id="searchResultDistanceStyle">Distance | Style</div>
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
         </a></li>
     </ul>
 </div>
+<footer th:replace="footer :: footer">
+</footer>
 </body>
 </html>

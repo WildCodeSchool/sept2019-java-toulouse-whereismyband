@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="imgFront" th:fragment="welcome">
+    <div class="linkFront">
+        <a th:href="@{/signup}">Inscription</a>
+        <a th:href="@{/login}">Connection</a>
+    </div>
+    <div class="divLogoFront">
+        <a th:href="@{/}"><img class="logoFront" src="images/leBonLogo.png" alt="logo épuré"></a>
+    </div>
+    <h1>Where is my band</h1>
+    <h2>Maybe Here</h2>
+</div>
+</body>
+</html>

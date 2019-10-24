@@ -10,11 +10,13 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>WhereIsMyBand</title>
+    <link rel="icon" type="image/png" href="images/leBonLogo.png" />
 </head>
 <body>
 <header th:replace="header :: header"></header>
 <h2>Inscription</h2>
-<form method="post" action="#">
+<a th:href="@{/login}">J'ai déjà un compte</a>
+<form method="post" th:action="@{/search}">
     <div class="blockUserInfo">
         <label for="userMail">Email</label>
         <input type="email" id="userMail" name="userMail" placeholder="votre email"/>
@@ -24,7 +26,6 @@
                placeholder="Confirmer le mot de passe">
     </div>
     <div class="blockUserInstrument">
-        <label for="mainInstrument">Instrument principal</label>
         <div class="userSingleInstrument">
             <select id="mainInstrument" class="fieldInstrument">
                 <option value="" disabled selected>Votre instrument principal</option>
@@ -62,5 +63,8 @@
         <input type="submit" value="Valider" class="saveButton">
     </div>
 </form>
+
+<footer th:replace="footer :: footer">
+</footer>
 </body>
 </html>

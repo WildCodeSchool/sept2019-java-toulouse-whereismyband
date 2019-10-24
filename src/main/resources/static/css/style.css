@@ -102,6 +102,7 @@ h2 {
     justify-content: space-around;
     flex-wrap: wrap;
     margin: 20px 0 15px 0;
+    justify-content: space-between;
 }
 
 .eachDay {
@@ -252,6 +253,79 @@ input[type="submit"] {
 
 /* FIN FORMULAIRES : sign, login search, user_profile*/
 
+/*
+.signUpForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    margin: auto;
+}
+
+.signUpForm h2 {
+    color: #D6390C;
+    width: 100%;
+    font-family: 'Muli', sans-serif;
+}
+
+.signUpForm a {
+    align-self: flex-start;
+    margin-top: 0.4em;
+    color: #222831;
+}
+
+.signUpForm a:hover {
+    color: #D6390C;
+}
+
+.signUpForm form {
+    width: 100%;
+}
+
+.signUpForm label {
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 20px 7px 2px 7px;
+    background: transparent;
+    font-size: 16px;
+    height: 25px;
+    color: #D6390C;
+    font-weight: bold;
+}
+
+.signUpForm input[type="text"],
+.signUpForm input[type="email"],
+.signUpForm input[type="password"],
+.signUpForm select {
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font-size: 16px;
+    height: 40px;
+}
+
+.signUpForm select {
+    color: #666666;
+}
+
+.signUpForm input[type="submit"] {
+    background-color: #393E46;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 16px;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 10px;
+}
+*/
 /* FOOTER */
 footer {
     background-color: #222831;
@@ -300,6 +374,10 @@ header {
     height: 120px;
 }
 
+.connectHeader {
+    font-size: 0.8em;
+}
+
 .flexHeader {
     display: flex;
     flex-direction: row-reverse;
@@ -313,7 +391,7 @@ header {
 }
 
 .pHeader {
-    font-size: 0.8em;
+    font-size: 0.9em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -338,11 +416,11 @@ header {
 }
 
 .linkFront {
-    width: 150px;
+    width: 70%;
     display: flex;
     flex-direction: row;
     align-self: flex-end;
-    justify-content: space-around;
+    justify-content: flex-end;
     padding-top: 5px;
     padding-bottom: 40px;
 }
@@ -350,6 +428,7 @@ header {
 .linkFront a {
     color: whitesmoke;
     font-size: medium;
+    margin-right: 10px;
 }
 
 .divLogoFront {
@@ -365,6 +444,7 @@ header {
 /* FIN FRAGMENT WELCOME */
 
 /* CAROUSEL PAGE SEARCH */
+
 .news {
     height: 30vh;
     border: solid 1px #D6390C;
@@ -430,13 +510,13 @@ header {
     border-radius: 10px;
 }
 
-#searchResultName {
+.searchResultName {
     font-size: 24px;
     font-weight: bold;
     padding: 5px;
 }
 
-#searchResultDistanceStyle {
+.searchResultDistanceStyle {
     text-align: right;
     padding: 5px;
 }
@@ -501,162 +581,3 @@ header {
 }
 
 /* FIN SLIDE MOBILE */
-
-
-
-/*
-.formulaireInscription {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    margin: auto;
-}
-
-.formulaireInscription h2 {
-    color: #D6390C;
-    width: 100%;
-    font-family: 'Muli', sans-serif;
-}
-
-.formulaireInscription form {
-    width: 100%;
-}
-
-.formulaireInscription label {
-    outline: none;
-    display: block;
-    width: 100%;
-    padding: 20px 7px 2px 7px;
-    background: transparent;
-    font-size: 16px;
-    height: 25px;
-    color: #D6390C;
-    font-weight: bold;
-}
-
-.formulaireInscription input[type="text"],
-.formulaireInscription input[type="email"],
-.formulaireInscription input[type="password"],
-.formulaireInscription select {
-    outline: none;
-    display: block;
-    width: 100%;
-    padding: 7px;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    background: transparent;
-    margin-bottom: 10px;
-    font-size: 16px;
-    height: 40px;
-}
-
-.formulaireInscription select {
-    color: #666666;
-}
-
-.formulaireInscription input[type="submit"] {
-    background-color: #393E46;
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    color: #FFFFFF;
-    font-size: 16px;
-    padding: 8px;
-    text-decoration: none;
-    border-radius: 10px;
-}
-
- */
-
-
-/*
-.searchFront {
-    width: 100%;
-    height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-}
-
-
-
-.searchFront {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.searchNoLog {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#groupeSearch {
-    width: 160px;
-}
-*/
-
-/*
-.searchForm {
-    background-color: transparent;
-}
-
-
-#groupSearchNoLog {
-    width: 110px;
-}
-
-.searchBarNoLog {
-    display: flex;
-    align-self: flex-start;
-}
-
-.noLogResults {
-    width: 90%;
-    max-width: 410px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    align-content: space-around;
-}
-
-.noLogGroup {
-    color: #eeeeee;
-    width: 100%;
-    max-width: 400px;
-    margin-top: 10px;
-    height: 100px;
-    padding: 10px 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #393E46;
-}
-
- */
-
-/*
-input[type="textarea"] {
-    outline: none;
-    width: 100%;
-    padding: 7px 0;
-    border: none;
-    border-bottom-color: currentcolor;
-    border-bottom-style: none;
-    border-bottom-width: medium;
-    border-bottom: 1px solid #ddd;
-    background: transparent;
-    margin-bottom: 10px;
-    font-size: 16px;
-    height: 100px;
-    max-width: 638px;
-}
-*/

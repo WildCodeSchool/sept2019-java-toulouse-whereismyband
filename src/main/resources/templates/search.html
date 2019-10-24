@@ -9,23 +9,25 @@
     <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-    <script src="../static/js/modernizr.custom.js"></script>
+    <script src="js/modernizr.custom.js"></script>
     <title>WhereIsMyBand</title>
-
+    <link rel="icon" type="image/png" href="images/leBonLogo.png" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <script src="../static/js/responsiveslides.min.js"></script>
+    <script src="js/responsiveslides.min.js"></script>
 </head>
 <body>
+<header th:replace="connectHeader :: connectheader">
+</header>
 <div id="wrapper">
     <ul class="rslides" id="slider1">
         <li>
-            <div class="news"><img src="../static/images/musiqueimg.png"/></div>
+            <div class="news"><img src="images/musiqueimg.png"/></div>
         </li>
         <li>
-            <div class="news"><img src="../static/images/musiqueimg2.png"/></div>
+            <div class="news"><img src="images/musiqueimg2.png"/></div>
         </li>
         <li>
-            <div class="news"><img src="../static/images/musiqueimg3.png"/></div>
+            <div class="news"><img src="images/musiqueimg3.png"/></div>
         </li>
     </ul>
 </div>
@@ -39,7 +41,7 @@
     <div class="overlay overlay-slidedown">
         <button type="button" class="overlay-close">Fermer</button>
         <nav>
-            <form method="post" action="">
+            <form th:action="@{/search}" method="post">
                 <div class="userSearch">
                     <div class="userSearchSpan">
                         <span>Je recherche... </span>
@@ -132,22 +134,22 @@
         <li th:each="group : ${search}" th:text="${group.name}">Nom du groupe, Distance, Style</li>
         TODO supprimer les li ci-dessous quand il y aura la bdd, utilisés pour la mise en page-->
         <li><a href="#">
-            <div id="searchResultName">Nom du groupe</div>
-            <div id="searchResultDistanceStyle">Distance | Style</div>
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
         </a></li>
         <li><a href="#">
-            <div id="searchResultName">Nom du groupe</div>
-            <div id="searchResultDistanceStyle">Distance | Style</div>
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
         </a></li>
         <li><a href="#">
-            <div id="searchResultName">Nom du groupe</div>
-            <div id="searchResultDistanceStyle">Distance | Style</div>
+            <div class="searchResultName">Nom du groupe</div>
+            <div class="searchResultDistanceStyle">Distance | Style</div>
         </a></li>
         <!-- TODO Fin de la suppression-->
     </ul>
 </div>
-<script src="../static/js/classie.js"></script>
-<script src="../static/js/demo1.js"></script>
+<script src="js/classie.js"></script>
+<script src="js/demo1.js"></script>
 <script>
     $(function () {
         // Slideshow 1
@@ -183,5 +185,7 @@
         });
     });
 </script>
+<footer th:replace="footer :: footer">
+</footer>
 </body>
 </html>
