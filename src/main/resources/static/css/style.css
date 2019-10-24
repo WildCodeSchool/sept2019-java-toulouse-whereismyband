@@ -1,6 +1,8 @@
 * {
     margin: 0;
     padding: 0;
+    list-style: none;
+    text-decoration: none;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -71,6 +73,12 @@
     justify-content: space-around;
     flex-wrap: wrap;
     margin: 20px 0 15px 0;
+    justify-content: space-between;
+}
+
+.eachDay {
+    display: flex;
+    align-items: center;
 }
 
 .eachDay {
@@ -240,7 +248,7 @@ input[type="submit"] {
     border-radius: 10px;
 }
 
-.formulaireInscription {
+.signUpForm {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -248,17 +256,27 @@ input[type="submit"] {
     margin: auto;
 }
 
-.formulaireInscription h2 {
+.signUpForm h2 {
     color: #D6390C;
     width: 100%;
     font-family: 'Muli', sans-serif;
 }
 
-.formulaireInscription form {
+.signUpForm a {
+    align-self: flex-start;
+    margin-top: 0.4em;
+    color: #222831;
+}
+
+.signUpForm a:hover {
+    color: #D6390C;
+}
+
+.signUpForm form {
     width: 100%;
 }
 
-.formulaireInscription label {
+.signUpForm label {
     outline: none;
     display: block;
     width: 100%;
@@ -270,10 +288,10 @@ input[type="submit"] {
     font-weight: bold;
 }
 
-.formulaireInscription input[type="text"],
-.formulaireInscription input[type="email"],
-.formulaireInscription input[type="password"],
-.formulaireInscription select {
+.signUpForm input[type="text"],
+.signUpForm input[type="email"],
+.signUpForm input[type="password"],
+.signUpForm select {
     outline: none;
     display: block;
     width: 100%;
@@ -286,11 +304,11 @@ input[type="submit"] {
     height: 40px;
 }
 
-.formulaireInscription select {
+.signUpForm select {
     color: #666666;
 }
 
-.formulaireInscription input[type="submit"] {
+.signUpForm input[type="submit"] {
     background-color: #393E46;
     display: block;
     width: 100%;
@@ -355,6 +373,10 @@ header {
     height: 120px;
 }
 
+.connectHeader {
+    font-size: 0.8em;
+}
+
 .flexHeader {
     display: flex;
     flex-direction: row-reverse;
@@ -372,14 +394,6 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-}
-
-*, a, ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    font-family: 'Montserrat', sans-serif;
 }
 
 a {
@@ -401,11 +415,11 @@ a {
 }
 
 .linkFront {
-    width: 150px;
+    width: 70%;
     display: flex;
     flex-direction: row;
     align-self: flex-end;
-    justify-content: space-around;
+    justify-content: flex-end;
     padding-top: 5px;
     padding-bottom: 40px;
 }
@@ -413,6 +427,7 @@ a {
 .linkFront a {
     color: whitesmoke;
     font-size: medium;
+    margin-right: 10px;
 }
 
 .divLogoFront {
@@ -450,7 +465,7 @@ a {
     justify-content: center;
 }
 
-#groupeSearch {
+#searchGroup {
     width: 160px;
 }
 

@@ -2,15 +2,17 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{css/style.css}" rel="stylesheet" type="text/css" href="../static/css/style.css">
     <title>Where Is My Band</title>
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
-<header>
-    <!-- TO DO : coller le header -->
+<header th:replace="connectHeader :: connectheader">
 </header>
 <h2 class="profilH2">Edition du profil</h2>
-<form action="" method="post">
+<form th:action="@{/search}" method="post">
     <div class="blockAvatarProfile">
         <div class="avatarImg">
             <img src="https://via.placeholder.com/90" alt="Avatar User"/>
@@ -43,10 +45,10 @@
         </div>
         <div class="userSingleInstrument">
             <select id="secondInstrument" class="fieldInstrument">
-                <option value=Saxophone">Saxophone</option>
+                <option value="Saxophone">Saxophone</option>
                 <option value="Guitare">Guitare</option>
             </select>
-            <select id="secondInstrumentLevel" class="fieldLevel" t>
+            <select id="secondInstrumentLevel" class="fieldLevel">
                 <option value="Débutant">Débutant</option>
                 <option value="Intermédiaire">Intermédiaire</option>
                 <option value="Avancé">Avancé</option>
@@ -57,20 +59,34 @@
     <div class="blockUserWeek">
         <span>Jours de disponibilité</span>
         <div class="blockUserDays">
-            <label for="lundi">Lu</label>
-            <input type="checkbox" id="lundi" name="lundi" class="checkbox">
-            <label for="mardi">Ma</label>
-            <input type="checkbox" id="mardi" name="mardi" class="checkbox">
-            <label for="mercredi">Me</label>
-            <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
-            <label for="jeudi">Je</label>
-            <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
-            <label for="vendredi">Ve</label>
-            <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
-            <label for="samedi">Sa</label>
-            <input type="checkbox" id="samedi" name="samedi" class="checkbox">
-            <label for="dimanche">Di</label>
-            <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+            <div class="eachDay">
+                <label for="lundi">Lu</label>
+                <input type="checkbox" id="lundi" name="lundi" class="checkbox">
+            </div>
+            <div class="eachDay">
+                <label for="mardi">Ma</label>
+                 <input type="checkbox" id="mardi" name="mardi" class="checkbox">
+            </div>
+            <div class="eachDay">
+                <label for="mercredi">Me</label>
+                <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
+            </div>
+            <div class="eachDay">
+                <label for="jeudi">Je</label>
+                <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
+            </div>
+            <div class="eachDay">
+                <label for="vendredi">Ve</label>
+                <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
+            </div>
+            <div class="eachDay">
+                <label for="samedi">Sa</label>
+                <input type="checkbox" id="samedi" name="samedi" class="checkbox">
+            </div>
+            <div class="eachDay">
+                <label for="dimanche">Di</label>
+                <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+            </div>
         </div>
     </div>
     <div class="userPostCode">
@@ -100,8 +116,7 @@
         <input type="submit" value="Sauvegarder" class="saveButton">
     </div>
 </form>
-<footer>
-<!-- TO DO, coller le footer -->
+<footer th:replace="footer :: footer">
 </footer>
 </body>
 </html>

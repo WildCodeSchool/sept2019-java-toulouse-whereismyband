@@ -6,12 +6,13 @@
     <link href="../static/css/style.css" th:href="@{css/style.css}" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 <header th:fragment="header">
     <div class="flexHeader">
         <div class="pHeader"><p>Where is my band</p></div>
-        <div class="logo"><a href="#"><img src="images/leBonLogo.png" alt="logo épuré"/></a></div>
+        <div class="logo"><a th:href="@{/}"><img src="images/leBonLogo.png" alt="logo épuré"/></a></div>
     </div>
 </header>
 </body>

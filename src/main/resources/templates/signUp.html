@@ -12,10 +12,12 @@
     <title>WhereIsMyBand</title>
 </head>
 <body>
-<header th:replace="header :: header"></header>
-<div class="formulaireInscription">
+<header th:replace="header :: header">
+</header>
+<div class="signUpForm">
     <h2>Inscription</h2>
-    <form method="post" action="#">
+    <a th:href="@{/login}">J'ai déjà un compte</a>
+    <form method="post" th:action="@{/search}">
         <label for="userMail">Email</label>
         <input type="email" id="userMail" name="userMail" placeholder="votre email"/>
         <label for="password">Mot de passe</label>
@@ -39,5 +41,7 @@
         <input type="submit" value="Valider"/>
     </form>
 </div>
+<footer th:replace="footer :: footer">
+</footer>
 </body>
 </html>

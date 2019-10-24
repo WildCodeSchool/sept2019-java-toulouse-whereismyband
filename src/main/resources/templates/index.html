@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>frontpage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="imgFront">
-    <div class="linkFront">
-        <a href="#">Sign up</a>
-        <a href="#">Log in</a>
-    </div>
-    <div class="divLogoFront">
-        <a href="#"><img class="logoFront" src="images/leBonLogo.png" alt="logo épuré"></a>
-    </div>
-    <h1>Where is my band</h1>
-    <h2>Maybe Here</h2>
+<div th:replace="welcome :: welcome">
 </div>
 <section class="searchFront">
     <label for="groupeSearch">Groupes à proximité</label>
-    <div class="recherche">
-        <input type="search" id="groupeSearch" name="q"
+    <form method="get" th:action="@{/notLogView}" class="recherche">
+        <input type="search" id="searchGroup" name="q"
                aria-label="Search through site content" placeholder="Code postal">
         <button type="submit">&#x1F50D</button>
-    </div>
+    </form>
 </section>
+<footer th:replace="footer :: footer">
+</footer>
 </body>
 </html>
