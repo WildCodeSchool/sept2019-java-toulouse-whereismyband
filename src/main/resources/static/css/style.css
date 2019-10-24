@@ -253,79 +253,6 @@ input[type="submit"] {
 
 /* FIN FORMULAIRES : sign, login search, user_profile*/
 
-/*
-.signUpForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    margin: auto;
-}
-
-.signUpForm h2 {
-    color: #D6390C;
-    width: 100%;
-    font-family: 'Muli', sans-serif;
-}
-
-.signUpForm a {
-    align-self: flex-start;
-    margin-top: 0.4em;
-    color: #222831;
-}
-
-.signUpForm a:hover {
-    color: #D6390C;
-}
-
-.signUpForm form {
-    width: 100%;
-}
-
-.signUpForm label {
-    outline: none;
-    display: block;
-    width: 100%;
-    padding: 20px 7px 2px 7px;
-    background: transparent;
-    font-size: 16px;
-    height: 25px;
-    color: #D6390C;
-    font-weight: bold;
-}
-
-.signUpForm input[type="text"],
-.signUpForm input[type="email"],
-.signUpForm input[type="password"],
-.signUpForm select {
-    outline: none;
-    display: block;
-    width: 100%;
-    padding: 7px;
-    border: none;
-    border-bottom: 1px solid #ddd;
-    background: transparent;
-    margin-bottom: 10px;
-    font-size: 16px;
-    height: 40px;
-}
-
-.signUpForm select {
-    color: #666666;
-}
-
-.signUpForm input[type="submit"] {
-    background-color: #393E46;
-    display: block;
-    width: 100%;
-    cursor: pointer;
-    color: #FFFFFF;
-    font-size: 16px;
-    padding: 8px;
-    text-decoration: none;
-    border-radius: 10px;
-}
-*/
 /* FOOTER */
 footer {
     background-color: #222831;
@@ -412,7 +339,7 @@ header {
     height: 290px;
     color: whitesmoke;
     background-image: url("../images/imgFront.png");
-    background-size:cover;
+    background-size: cover;
 }
 
 .linkFront {
@@ -441,6 +368,7 @@ header {
     width: 100%;
     height: auto;
 }
+
 /* FIN FRAGMENT WELCOME */
 
 /* CAROUSEL PAGE SEARCH */
