@@ -10,25 +10,31 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>WhereIsMyBand</title>
-    <link rel="icon" type="image/png" href="images/leBonLogo.png"/>
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
 </head>
 <body>
-<header th:replace="header :: header">
-</header>
-<h2>Login</h2>
-<a th:href="@{/signup}">Je n'ai pas de compte</a>
-<form method="post" th:action="@{/search}">
-    <div class="blockUserInfo">
-        <label for="userMail">Email</label>
-        <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
-        <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="userPassword" placeholder="Votre mot de passe"/>
+<div class="globalContainer">
+    <header th:replace="header :: header">
+    </header>
+    <div class="mainContent">
+        <h2>Login</h2>
+        <div class="blockUserInfo">
+            <a th:href="@{/signup}">Je n'ai pas de compte</a>
+        </div>
+        <form method="post" th:action="@{/search}">
+            <div class="blockUserInfo">
+                <label for="userMail">Email</label>
+                <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="userPassword" placeholder="Votre mot de passe"/>
+            </div>
+            <div class="saveProfile">
+                <input type="submit" value="Se connecter" class="saveButton">
+            </div>
+        </form>
     </div>
-    <div class="saveProfile">
-        <input type="submit" value="Se conecter" class="saveButton">
-    </div>
-</form>
-<footer th:replace="footer :: footer">
-</footer>
+    <footer th:replace="footer :: footer">
+    </footer>
+</div>
 </body>
 </html>

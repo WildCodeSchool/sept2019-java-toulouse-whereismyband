@@ -10,12 +10,14 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>WhereIsMyBand</title>
-    <link rel="icon" type="image/png" href="images/leBonLogo.png"/>
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
 </head>
 <body>
+<div class="globalContainer">
 <header th:replace="connectHeader :: connectheader">
 </header>
-<h2>Edition du profil</h2>
+    <div class="mainContent">
+        <h2>Edition du profil</h2>
 <form th:action="@{/search}" method="post">
     <div class="blockAvatarProfile">
         <div class="avatarImg">
@@ -35,7 +37,7 @@
                placeholder="Confirmer le mot de passe">
     </div>
     <div class="blockUserInstrument">
-        <label for="mainInstrument">Instrument principal</label>
+        <label for="mainInstrument">Mes instruments</label>
         <div class="userSingleInstrument">
             <select id="mainInstrument" class="fieldInstrument">
                 <option value="Saxophone">Saxophone</option>
@@ -121,7 +123,9 @@
         <input type="submit" value="Sauvegarder" class="saveButton">
     </div>
 </form>
+    </div>
 <footer th:replace="footer :: footer">
 </footer>
+</div>
 </body>
 </html>
