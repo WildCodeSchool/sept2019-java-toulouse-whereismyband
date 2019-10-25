@@ -10,20 +10,27 @@
     <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
     <title>WhereIsMyBand</title>
-    <link rel="icon" type="image/png" href="images/leBonLogo.png"/>
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
 </head>
 <body>
-<div th:replace="welcome :: welcome">
+<div class="globalContainer">
+    <div class="mainContent">
+        <div th:replace="welcome :: welcome">
+        </div>
+        <section class="searchFront">
+            <form method="get" th:action="@{/vue-non-connectee}" class="recherche">
+                <div class="userPostCode">
+                    <label for="postcode">Groupes à proximité</label>
+                    <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
+                </div>
+                <div class="saveProfile">
+                    <input type="submit" value="Valider" class="saveButton">
+                </div>
+            </form>
+        </section>
+    </div>
+    <footer th:replace="footer :: footer">
+    </footer>
 </div>
-<section class="searchFront">
-    <form method="get" th:action="@{/vue-non-connectee}" class="recherche">
-        <label for="searchGroup">Groupes à proximité</label>
-        <input type="search" id="searchGroup" name="q"
-               aria-label="Search through site content" placeholder="Code postal">
-        <button type="submit">&#x1F50D</button>
-    </form>
-</section>
-<footer th:replace="footer :: footer">
-</footer>
 </body>
 </html>
