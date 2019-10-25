@@ -225,11 +225,6 @@ select {
     max-width: 638px;
 }
 
-.fieldPostCode {
-    width: 95%;
-}
-
-
 .flexBio {
     display: flex;
     flex-direction: column;
@@ -332,7 +327,7 @@ header {
 }
 
 .pHeader {
-    font-size: 0.9em;
+    font-size: 0.8em;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -569,4 +564,23 @@ header {
 .validateNotLog {
     display: flex;
     align-items: center;
+}
+
+@media screen and (min-width: 761px) {
+    .mainContentLogSign {
+        width: 50%;
+        align-self: center;
+    }
+
+    .pHeader {
+        font-size: 0.9em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="textarea"],
+    select {
+       max-width: 1200px;
+    }
 }
