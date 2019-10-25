@@ -20,7 +20,7 @@
         <div class="searchResult">
             <h3>Résultats correspondant à votre code postal</h3>
             <section class="searchFrontNotLog">
-                <form method="get" th:action="@{/notLogView}" class="rechercheNotLog">
+                <form method="get" th:action="@{/vue-non-connectee}" class="rechercheNotLog">
                     <div class="userPostCode">
                         <label for="postcode"></label>
                         <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
@@ -31,15 +31,15 @@
                 </form>
             </section>
             <ul>
-                <li><a th:href="@{/signup}">
+                <li><a th:href="@{/inscription}">
                     <div class="searchResultName">Nom du groupe</div>
                     <div class="searchResultDistanceStyle">Distance | Style</div>
                 </a></li>
-                <li><a th:href="@{/signup}">
+                <li><a th:href="@{/inscription}">
                     <div class="searchResultName">Nom du groupe</div>
                     <div class="searchResultDistanceStyle">Distance | Style</div>
                 </a></li>
-                <li><a th:href="@{/signup}">
+                <li><a th:href="@{/inscription}">
                     <div class="searchResultName">Nom du groupe</div>
                     <div class="searchResultDistanceStyle">Distance | Style</div>
                 </a></li>

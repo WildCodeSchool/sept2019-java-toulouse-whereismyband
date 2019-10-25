@@ -11,17 +11,17 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/notLogView")
+    @GetMapping("/vue-non-connectee")
     public String notLogView() {
         return "notLogView";
     }
 
-    @GetMapping("/signup")
+    @GetMapping("/inscription")
     public String toSignUp() {
         return "signUp";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/connexion")
     public String toLogIn() {
         return "login";
     }

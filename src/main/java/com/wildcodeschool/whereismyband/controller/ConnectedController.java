@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ConnectedController {
-    @GetMapping("/userProfile")
+    @GetMapping("/profil-utilisateur")
     public String toProfile() {
         return "userProfile";
     }
 
-    @PostMapping("/search")
+    @PostMapping("/recherche")
     public String toSearch() {
         return "search";
     }
