@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>WhereIsMyBand</title>
+    <link rel="icon" type="image/png" href="images/leBonLogo.png"/>
+</head>
+<body>
+<header th:fragment="header">
+    <div class="flexHeader">
+        <div class="pHeader"><p>Where is my band</p></div>
+        <div class="logo"><a th:href="@{/}"><img src="images/leBonLogo.png" alt="logo épuré"/></a></div>
+    </div>
+</header>
+</body>
+</html>
