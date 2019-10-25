@@ -15,8 +15,8 @@
 <body>
 <header th:replace="header :: header"></header>
 <h2>Inscription</h2>
-<a th:href="@{/login}">J'ai déjà un compte</a>
-<form method="post" th:action="@{/search}">
+<a th:href="@{/connexion}">J'ai déjà un compte</a>
+<form method="post" th:action="@{/recherche}">
     <div class="blockUserInfo">
         <label for="userMail">Email</label>
         <input type="email" id="userMail" name="userMail" placeholder="votre email"/>
