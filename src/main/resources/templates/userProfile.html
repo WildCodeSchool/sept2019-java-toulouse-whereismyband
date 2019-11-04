@@ -18,7 +18,7 @@
     </header>
     <div class="mainContent">
         <h2>Edition du profil</h2>
-        <form th:action="@{/recherche}" method="post">
+        <form th:action="@{/recherche}" method="post" class = "medQProfil">
             <div class="blockAvatarProfile">
                 <div class="avatarImg">
                     <img src="https://via.placeholder.com/90" alt="Avatar User"/>
@@ -118,7 +118,7 @@
             </div>
             <div class="userBiography">
                 <label for="bio">Ma vie mon oeuvre</label>
-                <input type="textarea" id="bio" name="bio" class="fieldUserBiography" placeholder="Votre bio musicale">
+                <textarea id="bio" name="bio" class="fieldUserBiography"> Votre bio musicale </textarea>
             </div>
             <div class="saveProfile">
                 <input type="submit" value="Sauvegarder" class="saveButton">

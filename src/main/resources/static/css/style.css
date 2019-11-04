@@ -28,7 +28,7 @@ h2 {
     flex-direction: column;
 }
 
-.mainContent{
+.mainContent {
     flex-grow: 1;
 }
 
@@ -150,7 +150,7 @@ h2 {
 .userBiography {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin: 1rem 8%;
 }
 
@@ -340,7 +340,7 @@ header {
 
 .pHeader a {
     color: whitesmoke;
-    margin : 0 0.8em;
+    margin: 0 0.8em;
 }
 
 /* FIN HEADER */
@@ -362,7 +362,7 @@ header {
 }
 
 .imgFront h2 {
-    text-align:center;
+    text-align: center;
     color: whitesmoke;
 }
 
@@ -537,7 +537,7 @@ header {
 /* INDEX */
 .searchFront {
     min-height: 50vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -545,7 +545,7 @@ header {
 
 .searchFrontNotLog {
     min-height: 10vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
