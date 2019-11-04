@@ -21,7 +21,8 @@
             <form method="get" th:action="@{/vue-non-connectee}" class="research">
                 <div class="userPostCode">
                     <label for="postcode">Groupes à proximité</label>
-                    <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
+                    <input type="text" id="postcode" name="postcode" class="fieldPostCode fieldPostCodeIndex"
+                           placeholder="Votre code postal">
                 </div>
                 <div class="saveProfile">
                     <input type="submit" value="Valider" class="saveButton">

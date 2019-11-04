@@ -594,5 +594,9 @@ header {
         justify-content: flex-start;
         align-items: center;
     }
-    /*TODO couleur de recherche en blanc*/
+
+    .fieldPostCodeIndex {
+        color: white;
+        font-weight: bolder;
+    }
 }
