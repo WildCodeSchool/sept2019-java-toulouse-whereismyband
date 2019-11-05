@@ -581,7 +581,7 @@ header {
     input[type="password"],
     input[type="textarea"],
     select {
-       max-width: 1200px;
+        max-width: 1200px;
     }
 
     .imgFront {
