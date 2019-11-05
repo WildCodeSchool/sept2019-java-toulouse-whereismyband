@@ -576,7 +576,7 @@ header {
         height: auto;
     }
 
-    .mainContentIndex {
+    .mainContentIndex, .mainContentNotLog {
         background-image: url("../images/background_index_desk.png");
         background-size: 100% 100%;
     }
@@ -595,8 +595,13 @@ header {
         align-items: center;
     }
 
-    .fieldPostCodeIndex {
+    .fieldPostCodeIndex, .fieldPostCodeNotLog {
         color: white;
         font-weight: bolder;
     }
+
+    .searchResult ul {
+        max-width: 750px;
+    }
 }
+
