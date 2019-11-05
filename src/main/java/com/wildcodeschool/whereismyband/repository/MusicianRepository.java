@@ -6,7 +6,6 @@ import java.sql.*;
 
 public class MusicianRepository {
 
-
     private final static String DB_URL = "jdbc:mysql://localhost:3306/where_is_my_band?serverTimezone=GMT";
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
@@ -19,7 +18,7 @@ public class MusicianRepository {
             );
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO musician (password, alias, email, postcode, bio, avatar, availability, search_type) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
                     Statement.RETURN_GENERATED_KEYS
             );
             statement.setString(1, password);
