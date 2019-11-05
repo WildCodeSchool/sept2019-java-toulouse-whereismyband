@@ -28,7 +28,7 @@ h2 {
     flex-direction: column;
 }
 
-.mainContent{
+.mainContent {
     flex-grow: 1;
 }
 
@@ -340,7 +340,7 @@ header {
 
 .pHeader a {
     color: whitesmoke;
-    margin : 0 0.8em;
+    margin: 0 0.8em;
 }
 
 /* FIN HEADER */
@@ -357,12 +357,12 @@ header {
     width: 100%;
     height: 290px;
     color: whitesmoke;
-    background-image: url("../images/imgFront.png");
-    background-size: cover;
+    background-image: url("../images/background_index_desk.png");
+    background-size: 100% 100%;
 }
 
 .imgFront h2 {
-    text-align:center;
+    text-align: center;
     color: whitesmoke;
 }
 
@@ -522,7 +522,6 @@ header {
     transition: transform 0.4s ease-in-out;
 }
 
-
 #trigger-overlay {
     background-color: #393E46;
     cursor: pointer;
@@ -537,7 +536,7 @@ header {
 /* INDEX */
 .searchFront {
     min-height: 50vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -545,13 +544,13 @@ header {
 
 .searchFrontNotLog {
     min-height: 10vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
 
-.recherche {
+.research {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -559,7 +558,7 @@ header {
     flex-grow: 1;
 }
 
-.rechercheNotLog {
+.notLogSearch {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -569,4 +568,35 @@ header {
 .validateNotLog {
     display: flex;
     align-items: center;
+}
+
+@media screen and (min-width: 761px) {
+    .imgFront {
+        background-image: none;
+        height: auto;
+    }
+
+    .mainContentIndex {
+        background-image: url("../images/background_index_desk.png");
+        background-size: 100% 100%;
+    }
+
+    .divLogoFront {
+        align-self: flex-start;
+        position: absolute;
+        width: 100px;
+    }
+
+    .searchFront {
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .fieldPostCodeIndex {
+        color: white;
+        font-weight: bolder;
+    }
 }
