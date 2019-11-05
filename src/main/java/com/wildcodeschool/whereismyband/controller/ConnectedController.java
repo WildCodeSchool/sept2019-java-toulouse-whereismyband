@@ -21,7 +21,7 @@ public class ConnectedController {
     @PostMapping("/recherche")
     public String toSearch(Model model,
                            @RequestParam String password,
-                           @RequestParam String newPassword,
+                           @RequestParam String newpassword,
                            @RequestParam(required = false, defaultValue = "") String alias,
                            @RequestParam String userMail,
                            @RequestParam String postcode,
@@ -31,9 +31,9 @@ public class ConnectedController {
                            @RequestParam(required = false, defaultValue = "0")  int searchType,
                            @RequestParam(required = false, defaultValue = "0")  int idSearch
     ) {
-        //TODO vérifer password et confirm password
+        //TODO vérifer password et newpassword
         model.addAttribute("musician", repository.save(password, alias, userMail, postcode, bio, avatar,
-                availability, searchType, idSearch));
+                availability, searchType));
 
         return "search";
     }

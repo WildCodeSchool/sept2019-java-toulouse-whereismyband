@@ -11,10 +11,9 @@ public class Musician {
     private String avatar;
     private String availability;
     private int search_type;
-    private int id_search;
 
     public Musician(int id_musician, String password, String alias, String email, String postcode, String bio,
-                    String avatar, String availability, int search_type, int id_search) {
+                    String avatar, String availability, int search_type) {
         this.id_musician = id_musician;
         this.password = password;
         this.alias = alias;
@@ -24,7 +23,6 @@ public class Musician {
         this.avatar = avatar;
         this.availability = availability;
         this.search_type = search_type;
-        this.id_search = id_search;
     }
 
     public int getId_musician() {
@@ -99,11 +97,4 @@ public class Musician {
         this.search_type = search_type;
     }
 
-    public int getId_search() {
-        return id_search;
-    }
-
-    public void setId_search(int id_search) {
-        this.id_search = id_search;
-    }
 }

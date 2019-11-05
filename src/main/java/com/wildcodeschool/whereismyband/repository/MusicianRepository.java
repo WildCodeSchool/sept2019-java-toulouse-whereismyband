@@ -12,14 +12,14 @@ public class MusicianRepository {
     private final static String DB_PASSWORD = "Horcrux4life!";
 
     public Musician save(String password, String alias, String email, String postcode, String bio,
-                         String avatar, String availability, int searchType, int idSearch) {
+                         String avatar, String availability, int searchType) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
             );
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO wizard (password, alias, email, postcode, bio, avatar, availability, search_type, id_search) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    "INSERT INTO musician (password, alias, email, postcode, bio, avatar, availability, search_type) " +
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS
             );
             statement.setString(1, password);
@@ -30,7 +30,6 @@ public class MusicianRepository {
             statement.setString(6, avatar);
             statement.setString(7, availability);
             statement.setInt(8, searchType);
-            statement.setInt(9, idSearch);
 
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to insert data");
@@ -41,7 +40,7 @@ public class MusicianRepository {
             if (generatedKeys.next()) {
                 int id = generatedKeys.getInt(1);
                 return new Musician(id, password, alias, email, postcode, bio,
-                        avatar, availability, searchType, idSearch);
+                        avatar, availability, searchType);
             } else {
                 throw new SQLException("failed to get inserted id");
             }
