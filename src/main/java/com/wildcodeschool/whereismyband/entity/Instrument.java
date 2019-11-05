@@ -21,7 +21,7 @@ public class Instrument {
         this.id_instrument = id_instrument;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 }

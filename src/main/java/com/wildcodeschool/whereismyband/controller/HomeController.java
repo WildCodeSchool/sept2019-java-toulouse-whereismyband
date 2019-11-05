@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     private InstrumentRepository repository = new InstrumentRepository();
+
     @GetMapping("/index")
     public String index() {
         return "index";
@@ -21,7 +22,7 @@ public class HomeController {
 
     @GetMapping("/inscription")
     public String toSignUp(Model model) {
-        model.addAttribute("instruments",repository.findAllInstrument());
+        model.addAttribute("instruments", repository.findAllInstrument());
         return "signUp";
     }
 

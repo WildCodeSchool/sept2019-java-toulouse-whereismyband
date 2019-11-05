@@ -27,8 +27,8 @@ public class InstrumentRepository {
             while (resultSet.next()) {
                 int id_instrument = resultSet.getInt("id_instrument");
                 String name = resultSet.getString("name");
-                if (name.length() > 35){
-                    name = name.substring(0,35)+"...";
+                if (name.length() > 35) {
+                    name = name.substring(0, 35) + "...";
                 }
                 instruments.add(new Instrument(id_instrument, name));
             }
