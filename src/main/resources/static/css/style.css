@@ -568,8 +568,8 @@ header {
 @media screen and (min-width: 761px) {
     .medQProfil {
         display: grid;
-        grid-template-rows: auto; /*Hauteur des items*/
-        grid-template-columns: 50% 50%; /* Largeur des items */
+        grid-template-rows: auto; /*items height*/
+        grid-template-columns: 50% 50%; /* items width */
     }
 
     .blockUserInfo, .blockUserInstrument, .userBiography, .blockUserWeek, .userPostCode {
