@@ -14,16 +14,16 @@
 </head>
 <body>
 <div class="globalContainer">
-    <div class="mainContent">
+    <div class="mainContent mainContentNotLog">
         <div th:replace="welcome :: welcome">
         </div>
         <div class="searchResult">
             <h3>Résultats correspondant à votre code postal</h3>
             <section class="searchFrontNotLog">
-                <form method="get" th:action="@{/vue-non-connectee}" class="rechercheNotLog">
+                <form method="get" th:action="@{/vue-non-connectee}" class="notLogSearch">
                     <div class="userPostCode">
                         <label for="postcode"></label>
-                        <input type="text" id="postcode" name="postcode" class="fieldPostCode"
+                        <input type="text" id="postcode" name="postcode" class="fieldPostCode fieldPostCodeNotLog"
                                placeholder="Votre code postal">
                     </div>
                     <div class="validateNotLog">
