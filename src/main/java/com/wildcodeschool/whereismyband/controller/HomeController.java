@@ -1,10 +1,14 @@
 package com.wildcodeschool.whereismyband.controller;
 
+import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+
+    private InstrumentRepository repository = new InstrumentRepository();
 
     @GetMapping("/index")
     public String index() {
@@ -17,7 +21,8 @@ public class HomeController {
     }
 
     @GetMapping("/inscription")
-    public String toSignUp() {
+    public String toSignUp(Model model) {
+        model.addAttribute("instruments", repository.findAllInstrument());
         return "signUp";
     }
 
