@@ -150,7 +150,7 @@ h2 {
 .userBiography {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     margin: 1rem 8%;
 }
 
@@ -566,6 +566,27 @@ header {
 }
 
 @media screen and (min-width: 761px) {
+    .medQProfil {
+        display: grid;
+        grid-template-rows: auto; /*items height*/
+        grid-template-columns: 50% 50%; /* items width */
+    }
+
+    .blockUserInfo, .blockUserInstrument, .userBiography, .blockUserWeek, .userPostCode {
+        max-width: 80%;
+    }
+
+    .userBiography {
+        grid-column: 1/3;
+    }
+
+    .saveButton {
+        height: 50px;
+    }
+
+    .saveProfile {
+        grid-column: 1/3;
+    }
 
     .mainContentLogSign {
         width: 50%;
@@ -581,7 +602,7 @@ header {
     input[type="password"],
     input[type="textarea"],
     select {
-       max-width: 1200px;
+        max-width: 1200px;
     }
 
     .imgFront {
@@ -617,3 +638,4 @@ header {
         max-width: 750px;
     }
 }
+
