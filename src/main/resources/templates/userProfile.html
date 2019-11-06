@@ -18,7 +18,7 @@
     </header>
     <div class="mainContent">
         <h2>Edition du profil</h2>
-        <form th:action="@{/recherche}" method="post" class="medQProfil">
+        <form th:action="@{/rechercheviaprofil}" method="post" class="medQProfil">
             <div class="blockAvatarProfile">
                 <div class="avatarImg">
                     <img src="https://via.placeholder.com/90" alt="Avatar User"/>
@@ -124,6 +124,9 @@
             <div class="saveProfile">
                 <input type="submit" value="Sauvegarder" class="saveButton">
             </div>
+            <input type="hidden" name="idMusician" value="8"/>
+            <input type="hidden" name="oldInstrument1" value="8"/>
+            <input type="hidden" name="oldInstrument2" value="8"/>
         </form>
     </div>
     <footer th:replace="footer :: footer">
