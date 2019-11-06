@@ -35,7 +35,7 @@
                     <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
                         <option value="0" disabled selected>Votre instrument principal</option>
                         <option th:each="instrument : ${instruments}"
-                                th:value="${instrument.name}"
+                                th:value="${instrument.id_instrument}"
                                 th:text="${instrument.name}" class="optionTh"></option>
                     </select>
                     <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
