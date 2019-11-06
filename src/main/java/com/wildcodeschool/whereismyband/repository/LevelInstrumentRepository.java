@@ -34,7 +34,7 @@ public class LevelInstrumentRepository {
         return null;
     }
 
-    public LevelInstrument update(int idMusician, int idInstrument, int level, int oldInstrument) {
+    public LevelInstrument update(int idMusician, int idInstrument, int level, int previousInstrument) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -46,7 +46,7 @@ public class LevelInstrumentRepository {
             statement.setInt(2, idInstrument);
             statement.setInt(3, level);
             statement.setInt(1, idMusician);
-            statement.setInt(2, oldInstrument);
+            statement.setInt(2, previousInstrument);
 
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");

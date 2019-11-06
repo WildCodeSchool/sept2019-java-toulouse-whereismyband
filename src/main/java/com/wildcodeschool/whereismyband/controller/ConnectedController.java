@@ -76,10 +76,10 @@ public class ConnectedController {
                                @RequestParam boolean groupe,
                                @RequestParam int mainInstrument,
                                @RequestParam int mainInstrumentLevel,
-                               @RequestParam int oldInstrument1,
+                               @RequestParam int previousInstrument1,
                                @RequestParam(required = false, defaultValue = "0") int secondInstrument,
                                @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel,
-                               @RequestParam int oldInstrument2) {
+                               @RequestParam int previousInstrument2) {
 
         boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
@@ -90,11 +90,11 @@ public class ConnectedController {
         Musician musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio, avatar, availability, searchType);
         model.addAttribute("musician", musician);
 
-        LevelInstrument levelInstrument1 = levelInstrumentRepository.update(musician.getId_musician(), mainInstrument, mainInstrumentLevel, oldInstrument1);
+        LevelInstrument levelInstrument1 = levelInstrumentRepository.update(musician.getId_musician(), mainInstrument, mainInstrumentLevel, previousInstrument1);
         model.addAttribute("levelInstrument1", levelInstrument1);
 
         if (secondInstrument > 0) {
-            LevelInstrument levelInstrument2 = levelInstrumentRepository.update(musician.getId_musician(), secondInstrument, secondInstrumentLevel, oldInstrument2);
+            LevelInstrument levelInstrument2 = levelInstrumentRepository.update(musician.getId_musician(), secondInstrument, secondInstrumentLevel, previousInstrument2);
             model.addAttribute("levelInstrument2", levelInstrument2);
         }
 
