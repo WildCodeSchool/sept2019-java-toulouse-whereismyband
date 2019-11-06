@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ConnectedController {
 
@@ -48,6 +50,19 @@ public class ConnectedController {
         if (secondInstrument > 0) {
             LevelInstrument levelInstrument2 = levelInstrumentRepository.save(musician.getId_musician(), secondInstrument, secondInstrumentLevel);
             model.addAttribute("levelInstrument2", levelInstrument2);
+        }
+        return "search";
+    }
+
+    @PostMapping("/recherchevialogin")
+    public String searchByLogIn (Model model,HttpSession session,
+                                 @RequestParam String userMail,
+                                 @RequestParam String userPassword) {
+        Musician musician = musicianRepository.getMusicianLogIn(userMail,userPassword);
+        session.setAttribute("musician", musician);
+        if (musician == null){
+            model.addAttribute("errorMessage", true);
+            return "login";
         }
         return "search";
     }
