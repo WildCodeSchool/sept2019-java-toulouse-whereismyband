@@ -33,12 +33,13 @@
             <div class="blockUserInstrument">
                 <div class="userSingleInstrument">
                     <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
-                        <option value="" disabled selected>Votre instrument principal</option>
-                        <option value="1">Saxophone</option>
-                        <option value="2">Guitare</option>
+                        <option value="0" disabled selected>Votre instrument principal</option>
+                        <option th:each="instrument : ${instruments}"
+                                th:value="${instrument.name}"
+                                th:text="${instrument.name}" class="optionTh"></option>
                     </select>
                     <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
-                        <option value="" disabled selected>Votre niveau</option>
+                        <option value="0" disabled selected>Votre niveau</option>
                         <option value="1">Débutant</option>
                         <option value="2">Intermédiaire</option>
                         <option value="3">Avancé</option>
@@ -47,12 +48,13 @@
                 </div>
                 <div class="userSingleInstrument">
                     <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
-                        <option value="" disabled selected>Votre instrument principal</option>
-                        <option value="1">Saxophone</option>
-                        <option value="2">Guitare</option>
+                        <option value="0" disabled selected>Votre instrument secondaire</option>
+                        <option th:each="instrument : ${instruments}"
+                                th:value="${instrument.id_instrument}"
+                                th:text="${instrument.name}"></option>
                     </select>
                     <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
-                        <option value="" disabled selected>Votre niveau</option>
+                        <option value="0" disabled selected>Votre niveau</option>
                         <option value="1">Débutant</option>
                         <option value="2">Intermédiaire</option>
                         <option value="3">Avancé</option>
