@@ -19,8 +19,8 @@
 <div class="globalContainer">
     <header th:replace="connectHeader :: connectheader">
     </header>
-    <div class="mainContent">
-        <div id="wrapper">
+    <div class="mainContent mainContent-Search">
+        <div id="wrapper" class="grid-carousel">
             <ul class="rslides" id="slider1">
                 <li>
                     <div class="news"><img src="images/musiqueimg.png"/></div>
@@ -33,7 +33,8 @@
                 </li>
             </ul>
         </div>
-        <div class="searchResult">
+        <!-- Recherche Mobile -->
+        <div class="searchResultMobile">
             <h3>Résultats correspondant à votre profil</h3>
             <div class="container">
                 <section>
@@ -43,7 +44,7 @@
             <div class="overlay overlay-slidedown">
                 <button type="button" class="overlay-close">Fermer</button>
                 <nav>
-                    <form th:action="@{/recherche}" method="post">
+                    <form th:action="@{/rechercheviarecherche}" method="post">
                         <div class="userSearch">
                             <div class="userSearchSpan">
                                 <span>Je recherche... </span>
@@ -64,30 +65,44 @@
                             <input type="text" id="postcode" name="postcode" class="fieldPostCode"
                                    placeholder="Votre code postal">
                         </div>
-                        <div class="blockUserInstrument">
-                            <label for="mainInstrument">Instrument principal</label>
-                            <div class="userSingleInstrument">
-                                <select id="mainInstrument" class="fieldInstrument">
-                                    <option value="Saxophone">Saxophone</option>
-                                    <option value="Guitare">Guitare</option>
+                        <div class="blockMusicStyle">
+                            <label for="searchStyle">Style</label>
+                            <div class="musicStyle">
+                                <select id="searchStyle" class="fieldStyle">
+                                    <option value="Hip hop">Hip hop</option>
+                                    <option value="Jazz">Jazz</option>
                                 </select>
-                                <select id="mainInstrumentLevel" class="fieldLevel">
-                                    <option value="Débutant">Débutant</option>
-                                    <option value="Intermédiaire">Intermédiaire</option>
-                                    <option value="Avancé">Avancé</option>
-                                    <option value="Pro">Pro</option>
+                            </div>
+                        </div>
+                        <div class="blockUserInstrument">
+                            <div class="userSingleInstrument">
+                                <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
+                                    <option value="0" disabled selected>Votre instrument principal</option>
+                                    <option th:each="instrument : ${instruments}"
+                                            th:value="${instrument.id_instrument}"
+                                            th:text="${instrument.name}" class="optionTh"></option>
+                                </select>
+                                <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
+                                    <option value="0" disabled selected>Votre niveau</option>
+                                    <option value="1">Débutant</option>
+                                    <option value="2">Intermédiaire</option>
+                                    <option value="3">Avancé</option>
+                                    <option value="4">Pro</option>
                                 </select>
                             </div>
                             <div class="userSingleInstrument">
-                                <select id="secondInstrument" class="fieldInstrument">
-                                    <option value="Saxophone">Saxophone</option>
-                                    <option value="Guitare">Guitare</option>
+                                <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
+                                    <option value="0" disabled selected>Votre instrument secondaire</option>
+                                    <option th:each="instrument : ${instruments}"
+                                            th:value="${instrument.id_instrument}"
+                                            th:text="${instrument.name}"></option>
                                 </select>
-                                <select id="secondInstrumentLevel" class="fieldLevel">
-                                    <option value="Débutant">Débutant</option>
-                                    <option value="Intermédiaire">Intermédiaire</option>
-                                    <option value="Avancé">Avancé</option>
-                                    <option value="Pro">Pro</option>
+                                <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
+                                    <option value="0" disabled selected>Votre niveau</option>
+                                    <option value="1">Débutant</option>
+                                    <option value="2">Intermédiaire</option>
+                                    <option value="3">Avancé</option>
+                                    <option value="4">Pro</option>
                                 </select>
                             </div>
                         </div>
@@ -96,31 +111,31 @@
                             <div class="blockUserDays">
                                 <div class="eachDay">
                                     <label for="lundi">Lu</label>
-                                    <input type="checkbox" id="lundi" name="lundi" class="checkbox">
+                                    <input type="checkbox" id="lundi" name="monday" class="checkbox">
                                 </div>
                                 <div class="eachDay">
                                     <label for="mardi">Ma</label>
-                                    <input type="checkbox" id="mardi" name="mardi" class="checkbox">
+                                    <input type="checkbox" id="mardi" name="tuesday" class="checkbox">
                                 </div>
                                 <div class="eachDay">
                                     <label for="mercredi">Me</label>
-                                    <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
+                                    <input type="checkbox" id="mercredi" name="wednesday" class="checkbox">
                                 </div>
                                 <div class="eachDay">
                                     <label for="jeudi">Je</label>
-                                    <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
+                                    <input type="checkbox" id="jeudi" name="thursday" class="checkbox">
                                 </div>
                                 <div class="eachDay">
                                     <label for="vendredi">Ve</label>
-                                    <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
+                                    <input type="checkbox" id="vendredi" name="friday" class="checkbox">
                                 </div>
                                 <div class="eachDay">
                                     <label for="samedi">Sa</label>
-                                    <input type="checkbox" id="samedi" name="samedi" class="checkbox">
+                                    <input type="checkbox" id="samedi" name="saturday" class="checkbox">
                                 </div>
                                 <div class="eachDay">
                                     <label for="dimanche">Di</label>
-                                    <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+                                    <input type="checkbox" id="dimanche" name="sunday" class="checkbox">
                                 </div>
                             </div>
                         </div>
@@ -130,28 +145,132 @@
                     </form>
                 </nav>
             </div>
-            <ul>
-                <!--
-                <li th:each="group : ${search}" th:text="${group.name}">Nom du groupe, Distance, Style</li>
-                TODO supprimer les li ci-dessous quand il y aura la bdd, utilisés pour la mise en page-->
-                <li><a href="#">
-                    <div class="searchResultName">Nom du groupe</div>
-                    <div class="searchResultDistanceStyle">Distance | Style</div>
-                </a></li>
-                <li><a href="#">
-                    <div class="searchResultName">Nom du groupe</div>
-                    <div class="searchResultDistanceStyle">Distance | Style</div>
-                </a></li>
-                <li><a href="#">
-                    <div class="searchResultName">Nom du groupe</div>
-                    <div class="searchResultDistanceStyle">Distance | Style</div>
-                </a></li>
-                <!-- TODO Fin de la suppression-->
-            </ul>
         </div>
+        <!-- Recherche Desktop -->
+        <div class="searchResultDesktop">
+            <h3>Nouvelle recherche</h3>
+            <form th:action="@{/rechercheviarecherche}" method="post">
+                <div class="userSearch">
+                    <div class="userSearchSpan">
+                        <span>Je recherche... </span>
+                    </div>
+                    <div class="test">
+                        <div class="searchCheckbox">
+                            <input type="checkbox" id="jamD" name="jam" class="checkbox">
+                            <label for="jam">une Jam Session !</label>
+                        </div>
+                        <div class="searchCheckbox">
+                            <input type="checkbox" id="groupeD" name="groupe" class="checkbox">
+                            <label for="groupe">un Groupe !</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="userPostCode">
+                    <label for="postcode">Code postal</label>
+                    <input type="text" id="postcodeD" name="postcode" class="fieldPostCode"
+                           placeholder="Votre code postal">
+                </div>
+                <div class="blockMusicStyle">
+                    <label for="searchStyleD">Style</label>
+                    <div class="musicStyle">
+                        <select id="searchStyleD" class="fieldStyle">
+                            <option value="Hip hop">Hip hop</option>
+                            <option value="Jazz">Jazz</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="blockUserInstrument">
+                    <div class="userSingleInstrument">
+                        <select id="mainInstrumentD" name="mainInstrument" class="fieldInstrument">
+                            <option value="0" disabled selected>Votre instrument principal</option>
+                            <option th:each="instrument : ${instruments}"
+                                    th:value="${instrument.id_instrument}"
+                                    th:text="${instrument.name}" class="optionTh"></option>
+                        </select>
+                        <select id="mainInstrumentLevelD" name="mainInstrumentLevel" class="fieldLevel">
+                            <option value="0" disabled selected>Votre niveau</option>
+                            <option value="1">Débutant</option>
+                            <option value="2">Intermédiaire</option>
+                            <option value="3">Avancé</option>
+                            <option value="4">Pro</option>
+                        </select>
+                    </div>
+                    <div class="userSingleInstrument">
+                        <select id="secondInstrumentD" name="secondInstrument" class="fieldInstrument">
+                            <option value="0" disabled selected>Votre instrument secondaire</option>
+                            <option th:each="instrument : ${instruments}"
+                                    th:value="${instrument.id_instrument}"
+                                    th:text="${instrument.name}"></option>
+                        </select>
+                        <select id="secondInstrumentLevelD" name="secondInstrumentLevel" class="fieldLevel">
+                            <option value="0" disabled selected>Votre niveau</option>
+                            <option value="1">Débutant</option>
+                            <option value="2">Intermédiaire</option>
+                            <option value="3">Avancé</option>
+                            <option value="4">Pro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="blockUserWeek">
+                    <span>Jours de disponibilité</span>
+                    <div class="blockUserDays">
+                        <div class="eachDay">
+                            <label for="lundi">Lu</label>
+                            <input type="checkbox" id="lundiD" name="monday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="mardi">Ma</label>
+                            <input type="checkbox" id="mardiD" name="tuesday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="mercredi">Me</label>
+                            <input type="checkbox" id="mercrediD" name="wednesday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="jeudi">Je</label>
+                            <input type="checkbox" id="jeudiD" name="thursday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="vendredi">Ve</label>
+                            <input type="checkbox" id="vendrediD" name="friday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="samedi">Sa</label>
+                            <input type="checkbox" id="samediD" name="saturday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="dimanche">Di</label>
+                            <input type="checkbox" id="dimancheD" name="sunday" class="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="saveProfile">
+                    <input type="submit" value="Valider" class="saveButton">
+                </div>
+            </form>
+        </div>
+        <ul class="groupResult">
+            <!--
+            <li th:each="group : ${search}" th:text="${group.name}">Nom du groupe, Distance, Style</li>
+            TODO supprimer les li ci-dessous quand il y aura la bdd, utilisés pour la mise en page-->
+            <li><a href="#">
+                <div class="searchResultName">Nom du groupe</div>
+                <div class="searchResultDistanceStyle">Distance | Style</div>
+            </a></li>
+            <li><a href="#">
+                <div class="searchResultName">Nom du groupe</div>
+                <div class="searchResultDistanceStyle">Distance | Style</div>
+            </a></li>
+            <li><a href="#">
+                <div class="searchResultName">Nom du groupe</div>
+                <div class="searchResultDistanceStyle">Distance | Style</div>
+            </a></li>
+            <!-- TODO Fin de la suppression-->
+        </ul>
     </div>
-    <footer th:replace="footer :: footer">
-    </footer>
+</div>
+<footer th:replace="footer :: footer">
+</footer>
 </div>
 <script src="js/classie.js"></script>
 <script src="js/demo1.js"></script>

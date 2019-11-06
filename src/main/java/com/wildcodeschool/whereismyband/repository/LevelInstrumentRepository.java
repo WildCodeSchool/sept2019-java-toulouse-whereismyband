@@ -21,10 +21,33 @@ public class LevelInstrumentRepository {
             statement.setInt(1, idMusician);
             statement.setInt(2, idInstrument);
             statement.setInt(3, level);
-
-
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to insert data");
+            }
+            return new LevelInstrument(idMusician, idInstrument, level);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public LevelInstrument update(int idMusician, int idInstrument, int level, int previousInstrument) {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE level_instrument SET id_musician = ?, id_instrument = ?, level = ? WHERE id_musician = ? AND id_instrument = ?;"
+            );
+            statement.setInt(1, idMusician);
+            statement.setInt(2, idInstrument);
+            statement.setInt(3, level);
+            statement.setInt(1, idMusician);
+            statement.setInt(2, previousInstrument);
+
+            if (statement.executeUpdate() != 1) {
+                throw new SQLException("failed to update data");
             }
             return new LevelInstrument(idMusician, idInstrument, level);
 
