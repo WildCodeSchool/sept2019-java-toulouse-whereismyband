@@ -48,5 +48,39 @@ public class MusicianRepository {
         }
         return null;
     }
+
+    public Musician update(int idMusician, String password, String alias, String email, String postcode, String bio,
+                           String avatar, String availability, int searchType) {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE musician SET password = ?, alias = ?, email = ?, postcode = ?, bio = ?, avatar = ?, availability = ?," +
+                            " search_type = ? WHERE id_musician = ?",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            statement.setString(1, password);
+            statement.setString(2, alias);
+            statement.setString(3, email);
+            statement.setString(4, postcode);
+            statement.setString(5, bio);
+            statement.setString(6, avatar);
+            statement.setString(7, availability);
+            statement.setInt(8, searchType);
+            statement.setInt(9, idMusician);
+
+
+            if (statement.executeUpdate() != 1) {
+                throw new SQLException("failed to update data");
+            }
+            return new Musician(idMusician, password, alias, email, postcode, bio,
+                    avatar, availability, searchType);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }
 
