@@ -154,6 +154,11 @@ h2 {
     margin: 1rem 8%;
 }
 
+.fieldUserBiography {
+    height: 70px;
+    width: 60%;
+}
+
 .saveProfile {
     display: flex;
     justify-content: flex-end;
