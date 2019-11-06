@@ -48,7 +48,6 @@ public class LevelInstrumentRepository {
             statement.setInt(1, idMusician);
             statement.setInt(2, oldInstrument);
 
-
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");
             }

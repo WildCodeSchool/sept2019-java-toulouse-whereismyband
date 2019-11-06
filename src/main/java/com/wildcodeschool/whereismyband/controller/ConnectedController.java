@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class ConnectedController {
 
@@ -22,7 +24,7 @@ public class ConnectedController {
     }
 
     @PostMapping("/recherche")
-    public String toSearch(Model model,
+    public String toSearch(Model model, HttpSession session,
                            @RequestParam String password,
                            @RequestParam String newpassword,
                            @RequestParam(required = false, defaultValue = "") String alias,
@@ -40,6 +42,8 @@ public class ConnectedController {
         //TODO vérifer password et newpassword
         Musician musician = musicianRepository.save(password, alias, userMail, postcode, bio, avatar, availability, searchType);
         model.addAttribute("musician", musician);
+
+        session.setAttribute("session", musician);
 
         LevelInstrument levelInstrument1 = levelInstrumentRepository.save(musician.getId_musician(), mainInstrument, mainInstrumentLevel);
         model.addAttribute("levelInstrument1", levelInstrument1);
@@ -61,13 +65,13 @@ public class ConnectedController {
                                @RequestParam String postcode,
                                @RequestParam(required = false, defaultValue = "") String bio,
                                @RequestParam(required = false, defaultValue = "") String avatar,
-                               @RequestParam boolean lundi,
-                               @RequestParam boolean mardi,
-                               @RequestParam boolean mercredi,
-                               @RequestParam boolean jeudi,
-                               @RequestParam boolean vendredi,
-                               @RequestParam boolean samedi,
-                               @RequestParam boolean dimanche,
+                               @RequestParam boolean monday,
+                               @RequestParam boolean tuesday,
+                               @RequestParam boolean wednesday,
+                               @RequestParam boolean thursday,
+                               @RequestParam boolean friday,
+                               @RequestParam boolean saturday,
+                               @RequestParam boolean sunday,
                                @RequestParam boolean jam,
                                @RequestParam boolean groupe,
                                @RequestParam int mainInstrument,
@@ -75,9 +79,9 @@ public class ConnectedController {
                                @RequestParam int oldInstrument1,
                                @RequestParam(required = false, defaultValue = "0") int secondInstrument,
                                @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel,
-                               @RequestParam int oldInstrument2){
+                               @RequestParam int oldInstrument2) {
 
-        boolean[] week = {lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche} ;
+        boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
 
         int searchType = formatSearchType(jam, groupe);
@@ -94,27 +98,31 @@ public class ConnectedController {
             model.addAttribute("levelInstrument2", levelInstrument2);
         }
 
-
         return "search";
     }
 
-    private String formatAvailability(boolean[] week){
-        char[] availability = {'0','0','0','0','0','0','0'};
+    private String formatAvailability(boolean[] week) {
+        char[] availability = {'0', '0', '0', '0', '0', '0', '0'};
         int i = 0;
-        for(boolean day : week){
-            if(day){availability[i]=1;}
+        for (boolean day : week) {
+            if (day) {
+                availability[i] = 1;
+            }
             i++;
         }
         return String.valueOf(availability);
     }
 
-    private int formatSearchType(boolean jam, boolean groupe){
+    private int formatSearchType(boolean jam, boolean groupe) {
         int i = 0;
-        if(jam){i+=1;}
-        if(groupe){i+=2;}
+        if (jam) {
+            i += 1;
+        }
+        if (groupe) {
+            i += 2;
+        }
         return i;
     }
-
 
 
 }
