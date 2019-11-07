@@ -30,7 +30,7 @@
             </div>
             <div class="blockUserInfo">
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" class="fieldAccountInfo" placeholder="Votre pseudo">
+                <input type="text" id="username" name="username" class="fieldAccountInfo" th:value="${session.session.getAlias()}"/>
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" class="fieldAccountInfo"
                        placeholder="Mot de passe">
@@ -74,37 +74,37 @@
                 <div class="blockUserDays">
                     <div class="eachDay">
                         <label for="monday">Lu</label>
-                        <input type="checkbox" id="monday" name="lundi" class="checkbox">
+                        <input type="checkbox" id="monday" name="monday" class="checkbox" th:checked="${monday}">
                     </div>
                     <div class="eachDay">
                         <label for="tuesday">Ma</label>
-                        <input type="checkbox" id="tuesday" name="mardi" class="checkbox">
+                        <input type="checkbox" id="tuesday" name="tuesday" class="checkbox" th:checked="${tuesday}">
                     </div>
                     <div class="eachDay">
                         <label for="wednesday">Me</label>
-                        <input type="checkbox" id="wednesday" name="mercredi" class="checkbox">
+                        <input type="checkbox" id="wednesday" name="wednesday" class="checkbox" th:checked="${wednesday}">
                     </div>
                     <div class="eachDay">
                         <label for="thursday">Je</label>
-                        <input type="checkbox" id="thursday" name="jeudi" class="checkbox">
+                        <input type="checkbox" id="thursday" name="thursday" class="checkbox" th:checked="${thursday}">
                     </div>
                     <div class="eachDay">
                         <label for="friday">Ve</label>
-                        <input type="checkbox" id="friday" name="vendredi" class="checkbox">
+                        <input type="checkbox" id="friday" name="friday" class="checkbox" th:checked="${friday}">
                     </div>
                     <div class="eachDay">
                         <label for="saturday">Sa</label>
-                        <input type="checkbox" id="saturday" name="samedi" class="checkbox">
+                        <input type="checkbox" id="saturday" name="saturday" class="checkbox" th:checked="${saturday}">
                     </div>
                     <div class="eachDay">
                         <label for="sunday">Di</label>
-                        <input type="checkbox" id="sunday" name="dimanche" class="checkbox">
+                        <input type="checkbox" id="sunday" name="sunday" class="checkbox" th:checked="${sunday}">
                     </div>
                 </div>
             </div>
             <div class="userPostCode">
                 <label for="postcode">Code postal</label>
-                <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
+                <input type="text" id="postcode" name="postcode" class="fieldPostCode" th:value="${session.session.getPostcode()}">
             </div>
             <div class="userSearch">
                 <div class="userSearchSpan">
@@ -112,12 +112,12 @@
                 </div>
                 <div class="test">
                     <div class="searchCheckbox">
-                        <input type="checkbox" id="jam" name="jam" class="checkbox">
+                        <input type="checkbox" id="jam" name="jam" class="checkbox" th:checked="${jam}">
                         <label for="jam">une Jam Session !</label>
                     </div>
                     <div class="searchCheckbox">
-                        <input type="checkbox" id="groupe" name="groupe" class="checkbox">
-                        <label for="groupe">un Groupe !</label>
+                        <input type="checkbox" id="group" name="group" class="checkbox" th:checked="${group}">
+                        <label for="group">un Groupe !</label>
                     </div>
                 </div>
             </div>

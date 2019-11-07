@@ -38,6 +38,7 @@ public class MusicianRepository {
 
             if (generatedKeys.next()) {
                 int id = generatedKeys.getInt(1);
+                if(alias.equals("")){alias = email;}
                 return new Musician(id, password, alias, email, postcode, bio,
                         avatar, availability, searchType);
             } else {
@@ -70,17 +71,15 @@ public class MusicianRepository {
             statement.setInt(8, searchType);
             statement.setInt(9, idMusician);
 
-
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");
             }
+            if(alias.equals("")){alias = email;}
             return new Musician(idMusician, password, alias, email, postcode, bio,
                     avatar, availability, searchType);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }
-

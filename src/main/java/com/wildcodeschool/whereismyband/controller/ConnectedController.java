@@ -19,7 +19,48 @@ public class ConnectedController {
     private LevelInstrumentRepository levelInstrumentRepository = new LevelInstrumentRepository();
 
     @GetMapping("/profil-utilisateur")
-    public String toProfile() {
+    public String toProfile(Model model) {
+        String availability = "1010101";
+        //TODO : A récupérer depuis le table musician
+        char[] week = availability.toCharArray();
+        boolean monday = false;
+        if(week[0] == '1'){ monday = true;}
+        model.addAttribute("monday", monday);
+        boolean tuesday = false;
+        if(week[1] == '1'){ tuesday = true;}
+        model.addAttribute("tuesday", tuesday);
+        boolean wednesday = false;
+        if(week[2] == '1'){ wednesday = true;}
+        model.addAttribute("wednesday", wednesday);
+        boolean thursday = false;
+        if(week[3] == '1'){ thursday = true;}
+        model.addAttribute("thursday", thursday);
+        boolean friday = false;
+        if(week[4] == '1'){ friday = true;}
+        model.addAttribute("friday", friday);
+        boolean saturday = false;
+        if(week[5] == '1'){ saturday = true;}
+        model.addAttribute("saturday", saturday);
+        boolean sunday = false;
+        if(week[6] == '1'){ sunday = true;}
+        model.addAttribute("sunday", sunday);
+
+        int searchType = 2;
+        boolean jam = false;
+        boolean group = false;
+
+        if(searchType == 1) {
+            jam = true;
+        } else if (searchType == 2) {
+            group = true;
+        }
+        else{
+            jam=true;
+            group = true;
+        }
+        model.addAttribute("jam", jam);
+        model.addAttribute("group", group);
+
         return "userProfile";
     }
 
@@ -73,7 +114,7 @@ public class ConnectedController {
                                @RequestParam boolean saturday,
                                @RequestParam boolean sunday,
                                @RequestParam boolean jam,
-                               @RequestParam boolean groupe,
+                               @RequestParam boolean group,
                                @RequestParam int mainInstrument,
                                @RequestParam int mainInstrumentLevel,
                                @RequestParam int previousInstrument1,
@@ -84,7 +125,7 @@ public class ConnectedController {
         boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
 
-        int searchType = formatSearchType(jam, groupe);
+        int searchType = formatSearchType(jam, group);
 
         //TODO vérifer password et newpassword
         Musician musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio, avatar, availability, searchType);
@@ -113,12 +154,12 @@ public class ConnectedController {
         return String.valueOf(availability);
     }
 
-    private int formatSearchType(boolean jam, boolean groupe) {
+    private int formatSearchType(boolean jam, boolean group) {
         int i = 0;
         if (jam) {
             i += 1;
         }
-        if (groupe) {
+        if (group) {
             i += 2;
         }
         return i;
