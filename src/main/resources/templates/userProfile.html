@@ -30,42 +30,44 @@
             </div>
             <div class="blockUserInfo">
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" class="fieldAccountInfo" th:value="${session.session.getAlias()}"/>
+                <input type="text" id="username" name="username" class="fieldAccountInfo" th:value="${session.musician.getAlias()}"/>
                 <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" class="fieldAccountInfo"
-                       placeholder="Mot de passe">
+                <input type="password" id="password" name="password" class="fieldAccountInfo" th:value="${session.musician.getPassword()}"/>
                 <input type="password" id="newpassword" name="newpassword" class="fieldAccountInfo"
                        placeholder="Confirmer le mot de passe">
             </div>
             <div class="blockUserInstrument">
                 <div class="userSingleInstrument">
                     <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
-                        <option value="0" disabled selected>Votre instrument principal</option>
                         <option th:each="instrument : ${instruments}"
                                 th:value="${instrument.id_instrument}"
-                                th:text="${instrument.name}" class="optionTh"></option>
+                                th:text="${instrument.name}"
+                                th:selected="${instrument.id_instrument == levels.get(0).getIdMnstrument()}" class="optionTh"
+                        ></option>
                     </select>
                     <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
-                        <option value="0" disabled selected>Votre niveau</option>
-                        <option value="1">Débutant</option>
-                        <option value="2">Intermédiaire</option>
-                        <option value="3">Avancé</option>
-                        <option value="4">Pro</option>
+                        <option value="0" disabled th:selected="${levels.get(0).getLevel() == 0 }">Votre niveau</option>
+                        <option value="1"th:selected="${levels.get(0).getLevel() == 1 }">Débutant</option>
+                        <option value="2"th:selected="${levels.get(0).getLevel() == 2 }">Intermédiaire</option>
+                        <option value="3"th:selected="${levels.get(0).getLevel() == 3 }">Avancé</option>
+                        <option value="4"th:selected="${levels.get(0).getLevel() == 4 }">Pro</option>
                     </select>
                 </div>
                 <div class="userSingleInstrument">
                     <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
-                        <option value="0" disabled selected>Votre instrument secondaire</option>
-                        <option th:each="instrument : ${instruments}"
+                        <option value="0" disabled th:selected="${levels.get(1).getIdMnstrument() == 0 }">Sélectionnez votre instrument</option>
+                        </option><option th:each="instrument : ${instruments}"
                                 th:value="${instrument.id_instrument}"
-                                th:text="${instrument.name}"></option>
+                                th:text="${instrument.name}"
+                                th:selected="${instrument.id_instrument == levels.get(1).getIdMnstrument()}" class="optionTh"
+                        </option>
                     </select>
                     <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
-                        <option value="0" disabled selected>Votre niveau</option>
-                        <option value="1">Débutant</option>
-                        <option value="2">Intermédiaire</option>
-                        <option value="3">Avancé</option>
-                        <option value="4">Pro</option>
+                        <option value="0" disabled th:selected="${levels.get(1).getLevel() == 0 }">Votre niveau</option>
+                        <option value="1"th:selected="${levels.get(1).getLevel() == 1 }">Débutant</option>
+                        <option value="2"th:selected="${levels.get(1).getLevel() == 2 }">Intermédiaire</option>
+                        <option value="3"th:selected="${levels.get(1).getLevel() == 3 }">Avancé</option>
+                        <option value="4"th:selected="${levels.get(1).getLevel() == 4 }">Pro</option>
                     </select>
                 </div>
             </div>
@@ -104,7 +106,7 @@
             </div>
             <div class="userPostCode">
                 <label for="postcode">Code postal</label>
-                <input type="text" id="postcode" name="postcode" class="fieldPostCode" th:value="${session.session.getPostcode()}">
+                <input type="text" id="postcode" name="postcode" class="fieldPostCode" th:value="${session.musician.getPostcode()}">
             </div>
             <div class="userSearch">
                 <div class="userSearchSpan">
@@ -116,14 +118,14 @@
                         <label for="jam">une Jam Session !</label>
                     </div>
                     <div class="searchCheckbox">
-                        <input type="checkbox" id="group" name="group" class="checkbox" th:checked="${group}">
+                        <input type="checkbox" id="group" name="group" class="checkbox" th:checked="${band}">
                         <label for="group">un Groupe !</label>
                     </div>
                 </div>
             </div>
             <div class="userBiography">
                 <label for="bio">Ma vie mon oeuvre</label>
-                <textarea id="bio" name="bio" class="fieldUserBiography"> Votre bio musicale </textarea>
+                <textarea id="bio" name="bio" class="fieldUserBiography" placeholder="Votre bio musicale" th:text="${session.musician.getBio()}"></textarea>
             </div>
             <div class="saveProfile">
                 <input type="submit" value="Sauvegarder" class="saveButton">

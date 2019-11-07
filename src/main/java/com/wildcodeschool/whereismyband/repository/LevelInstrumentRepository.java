@@ -3,6 +3,8 @@ package com.wildcodeschool.whereismyband.repository;
 import com.wildcodeschool.whereismyband.entity.LevelInstrument;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LevelInstrumentRepository {
 
@@ -54,6 +56,34 @@ public class LevelInstrumentRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public List<LevelInstrument> getLevelInstrumentByIdMusician(int idMusician) {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+
+                    "SELECT * FROM level_instrument where id_musician = ?;"
+            );
+
+            statement.setInt(1, idMusician);
+            ResultSet resultSet = statement.executeQuery();
+
+            List<LevelInstrument> levels = new ArrayList<>();
+
+            while (resultSet.next()) {
+                int idInstrument = resultSet.getInt("id_instrument");
+                int level = resultSet.getInt("level");
+                levels.add(new LevelInstrument(idMusician, idInstrument, level));
+            }
+            return levels;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

@@ -39,4 +39,29 @@ public class InstrumentRepository {
         }
         return null;
     }
+
+    public Instrument getInstrumentById(int idInstrument) {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM instrument WHERE id_instrument = ?;"
+            );
+
+            statement.setInt(1, idInstrument);
+            ResultSet resultSet = statement.executeQuery();
+
+
+            if(resultSet.next()) {
+                idInstrument = resultSet.getInt("id_instrument");
+                String name = resultSet.getString("name");
+                return new Instrument(idInstrument, name);
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

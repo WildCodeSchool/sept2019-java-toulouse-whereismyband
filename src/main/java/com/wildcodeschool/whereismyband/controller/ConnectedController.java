@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ConnectedController {
@@ -21,47 +22,63 @@ public class ConnectedController {
     private InstrumentRepository repository = new InstrumentRepository();
 
     @GetMapping("/profil-utilisateur")
-    public String toProfile(Model model) {
-        String availability = "1010101";
-        //TODO : A récupérer depuis le table musician
+    public String toProfile(Model model, HttpSession session) {
+        Musician musician = (Musician) session.getAttribute("musician");
+        String availability = musician.getAvailability();
         char[] week = availability.toCharArray();
         boolean monday = false;
-        if(week[0] == '1'){ monday = true;}
+        if (week[0] == '1') {
+            monday = true;
+        }
         model.addAttribute("monday", monday);
         boolean tuesday = false;
-        if(week[1] == '1'){ tuesday = true;}
+        if (week[1] == '1') {
+            tuesday = true;
+        }
         model.addAttribute("tuesday", tuesday);
         boolean wednesday = false;
-        if(week[2] == '1'){ wednesday = true;}
+        if (week[2] == '1') {
+            wednesday = true;
+        }
         model.addAttribute("wednesday", wednesday);
         boolean thursday = false;
-        if(week[3] == '1'){ thursday = true;}
+        if (week[3] == '1') {
+            thursday = true;
+        }
         model.addAttribute("thursday", thursday);
         boolean friday = false;
-        if(week[4] == '1'){ friday = true;}
+        if (week[4] == '1') {
+            friday = true;
+        }
         model.addAttribute("friday", friday);
         boolean saturday = false;
-        if(week[5] == '1'){ saturday = true;}
+        if (week[5] == '1') {
+            saturday = true;
+        }
         model.addAttribute("saturday", saturday);
         boolean sunday = false;
-        if(week[6] == '1'){ sunday = true;}
+        if (week[6] == '1') {
+            sunday = true;
+        }
         model.addAttribute("sunday", sunday);
 
-        int searchType = 2;
+        int searchType = musician.getSearch_type();
         boolean jam = false;
-        boolean group = false;
+        boolean band = false;
 
-        if(searchType == 1) {
+        if (searchType == 1) {
             jam = true;
         } else if (searchType == 2) {
-            group = true;
-        }
-        else{
-            jam=true;
-            group = true;
+            band = true;
+        } else {
+            jam = true;
+            band = true;
         }
         model.addAttribute("jam", jam);
-        model.addAttribute("group", group);
+        model.addAttribute("band", band);
+
+        model.addAttribute("instruments", repository.findAllInstrument());
+        model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musician.getId_musician()));
 
         return "userProfile";
     }
