@@ -2,6 +2,7 @@ package com.wildcodeschool.whereismyband.controller;
 
 import com.wildcodeschool.whereismyband.entity.LevelInstrument;
 import com.wildcodeschool.whereismyband.entity.Musician;
+import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.LevelInstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.MusicianRepository;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class ConnectedController {
 
     private MusicianRepository musicianRepository = new MusicianRepository();
     private LevelInstrumentRepository levelInstrumentRepository = new LevelInstrumentRepository();
+    private InstrumentRepository repository = new InstrumentRepository();
 
     @GetMapping("/profil-utilisateur")
     public String toProfile() {
@@ -55,6 +57,43 @@ public class ConnectedController {
         return "search";
     }
 
+    @PostMapping("/rechercheviarecherche")
+    public String searchBySearch(Model model,
+                                 @RequestParam String postcode,
+                                 @RequestParam(required = false) String bio,
+                                 @RequestParam(required = false) String avatar,
+                                 @RequestParam(required = false, defaultValue = "false") boolean monday,
+                                 @RequestParam(required = false, defaultValue = "false") boolean tuesday,
+                                 @RequestParam(required = false, defaultValue = "false") boolean wednesday,
+                                 @RequestParam(required = false, defaultValue = "false") boolean thursday,
+                                 @RequestParam(required = false, defaultValue = "false") boolean friday,
+                                 @RequestParam(required = false, defaultValue = "false") boolean saturday,
+                                 @RequestParam(required = false, defaultValue = "false") boolean sunday,
+                                 @RequestParam(required = false, defaultValue = "false") boolean jam,
+                                 @RequestParam(required = false, defaultValue = "false") boolean band,
+                                 @RequestParam int mainInstrument,
+                                 @RequestParam int mainInstrumentLevel,
+                                 @RequestParam(required = false, defaultValue = "0") int secondInstrument,
+                                 @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel) {
+
+        model.addAttribute("instruments", repository.findAllInstrument());
+        return "search";
+    }
+
+    @PostMapping("/recherchevialogin")
+    public String searchByLogIn(Model model, HttpSession session,
+                                @RequestParam String userMail,
+                                @RequestParam String userPassword) {
+        Musician musician = musicianRepository.getMusicianLogIn(userMail, userPassword);
+        session.setAttribute("musician", musician);
+        model.addAttribute("instruments", repository.findAllInstrument());
+        if (musician == null) {
+            model.addAttribute("errorMessage", true);
+            return "login";
+        }
+        return "search";
+    }
+
     @PostMapping("/rechercheviaprofil")
     public String updateProfil(Model model,
                                @RequestParam int idMusician,
@@ -73,7 +112,7 @@ public class ConnectedController {
                                @RequestParam boolean saturday,
                                @RequestParam boolean sunday,
                                @RequestParam boolean jam,
-                               @RequestParam boolean groupe,
+                               @RequestParam boolean band,
                                @RequestParam int mainInstrument,
                                @RequestParam int mainInstrumentLevel,
                                @RequestParam int previousInstrument1,
@@ -84,7 +123,7 @@ public class ConnectedController {
         boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
 
-        int searchType = formatSearchType(jam, groupe);
+        int searchType = formatSearchType(jam, band);
 
         //TODO vérifer password et newpassword
         Musician musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio, avatar, availability, searchType);
@@ -92,6 +131,7 @@ public class ConnectedController {
 
         LevelInstrument levelInstrument1 = levelInstrumentRepository.update(musician.getId_musician(), mainInstrument, mainInstrumentLevel, previousInstrument1);
         model.addAttribute("levelInstrument1", levelInstrument1);
+        model.addAttribute("instruments", repository.findAllInstrument());
 
         if (secondInstrument > 0) {
             LevelInstrument levelInstrument2 = levelInstrumentRepository.update(musician.getId_musician(), secondInstrument, secondInstrumentLevel, previousInstrument2);
@@ -113,16 +153,14 @@ public class ConnectedController {
         return String.valueOf(availability);
     }
 
-    private int formatSearchType(boolean jam, boolean groupe) {
+    private int formatSearchType(boolean jam, boolean band) {
         int i = 0;
         if (jam) {
             i += 1;
         }
-        if (groupe) {
+        if (band) {
             i += 2;
         }
         return i;
     }
-
-
 }
