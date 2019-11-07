@@ -70,7 +70,7 @@ public class ConnectedController {
                                  @RequestParam(required = false, defaultValue = "false") boolean saturday,
                                  @RequestParam(required = false, defaultValue = "false") boolean sunday,
                                  @RequestParam(required = false, defaultValue = "false") boolean jam,
-                                 @RequestParam(required = false, defaultValue = "false") boolean groupe,
+                                 @RequestParam(required = false, defaultValue = "false") boolean band,
                                  @RequestParam int mainInstrument,
                                  @RequestParam int mainInstrumentLevel,
                                  @RequestParam(required = false, defaultValue = "0") int secondInstrument,
@@ -112,7 +112,7 @@ public class ConnectedController {
                                @RequestParam boolean saturday,
                                @RequestParam boolean sunday,
                                @RequestParam boolean jam,
-                               @RequestParam boolean groupe,
+                               @RequestParam boolean band,
                                @RequestParam int mainInstrument,
                                @RequestParam int mainInstrumentLevel,
                                @RequestParam int previousInstrument1,
@@ -123,7 +123,7 @@ public class ConnectedController {
         boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
 
-        int searchType = formatSearchType(jam, groupe);
+        int searchType = formatSearchType(jam, band);
 
         //TODO vérifer password et newpassword
         Musician musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio, avatar, availability, searchType);
@@ -153,12 +153,12 @@ public class ConnectedController {
         return String.valueOf(availability);
     }
 
-    private int formatSearchType(boolean jam, boolean groupe) {
+    private int formatSearchType(boolean jam, boolean band) {
         int i = 0;
         if (jam) {
             i += 1;
         }
-        if (groupe) {
+        if (band) {
             i += 2;
         }
         return i;

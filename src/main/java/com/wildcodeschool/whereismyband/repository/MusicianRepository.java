@@ -76,10 +76,9 @@ public class MusicianRepository {
                 String bio = resultSet.getString("bio");
                 String avatar = resultSet.getString("avatar");
                 String availability = resultSet.getString("availability");
-                int search_type = resultSet.getInt("search_type");
-                return new Musician(id_musician, password, alias, email, postcode, bio, avatar, availability, search_type);
+                int searchType = resultSet.getInt("search_type");
+                return new Musician(id_musician, password, alias, email, postcode, bio, avatar, availability, searchType);
             }
-
         } catch (
                 SQLException e) {
             e.printStackTrace();
