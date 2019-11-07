@@ -21,8 +21,6 @@ public class LevelInstrumentRepository {
             statement.setInt(1, idMusician);
             statement.setInt(2, idInstrument);
             statement.setInt(3, level);
-
-
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to insert data");
             }
@@ -56,7 +54,6 @@ public class LevelInstrumentRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }
