@@ -25,6 +25,56 @@ public class ConnectedController {
         return "userProfile";
     }
 
+    @PostMapping("/creation-session-recherche")
+    public String creationSession(HttpSession session,
+                                  @RequestParam(required = false) int comefromhere,
+                                  @RequestParam(required = false) int idMusician,
+                                  @RequestParam(required = false) String postcode,
+                                  @RequestParam(required = false, defaultValue = "") String bio,
+                                  @RequestParam String userMail,
+                                  @RequestParam String password,
+                                  @RequestParam(required = false, defaultValue = "") String avatar,
+                                  @RequestParam(required = false) String alias,
+                                  @RequestParam(required = false, defaultValue = "false") boolean monday,
+                                  @RequestParam(required = false, defaultValue = "false") boolean tuesday,
+                                  @RequestParam(required = false, defaultValue = "false") boolean wednesday,
+                                  @RequestParam(required = false, defaultValue = "false") boolean thursday,
+                                  @RequestParam(required = false, defaultValue = "false") boolean friday,
+                                  @RequestParam(required = false, defaultValue = "false") boolean saturday,
+                                  @RequestParam(required = false, defaultValue = "false") boolean sunday,
+                                  @RequestParam(required = false, defaultValue = "false") boolean jam,
+                                  @RequestParam(required = false, defaultValue = "false") boolean band,
+                                  @RequestParam(required = false) String availability,
+                                  @RequestParam(required = false) int searchType,
+                                  @RequestParam(required = false) int mainInstrument,
+                                  @RequestParam(required = false) int mainInstrumentLevel,
+                                  @RequestParam(required = false) int secondInstrument,
+                                  @RequestParam(required = false) int secondInstrumentLevel) {
+
+        Musician musician;
+        switch (comefromhere) {
+            case 1:
+                musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);  //(on vient d'inscription)
+                idMusician = musician.getId_musician();
+                break;
+            case 2:
+                searchType = formatSearchType(jam, band);
+                boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
+                availability = formatAvailability(week);
+                musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio,
+                        avatar, availability, searchType); //(on vient de profil)
+                break;
+            case 3: //enregistrer dans la derniere recherche (on vient de la recherche)
+                break;
+            default:
+                musician = musicianRepository.getMusicianLogIn(userMail, password); //on arrive du login
+                idMusician = musician.getId_musician();
+        }
+        musician = musicianRepository.getMusicianById(idMusician);
+        LevelInstrument levelInstrument = levelInstrumentRepository.getLevelInstrumentByIdMusician(idMusician).get(0); //TODO : gerer 2eme instru
+        //TODO : constructeur musician_levelInstrument a remplir avec les infos d'avant puis le passer dans une session recherche.
+    }
+
     @PostMapping("/recherche")
     public String toSearch(Model model, HttpSession session,
                            @RequestParam String password,

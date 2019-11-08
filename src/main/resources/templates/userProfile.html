@@ -128,7 +128,8 @@
             <div class="saveProfile">
                 <input type="submit" value="Sauvegarder" class="saveButton">
             </div>
-            <input type="hidden" name="idMusician" value="8"/>
+            <input type="hidden" name="idMusician" th:value="${session.musician.getId_musician()}"/>
+            <input type="hidden" name="comefromhere" value="2"/>
             <input type="hidden" name="previousInstrument1" value="8"/>
             <input type="hidden" name="previousInstrument2" value="8"/>
         </form>

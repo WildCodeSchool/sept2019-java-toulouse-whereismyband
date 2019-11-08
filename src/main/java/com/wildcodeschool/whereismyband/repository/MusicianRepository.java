@@ -118,4 +118,39 @@ public class MusicianRepository {
         }
         return null;
     }
+
+    public Musician getMusicianById(int id) {
+
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+
+                    "SELECT * FROM musician where id = ?;"
+            );
+
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int id_musician = resultSet.getInt("id_musician");
+                String password = resultSet.getString("password");
+                String alias = resultSet.getString("alias");
+                String email = resultSet.getString("email");
+                String postcode = resultSet.getString("postcode");
+                String bio = resultSet.getString("bio");
+                String avatar = resultSet.getString("avatar");
+                String availability = resultSet.getString("availability");
+                int searchType = resultSet.getInt("search_type");
+                return new Musician(id_musician, password, alias, email, postcode, bio, avatar, availability, searchType);
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

@@ -241,6 +241,8 @@
                         <div class="eachDay">
                             <label for="dimancheD">Di</label>
                             <input type="checkbox" id="dimancheD" name="sunday" class="checkbox">
+                            <input type="hidden" name="idMusician" th:value="${session.musician.getId_musician()}"/>
+                            <input type="hidden" name="comefromhere" value="3"/>
                         </div>
                     </div>
                 </div>
