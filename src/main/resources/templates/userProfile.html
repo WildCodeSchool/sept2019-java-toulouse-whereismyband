@@ -18,7 +18,7 @@
     </header>
     <div class="mainContent">
         <h2>Edition du profil</h2>
-        <form th:action="@{/recherche}" method="post">
+        <form th:action="@{/rechercheviaprofil}" method="post" class="medQProfil">
             <div class="blockAvatarProfile">
                 <div class="avatarImg">
                     <img src="https://via.placeholder.com/90" alt="Avatar User"/>
@@ -38,29 +38,34 @@
                        placeholder="Confirmer le mot de passe">
             </div>
             <div class="blockUserInstrument">
-                <label for="mainInstrument">Mes instruments</label>
                 <div class="userSingleInstrument">
-                    <select id="mainInstrument" class="fieldInstrument">
-                        <option value="Saxophone">Saxophone</option>
-                        <option value="Guitare">Guitare</option>
+                    <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
+                        <option value="0" disabled selected>Votre instrument principal</option>
+                        <option th:each="instrument : ${instruments}"
+                                th:value="${instrument.id_instrument}"
+                                th:text="${instrument.name}" class="optionTh"></option>
                     </select>
-                    <select id="mainInstrumentLevel" class="fieldLevel">
-                        <option value="Débutant">Débutant</option>
-                        <option value="Intermédiaire">Intermédiaire</option>
-                        <option value="Avancé">Avancé</option>
-                        <option value="Pro">Pro</option>
+                    <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
+                        <option value="0" disabled selected>Votre niveau</option>
+                        <option value="1">Débutant</option>
+                        <option value="2">Intermédiaire</option>
+                        <option value="3">Avancé</option>
+                        <option value="4">Pro</option>
                     </select>
                 </div>
                 <div class="userSingleInstrument">
-                    <select id="secondInstrument" class="fieldInstrument">
-                        <option value="Saxophone">Saxophone</option>
-                        <option value="Guitare">Guitare</option>
+                    <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
+                        <option value="0" disabled selected>Votre instrument secondaire</option>
+                        <option th:each="instrument : ${instruments}"
+                                th:value="${instrument.id_instrument}"
+                                th:text="${instrument.name}"></option>
                     </select>
-                    <select id="secondInstrumentLevel" class="fieldLevel">
-                        <option value="Débutant">Débutant</option>
-                        <option value="Intermédiaire">Intermédiaire</option>
-                        <option value="Avancé">Avancé</option>
-                        <option value="Pro">Pro</option>
+                    <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
+                        <option value="0" disabled selected>Votre niveau</option>
+                        <option value="1">Débutant</option>
+                        <option value="2">Intermédiaire</option>
+                        <option value="3">Avancé</option>
+                        <option value="4">Pro</option>
                     </select>
                 </div>
             </div>
@@ -68,32 +73,32 @@
                 <span>Jours de disponibilité</span>
                 <div class="blockUserDays">
                     <div class="eachDay">
-                        <label for="lundi">Lu</label>
-                        <input type="checkbox" id="lundi" name="lundi" class="checkbox">
+                        <label for="monday">Lu</label>
+                        <input type="checkbox" id="monday" name="lundi" class="checkbox">
                     </div>
                     <div class="eachDay">
-                        <label for="mardi">Ma</label>
-                        <input type="checkbox" id="mardi" name="mardi" class="checkbox">
+                        <label for="tuesday">Ma</label>
+                        <input type="checkbox" id="tuesday" name="mardi" class="checkbox">
                     </div>
                     <div class="eachDay">
-                        <label for="mercredi">Me</label>
-                        <input type="checkbox" id="mercredi" name="mercredi" class="checkbox">
+                        <label for="wednesday">Me</label>
+                        <input type="checkbox" id="wednesday" name="mercredi" class="checkbox">
                     </div>
                     <div class="eachDay">
-                        <label for="jeudi">Je</label>
-                        <input type="checkbox" id="jeudi" name="jeudi" class="checkbox">
+                        <label for="thursday">Je</label>
+                        <input type="checkbox" id="thursday" name="jeudi" class="checkbox">
                     </div>
                     <div class="eachDay">
-                        <label for="vendredi">Ve</label>
-                        <input type="checkbox" id="vendredi" name="vendredi" class="checkbox">
+                        <label for="friday">Ve</label>
+                        <input type="checkbox" id="friday" name="vendredi" class="checkbox">
                     </div>
                     <div class="eachDay">
-                        <label for="samedi">Sa</label>
-                        <input type="checkbox" id="samedi" name="samedi" class="checkbox">
+                        <label for="saturday">Sa</label>
+                        <input type="checkbox" id="saturday" name="samedi" class="checkbox">
                     </div>
                     <div class="eachDay">
-                        <label for="dimanche">Di</label>
-                        <input type="checkbox" id="dimanche" name="dimanche" class="checkbox">
+                        <label for="sunday">Di</label>
+                        <input type="checkbox" id="sunday" name="dimanche" class="checkbox">
                     </div>
                 </div>
             </div>
@@ -118,11 +123,14 @@
             </div>
             <div class="userBiography">
                 <label for="bio">Ma vie mon oeuvre</label>
-                <input type="textarea" id="bio" name="bio" class="fieldUserBiography" placeholder="Votre bio musicale">
+                <textarea id="bio" name="bio" class="fieldUserBiography"> Votre bio musicale </textarea>
             </div>
             <div class="saveProfile">
                 <input type="submit" value="Sauvegarder" class="saveButton">
             </div>
+            <input type="hidden" name="idMusician" value="8"/>
+            <input type="hidden" name="previousInstrument1" value="8"/>
+            <input type="hidden" name="previousInstrument2" value="8"/>
         </form>
     </div>
     <footer th:replace="footer :: footer">
