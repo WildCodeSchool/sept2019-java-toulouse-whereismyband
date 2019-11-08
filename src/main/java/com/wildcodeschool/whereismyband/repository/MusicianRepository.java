@@ -41,7 +41,6 @@ public class MusicianRepository {
 
             if (generatedKeys.next()) {
                 int id = generatedKeys.getInt(1);
-                if(alias.equals("")){alias = email;}
                 return new Musician(id, password, alias, email, postcode, bio,
                         avatar, availability, searchType);
             } else {
