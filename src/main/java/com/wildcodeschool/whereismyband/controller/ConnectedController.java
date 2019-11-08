@@ -55,19 +55,13 @@ public class ConnectedController {
                            @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel
     ) {
         //TODO vérifer password et newpassword
-        Musician musician = musicianRepository.save(password, alias, userMail, postCode, bio, avatar, availability, searchType);
-        model.addAttribute("musician", musician);
-
-        session.setAttribute("session", musician);
-
+        Musician musician = musicianRepository.save(password, userMail, userMail, postCode, bio, avatar, availability, searchType);
+        Musician musicianSession = musicianRepository.getMusicianLogIn(userMail, password);
+        session.setAttribute("musician", musicianSession);
         LevelInstrument levelInstrument1 = levelInstrumentRepository.save(musician.getId_musician(), mainInstrument, mainInstrumentLevel);
-        model.addAttribute("levelInstrument1", levelInstrument1);
-
         if (secondInstrument > 0) {
             LevelInstrument levelInstrument2 = levelInstrumentRepository.save(musician.getId_musician(), secondInstrument, secondInstrumentLevel);
-            model.addAttribute("levelInstrument2", levelInstrument2);
         }
-
         initSearchSession(session,musician);
         return "redirect:/resultats";
     }
@@ -101,7 +95,6 @@ public class ConnectedController {
                                 @RequestParam String userPassword) {
         Musician musician = musicianRepository.getMusicianLogIn(userMail, userPassword);
         session.setAttribute("musician", musician);
-        model.addAttribute("instruments", repository.findAllInstrument());
         if (musician == null) {
             model.addAttribute("errorMessage", true);
             return "login";
@@ -126,7 +119,7 @@ public class ConnectedController {
         session.setAttribute("sessionSearch", userSearch);
     }
 
-    @PostMapping("/rechercheviaprofil")
+    /*@PostMapping("/rechercheviaprofil")
     public String updateProfil(Model model,
                                @RequestParam int idMusician,
                                @RequestParam String password,
@@ -151,12 +144,9 @@ public class ConnectedController {
                                @RequestParam(required = false, defaultValue = "0") int secondInstrument,
                                @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel,
                                @RequestParam int previousInstrument2) {
-
         boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
-
         int searchType = formatSearchType(jam, band);
-
         //TODO vérifer password et newpassword
         Musician musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio, avatar, availability, searchType);
         model.addAttribute("musician", musician);
@@ -169,12 +159,13 @@ public class ConnectedController {
             LevelInstrument levelInstrument2 = levelInstrumentRepository.update(musician.getId_musician(), secondInstrument, secondInstrumentLevel, previousInstrument2);
             model.addAttribute("levelInstrument2", levelInstrument2);
         }
-
         return "redirect:/redirection-session";
-    }
+    }*/
 
     @PostMapping("/redirection-session")
     public String redirectSession(HttpSession session,
+                                  @RequestParam String password,
+                                  @RequestParam String userMail,
                                   @RequestParam(required = false, defaultValue = "0") String postCode,
                                   @RequestParam(required = false, defaultValue = "0") String availability,
                                   @RequestParam(required = false, defaultValue = "false") boolean monday,
