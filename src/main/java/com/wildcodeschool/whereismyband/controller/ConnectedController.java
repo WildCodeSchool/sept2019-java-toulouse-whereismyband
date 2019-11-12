@@ -45,7 +45,7 @@ public class ConnectedController {
         Musician musician = musicianRepository.save(password, alias, userMail, postcode, bio, avatar, availability, searchType);
         model.addAttribute("musician", musician);
 
-        session.setAttribute("session", musician);
+        session.setAttribute("musician", musician);
 
         LevelInstrument levelInstrument1 = levelInstrumentRepository.save(musician.getId_musician(), mainInstrument, mainInstrumentLevel);
         model.addAttribute("levelInstrument1", levelInstrument1);
