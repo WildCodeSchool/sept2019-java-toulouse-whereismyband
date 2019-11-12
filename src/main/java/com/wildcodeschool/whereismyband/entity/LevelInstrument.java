@@ -3,29 +3,29 @@ package com.wildcodeschool.whereismyband.entity;
 public class LevelInstrument {
 
 
-    private int idMusician;
-    private int idMnstrument;
+    private Long idMusician;
+    private Long idMnstrument;
     private int level;
 
-    public LevelInstrument(int idMusician, int idMnstrument, int level) {
+    public LevelInstrument(Long idMusician, Long idMnstrument, int level) {
         this.idMusician = idMusician;
         this.idMnstrument = idMnstrument;
         this.level = level;
     }
 
-    public int getIdMusician() {
+    public Long getIdMusician() {
         return idMusician;
     }
 
-    public void setIdMusician(int idMusician) {
+    public void setIdMusician(Long idMusician) {
         this.idMusician = idMusician;
     }
 
-    public int getIdMnstrument() {
+    public Long getIdMnstrument() {
         return idMnstrument;
     }
 
-    public void setIdMnstrument(int idMnstrument) {
+    public void setIdMnstrument(Long idMnstrument) {
         this.idMnstrument = idMnstrument;
     }
 

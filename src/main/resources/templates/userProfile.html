@@ -18,7 +18,7 @@
     </header>
     <div class="mainContent">
         <h2>Edition du profil</h2>
-        <form th:action="@{/rechercheviaprofil}" method="post" class="medQProfil">
+        <form th:action="@{/creation-session-recherche}" method="post" class="medQProfil">
             <div class="blockAvatarProfile">
                 <div class="avatarImg">
                     <img src="https://via.placeholder.com/90" alt="Avatar User"/>
@@ -30,81 +30,85 @@
             </div>
             <div class="blockUserInfo">
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" class="fieldAccountInfo" placeholder="Votre pseudo">
+                <input type="text" id="username" name="username" class="fieldAccountInfo"
+                       th:value="${session.musicianLevelInstrument.getAlias()}"/>
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" class="fieldAccountInfo"
-                       placeholder="Mot de passe">
+                       th:value="${session.musicianLevelInstrument.getPassword()}"/>
                 <input type="password" id="newpassword" name="newpassword" class="fieldAccountInfo"
                        placeholder="Confirmer le mot de passe">
             </div>
             <div class="blockUserInstrument">
                 <div class="userSingleInstrument">
                     <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
-                        <option value="0" disabled selected>Votre instrument principal</option>
                         <option th:each="instrument : ${instruments}"
-                                th:value="${instrument.id_instrument}"
-                                th:text="${instrument.name}" class="optionTh"></option>
+                                th:value="${instrument.idInstrument}"
+                                th:text="${instrument.name}"
+                                th:selected="${instrument.idInstrument == levels.get(0).getIdMnstrument()}"
+                                class="optionTh"
+                        ></option>
                     </select>
                     <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
-                        <option value="0" disabled selected>Votre niveau</option>
-                        <option value="1">Débutant</option>
-                        <option value="2">Intermédiaire</option>
-                        <option value="3">Avancé</option>
-                        <option value="4">Pro</option>
+                        <option value="0" disabled th:selected="${levels.get(0).getLevel() == 0 }">Votre niveau</option>
+                        <option value="1" th:selected="${levels.get(0).getLevel() == 1 }">Débutant</option>
+                        <option value="2" th:selected="${levels.get(0).getLevel() == 2 }">Intermédiaire</option>
+                        <option value="3" th:selected="${levels.get(0).getLevel() == 3 }">Avancé</option>
+                        <option value="4" th:selected="${levels.get(0).getLevel() == 4 }">Pro</option>
                     </select>
                 </div>
                 <div class="userSingleInstrument">
-                    <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
+                    <select id="secondInstrumentD" name="secondInstrument" class="fieldInstrument">
                         <option value="0" disabled selected>Votre instrument secondaire</option>
                         <option th:each="instrument : ${instruments}"
-                                th:value="${instrument.id_instrument}"
+                                th:value="${instrument.idInstrument}"
                                 th:text="${instrument.name}"></option>
                     </select>
-                    <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
+                    <select id="secondInstrumentLevelD" name="secondInstrumentLevel" class="fieldLevel">
                         <option value="0" disabled selected>Votre niveau</option>
                         <option value="1">Débutant</option>
                         <option value="2">Intermédiaire</option>
                         <option value="3">Avancé</option>
                         <option value="4">Pro</option>
-                    </select>
-                </div>
+                    </select></div>
             </div>
             <div class="blockUserWeek">
                 <span>Jours de disponibilité</span>
                 <div class="blockUserDays">
                     <div class="eachDay">
                         <label for="monday">Lu</label>
-                        <input type="checkbox" id="monday" name="lundi" class="checkbox">
+                        <input type="checkbox" id="monday" name="monday" class="checkbox" th:checked="${monday}">
                     </div>
                     <div class="eachDay">
                         <label for="tuesday">Ma</label>
-                        <input type="checkbox" id="tuesday" name="mardi" class="checkbox">
+                        <input type="checkbox" id="tuesday" name="tuesday" class="checkbox" th:checked="${tuesday}">
                     </div>
                     <div class="eachDay">
                         <label for="wednesday">Me</label>
-                        <input type="checkbox" id="wednesday" name="mercredi" class="checkbox">
+                        <input type="checkbox" id="wednesday" name="wednesday" class="checkbox"
+                               th:checked="${wednesday}">
                     </div>
                     <div class="eachDay">
                         <label for="thursday">Je</label>
-                        <input type="checkbox" id="thursday" name="jeudi" class="checkbox">
+                        <input type="checkbox" id="thursday" name="thursday" class="checkbox" th:checked="${thursday}">
                     </div>
                     <div class="eachDay">
                         <label for="friday">Ve</label>
-                        <input type="checkbox" id="friday" name="vendredi" class="checkbox">
+                        <input type="checkbox" id="friday" name="friday" class="checkbox" th:checked="${friday}">
                     </div>
                     <div class="eachDay">
                         <label for="saturday">Sa</label>
-                        <input type="checkbox" id="saturday" name="samedi" class="checkbox">
+                        <input type="checkbox" id="saturday" name="saturday" class="checkbox" th:checked="${saturday}">
                     </div>
                     <div class="eachDay">
                         <label for="sunday">Di</label>
-                        <input type="checkbox" id="sunday" name="dimanche" class="checkbox">
+                        <input type="checkbox" id="sunday" name="sunday" class="checkbox" th:checked="${sunday}">
                     </div>
                 </div>
             </div>
             <div class="userPostCode">
                 <label for="postcode">Code postal</label>
-                <input type="text" id="postcode" name="postcode" class="fieldPostCode" placeholder="Votre code postal">
+                <input type="text" id="postcode" name="postcode" class="fieldPostCode"
+                       th:value="${session.musicianLevelInstrument.getPostcode()}">
             </div>
             <div class="userSearch">
                 <div class="userSearchSpan">
@@ -112,23 +116,25 @@
                 </div>
                 <div class="test">
                     <div class="searchCheckbox">
-                        <input type="checkbox" id="jam" name="jam" class="checkbox">
+                        <input type="checkbox" id="jam" name="jam" class="checkbox" th:checked="${jam}">
                         <label for="jam">une Jam Session !</label>
                     </div>
                     <div class="searchCheckbox">
-                        <input type="checkbox" id="groupe" name="groupe" class="checkbox">
-                        <label for="groupe">un Groupe !</label>
+                        <input type="checkbox" id="group" name="group" class="checkbox" th:checked="${band}">
+                        <label for="group">un Groupe !</label>
                     </div>
                 </div>
             </div>
             <div class="userBiography">
                 <label for="bio">Ma vie mon oeuvre</label>
-                <textarea id="bio" name="bio" class="fieldUserBiography"> Votre bio musicale </textarea>
+                <textarea id="bio" name="bio" class="fieldUserBiography" placeholder="Votre bio musicale"
+                          th:text="${session.musicianLevelInstrument.getBio()}"></textarea>
             </div>
             <div class="saveProfile">
                 <input type="submit" value="Sauvegarder" class="saveButton">
             </div>
-            <input type="hidden" name="idMusician" value="8"/>
+            <input type="hidden" name="idMusician" th:value="${session.musicianLevelInstrument.getIdMusician()}"/>
+            <input type="hidden" name="comefromhere" value="2"/>
             <input type="hidden" name="previousInstrument1" value="8"/>
             <input type="hidden" name="previousInstrument2" value="8"/>
         </form>
