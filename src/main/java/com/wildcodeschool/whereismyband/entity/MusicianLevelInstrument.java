@@ -1,6 +1,6 @@
 package com.wildcodeschool.whereismyband.entity;
 
-public class Musician {
+public class MusicianLevelInstrument {
 
     private Long idMusician;
     private String password;
@@ -11,9 +11,27 @@ public class Musician {
     private String avatar;
     private String availability;
     private int searchType;
+    private Long idInstrument;
+    private int level;
 
-    public Musician(Long idMusician, String password, String alias, String email, String postcode, String bio,
-                    String avatar, String availability, int searchType) {
+    public Long getIdInstrument() {
+        return idInstrument;
+    }
+
+    public void setIdInstrument(Long idInstrument) {
+        this.idInstrument = idInstrument;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public MusicianLevelInstrument(Long idMusician, String password, String alias, String email, String postcode, String bio,
+                                   String avatar, String availability, int searchType, Long idInstrument, int level) {
         this.idMusician = idMusician;
         this.password = password;
         this.alias = alias;
@@ -23,6 +41,8 @@ public class Musician {
         this.avatar = avatar;
         this.availability = availability;
         this.searchType = searchType;
+        this.idInstrument = idInstrument;
+        this.level = level;
     }
 
     public Long getIdMusician() {
@@ -96,5 +116,4 @@ public class Musician {
     public void setSearchType(int searchType) {
         this.searchType = searchType;
     }
-
 }

@@ -25,7 +25,7 @@ public class InstrumentRepository {
             List<Instrument> instruments = new ArrayList<>();
 
             while (resultSet.next()) {
-                int id_instrument = resultSet.getInt("id_instrument");
+                Long id_instrument = resultSet.getLong("id_instrument");
                 String name = resultSet.getString("name");
                 if (name.length() > 35) {
                     name = name.substring(0, 35) + "...";

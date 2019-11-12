@@ -18,7 +18,7 @@
     </header>
     <div class="mainContent">
         <h2>Edition du profil</h2>
-        <form th:action="@{/redirection-session}" method="post" class="medQProfil">
+        <form th:action="@{/creation-session-recherche}" method="post" class="medQProfil">
             <div class="blockAvatarProfile">
                 <div class="avatarImg">
                     <img src="https://via.placeholder.com/90" alt="Avatar User"/>
@@ -40,9 +40,9 @@
                 <div class="userSingleInstrument">
                     <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
                         <option th:each="instrument : ${instruments}"
-                                th:value="${instrument.id_instrument}"
+                                th:value="${instrument.idInstrument}"
                                 th:text="${instrument.name}"
-                                th:selected="${instrument.id_instrument == levels.get(0).getIdMnstrument()}" class="optionTh"
+                                th:selected="${instrument.idInstrument == levels.get(0).getIdMnstrument()}" class="optionTh"
                         ></option>
                     </select>
                     <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
@@ -58,9 +58,9 @@
                         <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
                             <option value="0" disabled th:selected="${levels.get(1).getIdMnstrument() == 0 }">Sélectionnez votre instrument</option>
                             </option><option th:each="instrument : ${instruments}"
-                                    th:value="${instrument.id_instrument}"
+                                    th:value="${instrument.idInstrument}"
                                     th:text="${instrument.name}"
-                                    th:selected="${instrument.id_instrument == levels.get(1).getIdMnstrument()}" class="optionTh"
+                                    th:selected="${instrument.idInstrument == levels.get(1).getIdMnstrument()}" class="optionTh"
                             </option>
                         </select>
                         <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
@@ -132,7 +132,8 @@
             <div class="saveProfile">
                 <input type="submit" value="Sauvegarder" class="saveButton">
             </div>
-            <input type="hidden" name="idMusician" value="8"/>
+            <input type="hidden" name="idMusician" th:value="${session.musicianLevelInstrument.getIdMusician()}"/>
+            <input type="hidden" name="comefromhere" value="2"/>
             <input type="hidden" name="previousInstrument1" value="8"/>
             <input type="hidden" name="previousInstrument2" value="8"/>
         </form>
