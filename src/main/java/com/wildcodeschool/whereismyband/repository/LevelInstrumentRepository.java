@@ -45,8 +45,8 @@ public class LevelInstrumentRepository {
             statement.setLong(1, idMusician);
             statement.setLong(2, idInstrument);
             statement.setInt(3, level);
-            statement.setLong(1, idMusician);
-            statement.setLong(2, previousInstrument);
+            statement.setLong(4, idMusician);
+            statement.setLong(5, previousInstrument);
 
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");

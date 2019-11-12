@@ -57,6 +57,7 @@ public class ConnectedController {
             case 1:
                 musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);  //(on vient d'inscription)
                 idMusician = musician.getIdMusician();
+                LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician,mainInstrument,mainInstrumentLevel);
                 break;
             case 2:
                 searchType = formatSearchType(jam, band);
@@ -83,34 +84,10 @@ public class ConnectedController {
 
     @GetMapping("/recherche")
     public String toSearch(Model model, HttpSession session){
-                          /* @RequestParam String password,
-                           @RequestParam String newpassword,
-                           @RequestParam(required = false, defaultValue = "") String alias,
-                           @RequestParam String userMail,
-                           @RequestParam String postcode,
-                           @RequestParam(required = false, defaultValue = "") String bio,
-                           @RequestParam(required = false, defaultValue = "") String avatar,
-                           @RequestParam(required = false, defaultValue = "1111111") String availability,
-                           @RequestParam(required = false, defaultValue = "3") int searchType,
-                           @RequestParam Long mainInstrument,
-                           @RequestParam int mainInstrumentLevel,
-                           @RequestParam(required = false, defaultValue = "0") Long secondInstrument,
-                           @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel*/
 
         //TODO vérifer password et newpassword
 
-        /*Musician musician = musicianRepository.save(password, alias, userMail, postcode, bio, avatar, availability, searchType);
-        model.addAttribute("musician", musician);
-
-        session.setAttribute("session", musician);
-
-        LevelInstrument levelInstrument1 = levelInstrumentRepository.save(musician.getIdMusician(), mainInstrument, mainInstrumentLevel);
-        model.addAttribute("levelInstrument1", levelInstrument1);
-
-        if (secondInstrument > 0) {
-            LevelInstrument levelInstrument2 = levelInstrumentRepository.save(musician.getIdMusician(), secondInstrument, secondInstrumentLevel);
-            model.addAttribute("levelInstrument2", levelInstrument2);
-        }*/
+        model.addAttribute("instruments", repository.findAllInstrument());
         return "search";
     }
 
