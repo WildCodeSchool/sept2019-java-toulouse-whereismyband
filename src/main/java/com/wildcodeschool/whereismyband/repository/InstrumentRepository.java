@@ -52,9 +52,7 @@ public class InstrumentRepository {
             statement.setLong(1, idInstrument);
             ResultSet resultSet = statement.executeQuery();
 
-
-            if(resultSet.next()) {
-                idInstrument = resultSet.getLong("id_instrument");
+            if (resultSet.next()) {
                 String name = resultSet.getString("name");
                 return new Instrument(idInstrument, name);
             }
