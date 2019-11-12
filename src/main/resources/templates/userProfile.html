@@ -30,7 +30,7 @@
             </div>
             <div class="blockUserInfo">
                 <label for="username">Nom d'utilisateur</label>
-                <input type="text" id="username" name="username" class="fieldAccountInfo"
+                <input type="text" id="username" name="alias" class="fieldAccountInfo"
                        th:value="${session.musicianLevelInstrument.getAlias()}"/>
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" class="fieldAccountInfo"
@@ -120,8 +120,8 @@
                         <label for="jam">une Jam Session !</label>
                     </div>
                     <div class="searchCheckbox">
-                        <input type="checkbox" id="group" name="group" class="checkbox" th:checked="${band}">
-                        <label for="group">un Groupe !</label>
+                        <input type="checkbox" id="band" name="band" class="checkbox" th:checked="${band}">
+                        <label for="band">un Groupe !</label>
                     </div>
                 </div>
             </div>
@@ -135,7 +135,8 @@
             </div>
             <input type="hidden" name="idMusician" th:value="${session.musicianLevelInstrument.getIdMusician()}"/>
             <input type="hidden" name="comefromhere" value="2"/>
-            <input type="hidden" name="previousInstrument1" value="8"/>
+            <input type="hidden" name="userMail" th:value="${session.musicianLevelInstrument.getEmail()}"/>
+            <input type="hidden" name="previousInstrument1" th:value="${session.musicianLevelInstrument.getIdInstrument()}"/>
             <input type="hidden" name="previousInstrument2" value="8"/>
         </form>
     </div>
