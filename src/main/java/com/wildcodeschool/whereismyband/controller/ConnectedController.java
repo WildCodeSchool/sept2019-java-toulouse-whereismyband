@@ -4,12 +4,14 @@ import com.wildcodeschool.whereismyband.entity.*;
 import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.LevelInstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.MusicianRepository;
+import com.wildcodeschool.whereismyband.repository.ResultRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ConnectedController {
@@ -17,9 +19,11 @@ public class ConnectedController {
     private MusicianRepository musicianRepository = new MusicianRepository();
     private LevelInstrumentRepository levelInstrumentRepository = new LevelInstrumentRepository();
     private InstrumentRepository repository = new InstrumentRepository();
+    private ResultRepository resultRepository = new ResultRepository();
 
     @GetMapping("/profil-utilisateur")
     public String toProfile(Model model, HttpSession session) {
+
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
 
         String availability = musicianLevelInstrument.getAvailability();
@@ -53,7 +57,7 @@ public class ConnectedController {
                                   @RequestParam(required = false, defaultValue = "false") boolean sunday,
                                   @RequestParam(required = false, defaultValue = "false") boolean jam,
                                   @RequestParam(required = false, defaultValue = "false") boolean band,
-                                  @RequestParam(required = false) String availability,
+                                  @RequestParam(required = false, defaultValue = "1111111") String availability,
                                   @RequestParam(required = false, defaultValue = "3") int searchType,
                                   @RequestParam(required = false) Long mainInstrument,
                                   @RequestParam(required = false, defaultValue = "0") int mainInstrumentLevel,
@@ -101,6 +105,13 @@ public class ConnectedController {
 
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
+        return "search";
+    }
+
+    @GetMapping("/resultat-recherche")
+    public String getResult(Model model) {
+        List<Result> results = resultRepository.getResult(2, "31000", 209,1, "1100111");
+        model.addAttribute("results",results);
         return "search";
     }
 
