@@ -96,5 +96,4 @@ public class Musician {
     public void setSearchType(int searchType) {
         this.searchType = searchType;
     }
-
 }

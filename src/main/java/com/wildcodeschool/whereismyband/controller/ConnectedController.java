@@ -1,6 +1,5 @@
 package com.wildcodeschool.whereismyband.controller;
 
-
 import com.wildcodeschool.whereismyband.entity.*;
 import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.LevelInstrumentRepository;
@@ -10,9 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
-
 
 @Controller
 public class ConnectedController {
@@ -77,7 +74,7 @@ public class ConnectedController {
                 musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio,
                         avatar, availability, searchType); //(on vient de profil)
                 break;
-            case 3: //enregistrer dans la derniere recherche (on vient de la recherche)
+            case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
                 break;
             case 4:
                 musician = musicianRepository.getMusicianLogIn(userMail, password); //on arrive du login

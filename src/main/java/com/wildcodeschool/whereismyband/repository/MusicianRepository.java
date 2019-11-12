@@ -1,7 +1,6 @@
 package com.wildcodeschool.whereismyband.repository;
 
 import com.wildcodeschool.whereismyband.entity.Musician;
-
 import java.sql.*;
 
 public class MusicianRepository {
@@ -85,7 +84,6 @@ public class MusicianRepository {
 
     public Musician update(Long idMusician, String password, String alias, String email, String postcode, String bio,
                            String avatar, String availability, int searchType) {
-
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -108,7 +106,6 @@ public class MusicianRepository {
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");
             }
-            if(alias.equals("")){alias = email;}
             return new Musician(idMusician, password, alias, email, postcode, bio,
                     avatar, availability, searchType);
         } catch (SQLException e) {
@@ -149,6 +146,4 @@ public class MusicianRepository {
         }
         return null;
     }
-
-
 }
