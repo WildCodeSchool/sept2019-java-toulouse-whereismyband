@@ -44,7 +44,7 @@
             <div class="overlay overlay-slidedown">
                 <button type="button" class="overlay-close">Fermer</button>
                 <nav>
-                    <form th:action="@{/redirection-session}" method="post">
+                    <form th:action="@{/creation-session-recherche}" method="post">
                         <div class="userSearch">
                             <div class="userSearchSpan">
                                 <span>Je recherche... </span>
@@ -79,7 +79,7 @@
                                 <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
                                     <option value="0" disabled selected>Votre instrument principal</option>
                                     <option th:each="instrument : ${instruments}"
-                                            th:value="${instrument.id_instrument}"
+                                            th:value="${instrument.idInstrument}"
                                             th:text="${instrument.name}" class="optionTh"></option>
                                 </select>
                                 <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
@@ -94,7 +94,7 @@
                                 <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
                                     <option value="0" disabled selected>Votre instrument secondaire</option>
                                     <option th:each="instrument : ${instruments}"
-                                            th:value="${instrument.id_instrument}"
+                                            th:value="${instrument.idInstrument}"
                                             th:text="${instrument.name}"></option>
                                 </select>
                                 <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
@@ -136,11 +136,15 @@
                                 <div class="eachDay">
                                     <label for="dimanche">Di</label>
                                     <input type="checkbox" id="dimanche" name="sunday" class="checkbox">
+                                    <input type="hidden" name="idMusician" th:value="${session.musicianLevelInstrument.getIdMusician()}"/>
+                                    <input type="hidden" name="comefromhere" value="3"/>
+                                    <input type="hidden" name="password" th:value="${session.musicianLevelInstrument.getPassword()}"/>
+                                    <input type="hidden" name="userMail" th:value="${session.musicianLevelInstrument.getEmail()}"/>
                                 </div>
                             </div>
                         </div>
                         <div class="saveProfile">
-                            <input type="submit" value="Valider" class="saveButton">
+                            <input type="submit" value="Valider" class="saveButton"/>
                         </div>
                     </form>
                 </nav>
@@ -149,7 +153,7 @@
         <!-- Recherche Desktop -->
         <div class="searchResultDesktop">
             <h3>Nouvelle recherche</h3>
-            <form th:action="@{/redirection-session}" method="post">
+            <form th:action="@{/creation-session-recherche}" method="post">
                 <div class="userSearch">
                     <div class="userSearchSpan">
                         <span>Je recherche... </span>
@@ -184,7 +188,7 @@
                         <select id="mainInstrumentD" name="mainInstrument" class="fieldInstrument">
                             <option value="0" disabled selected>Votre instrument principal</option>
                             <option th:each="instrument : ${instruments}"
-                                    th:value="${instrument.id_instrument}"
+                                    th:value="${instrument.idInstrument}"
                                     th:text="${instrument.name}" class="optionTh"></option>
                         </select>
                         <select id="mainInstrumentLevelD" name="mainInstrumentLevel" class="fieldLevel">
@@ -199,7 +203,7 @@
                         <select id="secondInstrumentD" name="secondInstrument" class="fieldInstrument">
                             <option value="0" disabled selected>Votre instrument secondaire</option>
                             <option th:each="instrument : ${instruments}"
-                                    th:value="${instrument.id_instrument}"
+                                    th:value="${instrument.idInstrument}"
                                     th:text="${instrument.name}"></option>
                         </select>
                         <select id="secondInstrumentLevelD" name="secondInstrumentLevel" class="fieldLevel">
@@ -241,11 +245,15 @@
                         <div class="eachDay">
                             <label for="dimancheD">Di</label>
                             <input type="checkbox" id="dimancheD" name="sunday" class="checkbox">
+                            <input type="hidden" name="idMusician" th:value="${session.musicianLevelInstrument.getIdMusician()}"/>
+                            <input type="hidden" name="comefromhere" value="3"/>
+                            <input type="hidden" name="password" th:value="${session.musicianLevelInstrument.getPassword()}"/>
+                            <input type="hidden" name="userMail" th:value="${session.musicianLevelInstrument.getEmail()}"/>
                         </div>
                     </div>
                 </div>
                 <div class="saveProfile">
-                    <input type="submit" value="Valider" class="saveButton">
+                    <input type="submit" value="Valider" class="saveButton"/>
                 </div>
             </form>
         </div>

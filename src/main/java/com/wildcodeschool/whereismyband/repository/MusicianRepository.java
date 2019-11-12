@@ -1,12 +1,8 @@
 package com.wildcodeschool.whereismyband.repository;
 
-import com.wildcodeschool.whereismyband.entity.Instrument;
 import com.wildcodeschool.whereismyband.entity.Musician;
-import com.wildcodeschool.whereismyband.entity.MusicianInstrumentLevel;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MusicianRepository {
 
@@ -41,7 +37,7 @@ public class MusicianRepository {
             ResultSet generatedKeys = statement.getGeneratedKeys();
 
             if (generatedKeys.next()) {
-                int id = generatedKeys.getInt(1);
+                Long id = generatedKeys.getLong(1);
                 return new Musician(id, password, alias, email, postcode, bio,
                         avatar, availability, searchType);
             } else {
@@ -69,7 +65,7 @@ public class MusicianRepository {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                int id_musician = resultSet.getInt("id_musician");
+                Long id_musician = resultSet.getLong("id_musician");
                 String password = resultSet.getString("password");
                 String alias = resultSet.getString("alias");
                 String email = resultSet.getString("email");
@@ -87,7 +83,7 @@ public class MusicianRepository {
         return null;
     }
 
-    public Musician update(int idMusician, String password, String alias, String email, String postcode, String bio,
+    public Musician update(Long idMusician, String password, String alias, String email, String postcode, String bio,
                            String avatar, String availability, int searchType) {
 
         try {
@@ -107,7 +103,7 @@ public class MusicianRepository {
             statement.setString(6, avatar);
             statement.setString(7, availability);
             statement.setInt(8, searchType);
-            statement.setInt(9, idMusician);
+            statement.setLong(9, idMusician);
 
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");
@@ -119,4 +115,39 @@ public class MusicianRepository {
         }
         return null;
     }
+
+    public Musician getMusicianById(Long id) {
+
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+
+                    "SELECT * FROM musician where id_musician = ?;"
+            );
+
+            statement.setLong(1, id);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                Long id_musician = resultSet.getLong("id_musician");
+                String password = resultSet.getString("password");
+                String alias = resultSet.getString("alias");
+                String email = resultSet.getString("email");
+                String postcode = resultSet.getString("postcode");
+                String bio = resultSet.getString("bio");
+                String avatar = resultSet.getString("avatar");
+                String availability = resultSet.getString("availability");
+                int searchType = resultSet.getInt("search_type");
+                return new Musician(id_musician, password, alias, email, postcode, bio, avatar, availability, searchType);
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }
