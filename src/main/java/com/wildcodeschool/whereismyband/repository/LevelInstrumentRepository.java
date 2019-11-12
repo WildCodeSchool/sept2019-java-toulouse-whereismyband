@@ -65,15 +65,11 @@ public class LevelInstrumentRepository {
                     DB_URL, DB_USER, DB_PASSWORD
             );
             PreparedStatement statement = connection.prepareStatement(
-
                     "SELECT * FROM level_instrument where id_musician = ?;"
             );
-
             statement.setInt(1, idMusician);
             ResultSet resultSet = statement.executeQuery();
-
             List<LevelInstrument> levels = new ArrayList<>();
-
             while (resultSet.next()) {
                 int idInstrument = resultSet.getInt("id_instrument");
                 int level = resultSet.getInt("level");
@@ -83,7 +79,6 @@ public class LevelInstrumentRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 }
