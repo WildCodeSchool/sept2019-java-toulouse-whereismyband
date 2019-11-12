@@ -20,7 +20,7 @@
         <div class="blockUserInfo">
             <a th:href="@{/connexion}">J'ai déjà un compte</a>
         </div>
-        <form method="post" th:action="@{/recherche}">
+        <form method="post" th:action="@{/sign-up}">
             <div class="blockUserInfo">
                 <label for="userMail">Email</label>
                 <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
@@ -64,7 +64,7 @@
             </div>
             <div class="userPostCode">
                 <label for="postcode">Code postal</label>
-                <input type="text" id="postcode" name="postcode" class="fieldPostCode"
+                <input type="text" id="postcode" name="postCode" class="fieldPostCode"
                        placeholder="Votre code postal">
             </div>
             <div class="saveProfile">
