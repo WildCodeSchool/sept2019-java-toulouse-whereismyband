@@ -23,62 +23,16 @@ public class ConnectedController {
 
     @GetMapping("/profil-utilisateur")
     public String toProfile(Model model, HttpSession session) {
-        Musician musician = (Musician) session.getAttribute("musician");
-        String availability = musician.getAvailability();
-        char[] week = availability.toCharArray();
-        boolean monday = false;
-        if (week[0] == '1') {
-            monday = true;
-        }
-        model.addAttribute("monday", monday);
-        boolean tuesday = false;
-        if (week[1] == '1') {
-            tuesday = true;
-        }
-        model.addAttribute("tuesday", tuesday);
-        boolean wednesday = false;
-        if (week[2] == '1') {
-            wednesday = true;
-        }
-        model.addAttribute("wednesday", wednesday);
-        boolean thursday = false;
-        if (week[3] == '1') {
-            thursday = true;
-        }
-        model.addAttribute("thursday", thursday);
-        boolean friday = false;
-        if (week[4] == '1') {
-            friday = true;
-        }
-        model.addAttribute("friday", friday);
-        boolean saturday = false;
-        if (week[5] == '1') {
-            saturday = true;
-        }
-        model.addAttribute("saturday", saturday);
-        boolean sunday = false;
-        if (week[6] == '1') {
-            sunday = true;
-        }
-        model.addAttribute("sunday", sunday);
+        MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
 
-        int searchType = musician.getSearchType();
-        boolean jam = false;
-        boolean band = false;
+        String availability = musicianLevelInstrument.getAvailability();
+        this.sendAvaibilityToForm(model, availability);
 
-        if (searchType == 1) {
-            jam = true;
-        } else if (searchType == 2) {
-            band = true;
-        } else {
-            jam = true;
-            band = true;
-        }
-        model.addAttribute("jam", jam);
-        model.addAttribute("band", band);
+        int searchType = musicianLevelInstrument.getSearchType();
+        this.sendSearchTypeToForm(model, searchType);
 
         model.addAttribute("instruments", repository.findAllInstrument());
-        model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musician.getIdMusician()));
+        model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
 
         return "userProfile";
     }
@@ -142,7 +96,13 @@ public class ConnectedController {
     @GetMapping("/recherche")
     public String toSearch(Model model, HttpSession session){
         //TODO vérifer password et newpassword
+        MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
+        String availability = musicianLevelInstrument.getAvailability();
+        this.sendAvaibilityToForm(model, availability);
+        int searchType = musicianLevelInstrument.getSearchType();
+        this.sendSearchTypeToForm(model, searchType);
 
+        model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
         return "search";
     }
@@ -168,5 +128,60 @@ public class ConnectedController {
             i += 2;
         }
         return i;
+    }
+
+    private void sendAvaibilityToForm(Model model, String availability) {
+        char[] week = availability.toCharArray();
+        boolean monday = false;
+        if (week[0] == '1') {
+            monday = true;
+        }
+        model.addAttribute("monday", monday);
+        boolean tuesday = false;
+        if (week[1] == '1') {
+            tuesday = true;
+        }
+        model.addAttribute("tuesday", tuesday);
+        boolean wednesday = false;
+        if (week[2] == '1') {
+            wednesday = true;
+        }
+        model.addAttribute("wednesday", wednesday);
+        boolean thursday = false;
+        if (week[3] == '1') {
+            thursday = true;
+        }
+        model.addAttribute("thursday", thursday);
+        boolean friday = false;
+        if (week[4] == '1') {
+            friday = true;
+        }
+        model.addAttribute("friday", friday);
+        boolean saturday = false;
+        if (week[5] == '1') {
+            saturday = true;
+        }
+        model.addAttribute("saturday", saturday);
+        boolean sunday = false;
+        if (week[6] == '1') {
+            sunday = true;
+        }
+        model.addAttribute("sunday", sunday);
+    }
+
+    private void sendSearchTypeToForm(Model model, int searchType) {
+        boolean jam = false;
+        boolean band = false;
+
+        if (searchType == 1) {
+            jam = true;
+        } else if (searchType == 2) {
+            band = true;
+        } else {
+            jam = true;
+            band = true;
+        }
+        model.addAttribute("jam", jam);
+        model.addAttribute("band", band);
     }
 }

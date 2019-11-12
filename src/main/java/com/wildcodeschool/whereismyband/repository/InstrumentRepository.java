@@ -40,7 +40,7 @@ public class InstrumentRepository {
         return null;
     }
 
-    public Instrument getInstrumentById(int idInstrument) {
+    public Instrument getInstrumentById(long idInstrument) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -49,12 +49,12 @@ public class InstrumentRepository {
                     "SELECT * FROM instrument WHERE id_instrument = ?;"
             );
 
-            statement.setInt(1, idInstrument);
+            statement.setLong(1, idInstrument);
             ResultSet resultSet = statement.executeQuery();
 
 
             if(resultSet.next()) {
-                idInstrument = resultSet.getInt("id_instrument");
+                idInstrument = resultSet.getLong("id_instrument");
                 String name = resultSet.getString("name");
                 return new Instrument(idInstrument, name);
             }
