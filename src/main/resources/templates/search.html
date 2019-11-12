@@ -79,7 +79,7 @@
                                 <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
                                     <option value="0" disabled selected>Votre instrument principal</option>
                                     <option th:each="instrument : ${instruments}"
-                                            th:value="${instrument.id_instrument}"
+                                            th:value="${instrument.idInstrument}"
                                             th:text="${instrument.name}" class="optionTh"></option>
                                 </select>
                                 <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
@@ -94,7 +94,7 @@
                                 <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
                                     <option value="0" disabled selected>Votre instrument secondaire</option>
                                     <option th:each="instrument : ${instruments}"
-                                            th:value="${instrument.id_instrument}"
+                                            th:value="${instrument.idInstrument}"
                                             th:text="${instrument.name}"></option>
                                 </select>
                                 <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
@@ -184,7 +184,7 @@
                         <select id="mainInstrumentD" name="mainInstrument" class="fieldInstrument">
                             <option value="0" disabled selected>Votre instrument principal</option>
                             <option th:each="instrument : ${instruments}"
-                                    th:value="${instrument.id_instrument}"
+                                    th:value="${instrument.idInstrument}"
                                     th:text="${instrument.name}" class="optionTh"></option>
                         </select>
                         <select id="mainInstrumentLevelD" name="mainInstrumentLevel" class="fieldLevel">
@@ -199,7 +199,7 @@
                         <select id="secondInstrumentD" name="secondInstrument" class="fieldInstrument">
                             <option value="0" disabled selected>Votre instrument secondaire</option>
                             <option th:each="instrument : ${instruments}"
-                                    th:value="${instrument.id_instrument}"
+                                    th:value="${instrument.idInstrument}"
                                     th:text="${instrument.name}"></option>
                         </select>
                         <select id="secondInstrumentLevelD" name="secondInstrumentLevel" class="fieldLevel">
@@ -241,7 +241,7 @@
                         <div class="eachDay">
                             <label for="dimancheD">Di</label>
                             <input type="checkbox" id="dimancheD" name="sunday" class="checkbox">
-                            <input type="hidden" name="idMusician" th:value="${session.musician.getId_musician()}"/>
+                            <input type="hidden" name="idMusician" th:value="${session.musician.getIdMusician()}"/>
                             <input type="hidden" name="comefromhere" value="3"/>
                         </div>
                     </div>

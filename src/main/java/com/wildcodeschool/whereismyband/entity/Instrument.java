@@ -1,24 +1,24 @@
 package com.wildcodeschool.whereismyband.entity;
 
 public class Instrument {
-    private int id_instrument;
+    private Long idInstrument;
     private String name;
 
-    public Instrument(int id_instrument, String name) {
-        this.id_instrument = id_instrument;
+    public Instrument(Long idInstrument, String name) {
+        this.idInstrument = idInstrument;
         this.name = name;
     }
 
-    public int getId_instrument() {
-        return id_instrument;
+    public Long getIdInstrument() {
+        return idInstrument;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setId_instrument(int id_instrument) {
-        this.id_instrument = id_instrument;
+    public void setIdInstrument(Long idInstrument) {
+        this.idInstrument = idInstrument;
     }
 
     public void setName(String name) {

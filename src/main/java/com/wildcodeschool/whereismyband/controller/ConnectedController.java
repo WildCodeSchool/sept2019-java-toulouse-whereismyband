@@ -2,6 +2,7 @@ package com.wildcodeschool.whereismyband.controller;
 
 import com.wildcodeschool.whereismyband.entity.LevelInstrument;
 import com.wildcodeschool.whereismyband.entity.Musician;
+import com.wildcodeschool.whereismyband.entity.MusicianLevelInstrument;
 import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.LevelInstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.MusicianRepository;
@@ -28,7 +29,7 @@ public class ConnectedController {
     @PostMapping("/creation-session-recherche")
     public String creationSession(HttpSession session,
                                   @RequestParam(required = false) int comefromhere,
-                                  @RequestParam(required = false) int idMusician,
+                                  @RequestParam(required = false) Long idMusician,
                                   @RequestParam(required = false) String postcode,
                                   @RequestParam(required = false, defaultValue = "") String bio,
                                   @RequestParam String userMail,
@@ -45,17 +46,17 @@ public class ConnectedController {
                                   @RequestParam(required = false, defaultValue = "false") boolean jam,
                                   @RequestParam(required = false, defaultValue = "false") boolean band,
                                   @RequestParam(required = false) String availability,
-                                  @RequestParam(required = false) int searchType,
-                                  @RequestParam(required = false) int mainInstrument,
-                                  @RequestParam(required = false) int mainInstrumentLevel,
-                                  @RequestParam(required = false) int secondInstrument,
-                                  @RequestParam(required = false) int secondInstrumentLevel) {
+                                  @RequestParam(required = false, defaultValue = "3") int searchType,
+                                  @RequestParam(required = false) Long mainInstrument,
+                                  @RequestParam(required = false, defaultValue = "0") int mainInstrumentLevel,
+                                  @RequestParam(required = false) Long secondInstrument,
+                                  @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel) {
 
         Musician musician;
         switch (comefromhere) {
             case 1:
                 musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);  //(on vient d'inscription)
-                idMusician = musician.getId_musician();
+                idMusician = musician.getIdMusician();
                 break;
             case 2:
                 searchType = formatSearchType(jam, band);
@@ -66,18 +67,23 @@ public class ConnectedController {
                 break;
             case 3: //enregistrer dans la derniere recherche (on vient de la recherche)
                 break;
-            default:
+            case 4:
                 musician = musicianRepository.getMusicianLogIn(userMail, password); //on arrive du login
-                idMusician = musician.getId_musician();
+                idMusician = musician.getIdMusician();
         }
         musician = musicianRepository.getMusicianById(idMusician);
-        LevelInstrument levelInstrument = levelInstrumentRepository.getLevelInstrumentByIdMusician(idMusician).get(0); //TODO : gerer 2eme instru
+        LevelInstrument levelInstrument = levelInstrumentRepository.getLevelInstrumentByIdMusician(musician.getIdMusician()).get(0);
+        MusicianLevelInstrument musicianLevelInstrument = new MusicianLevelInstrument(musician.getIdMusician(), musician.getPassword(), musician.getAlias(), musician.getEmail(), musician.getPostcode(),
+                musician.getBio(), musician.getAvatar(), musician.getAvailability(), musician.getSearchType(), levelInstrument.getIdMnstrument(), levelInstrument.getLevel());
+        session.setAttribute("musicianLevelInstrument", musicianLevelInstrument);
+        //TODO : gerer 2eme instru
         //TODO : constructeur musician_levelInstrument a remplir avec les infos d'avant puis le passer dans une session recherche.
+        return "redirect:/recherche";
     }
 
-    @PostMapping("/recherche")
-    public String toSearch(Model model, HttpSession session,
-                           @RequestParam String password,
+    @GetMapping("/recherche")
+    public String toSearch(Model model, HttpSession session){
+                          /* @RequestParam String password,
                            @RequestParam String newpassword,
                            @RequestParam(required = false, defaultValue = "") String alias,
                            @RequestParam String userMail,
@@ -86,24 +92,25 @@ public class ConnectedController {
                            @RequestParam(required = false, defaultValue = "") String avatar,
                            @RequestParam(required = false, defaultValue = "1111111") String availability,
                            @RequestParam(required = false, defaultValue = "3") int searchType,
-                           @RequestParam int mainInstrument,
+                           @RequestParam Long mainInstrument,
                            @RequestParam int mainInstrumentLevel,
-                           @RequestParam(required = false, defaultValue = "0") int secondInstrument,
-                           @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel
-    ) {
+                           @RequestParam(required = false, defaultValue = "0") Long secondInstrument,
+                           @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel*/
+
         //TODO vérifer password et newpassword
-        Musician musician = musicianRepository.save(password, alias, userMail, postcode, bio, avatar, availability, searchType);
+
+        /*Musician musician = musicianRepository.save(password, alias, userMail, postcode, bio, avatar, availability, searchType);
         model.addAttribute("musician", musician);
 
         session.setAttribute("session", musician);
 
-        LevelInstrument levelInstrument1 = levelInstrumentRepository.save(musician.getId_musician(), mainInstrument, mainInstrumentLevel);
+        LevelInstrument levelInstrument1 = levelInstrumentRepository.save(musician.getIdMusician(), mainInstrument, mainInstrumentLevel);
         model.addAttribute("levelInstrument1", levelInstrument1);
 
         if (secondInstrument > 0) {
-            LevelInstrument levelInstrument2 = levelInstrumentRepository.save(musician.getId_musician(), secondInstrument, secondInstrumentLevel);
+            LevelInstrument levelInstrument2 = levelInstrumentRepository.save(musician.getIdMusician(), secondInstrument, secondInstrumentLevel);
             model.addAttribute("levelInstrument2", levelInstrument2);
-        }
+        }*/
         return "search";
     }
 
@@ -146,7 +153,7 @@ public class ConnectedController {
 
     @PostMapping("/rechercheviaprofil")
     public String updateProfil(Model model,
-                               @RequestParam int idMusician,
+                               @RequestParam Long idMusician,
                                @RequestParam String password,
                                @RequestParam String newpassword,
                                @RequestParam(required = false, defaultValue = "") String alias,
@@ -163,12 +170,12 @@ public class ConnectedController {
                                @RequestParam boolean sunday,
                                @RequestParam boolean jam,
                                @RequestParam boolean band,
-                               @RequestParam int mainInstrument,
+                               @RequestParam Long mainInstrument,
                                @RequestParam int mainInstrumentLevel,
-                               @RequestParam int previousInstrument1,
-                               @RequestParam(required = false, defaultValue = "0") int secondInstrument,
+                               @RequestParam Long previousInstrument1,
+                               @RequestParam(required = false, defaultValue = "0") Long secondInstrument,
                                @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel,
-                               @RequestParam int previousInstrument2) {
+                               @RequestParam Long previousInstrument2) {
 
         boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
@@ -179,12 +186,12 @@ public class ConnectedController {
         Musician musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio, avatar, availability, searchType);
         model.addAttribute("musician", musician);
 
-        LevelInstrument levelInstrument1 = levelInstrumentRepository.update(musician.getId_musician(), mainInstrument, mainInstrumentLevel, previousInstrument1);
+        LevelInstrument levelInstrument1 = levelInstrumentRepository.update(musician.getIdMusician(), mainInstrument, mainInstrumentLevel, previousInstrument1);
         model.addAttribute("levelInstrument1", levelInstrument1);
         model.addAttribute("instruments", repository.findAllInstrument());
 
         if (secondInstrument > 0) {
-            LevelInstrument levelInstrument2 = levelInstrumentRepository.update(musician.getId_musician(), secondInstrument, secondInstrumentLevel, previousInstrument2);
+            LevelInstrument levelInstrument2 = levelInstrumentRepository.update(musician.getIdMusician(), secondInstrument, secondInstrumentLevel, previousInstrument2);
             model.addAttribute("levelInstrument2", levelInstrument2);
         }
 
