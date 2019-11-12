@@ -249,11 +249,11 @@
                 </div>
             </form>
         </div>
-        <ul class="groupResult">
+        <ul th:each="result : ${results}" class="groupResult">
             <!--
             <li th:each="group : ${search}" th:text="${group.name}">Nom du groupe, Distance, Style</li>
             TODO supprimer les li ci-dessous quand il y aura la bdd, utilisés pour la mise en page-->
-            <li><a href="#">
+            <!--<li><a href="#">
                 <div class="searchResultName">Nom du groupe</div>
                 <div class="searchResultDistanceStyle">Distance | Style</div>
             </a></li>
@@ -264,7 +264,13 @@
             <li><a href="#">
                 <div class="searchResultName">Nom du groupe</div>
                 <div class="searchResultDistanceStyle">Distance | Style</div>
-            </a></li>
+            </a></li> -->
+
+                <li th:text="|Code Postal: ${result.getPostCode()}|">$id</li>
+                <li th:text="|Id Instrument: ${result.getIdInstrument()}|">$name</li>
+                <li th:text="|Niveau instrument: ${result.getInstrumentLevel()}|">$capacity</li>
+                <li th:text="|Disponibilité: ${result.getAvailability()}|">$country</li>
+
             <!-- TODO Fin de la suppression-->
         </ul>
     </div>

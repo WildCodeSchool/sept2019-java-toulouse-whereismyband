@@ -2,9 +2,11 @@ package com.wildcodeschool.whereismyband.controller;
 
 import com.wildcodeschool.whereismyband.entity.LevelInstrument;
 import com.wildcodeschool.whereismyband.entity.Musician;
+import com.wildcodeschool.whereismyband.entity.Result;
 import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.LevelInstrumentRepository;
 import com.wildcodeschool.whereismyband.repository.MusicianRepository;
+import com.wildcodeschool.whereismyband.repository.ResultRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ConnectedController {
@@ -19,6 +22,7 @@ public class ConnectedController {
     private MusicianRepository musicianRepository = new MusicianRepository();
     private LevelInstrumentRepository levelInstrumentRepository = new LevelInstrumentRepository();
     private InstrumentRepository repository = new InstrumentRepository();
+    private ResultRepository resultRepository = new ResultRepository();
 
     @GetMapping("/profil-utilisateur")
     public String toProfile() {
@@ -45,7 +49,7 @@ public class ConnectedController {
         Musician musician = musicianRepository.save(password, alias, userMail, postcode, bio, avatar, availability, searchType);
         model.addAttribute("musician", musician);
 
-        session.setAttribute("session", musician);
+        session.setAttribute("musician", musician);
 
         LevelInstrument levelInstrument1 = levelInstrumentRepository.save(musician.getId_musician(), mainInstrument, mainInstrumentLevel);
         model.addAttribute("levelInstrument1", levelInstrument1);
@@ -138,6 +142,13 @@ public class ConnectedController {
             model.addAttribute("levelInstrument2", levelInstrument2);
         }
 
+        return "search";
+    }
+
+    @GetMapping("/resultat-recherche")
+    public String getResult(Model model) {
+        List<Result> results = resultRepository.getResult(2, "31000", 209,1, "1100111");
+        model.addAttribute("results",results);
         return "search";
     }
 
