@@ -55,6 +55,7 @@
             <form th:replace="form :: form">
             </form>
         </div>
+        <a th:href="${ahref}"><p th:text="${atexte}">Lien vers groupe</p></a>
 <!-- TODO Gérer l'affichage des résultats de recherche-->
         <ul th:each="result : ${results}" class="groupResult">
                 <li th:text="|Code Postal: ${result.getPostCode()}|">$id</li>
