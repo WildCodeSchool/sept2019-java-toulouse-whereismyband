@@ -21,8 +21,8 @@ public class ResultRepository {
                     "SELECT * FROM band " +
                             "JOIN need ON band.id_band = need.id_band " +
                             "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
-                            "WHERE search_type = ? AND postcode = ? AND need.id_instrument = ? " +
-                            "AND level = ?;"
+                            "WHERE band.search_type = ? AND band.postcode = ? AND need.id_instrument = ? " +
+                            "AND need.level = ?;"
             );
             statement.setInt(1, searchType);
             statement.setString(2, postCode);

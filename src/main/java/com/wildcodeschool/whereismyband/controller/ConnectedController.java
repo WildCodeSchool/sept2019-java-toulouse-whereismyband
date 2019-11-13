@@ -105,15 +105,12 @@ public class ConnectedController {
         int searchType = musicianLevelInstrument.getSearchType();
         this.sendSearchTypeToForm(model, searchType);
 
+        List<Result> results = resultRepository.getResult(musicianLevelInstrument.getSearchType(), musicianLevelInstrument.getPostcode(),
+                musicianLevelInstrument.getIdInstrument(), musicianLevelInstrument.getLevel(), musicianLevelInstrument.getAvailability());
+        model.addAttribute("results",results);
+
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
-        return "search";
-    }
-
-    @GetMapping("/resultat-recherche")
-    public String getResult(Model model) {
-        List<Result> results = resultRepository.getResult(2, "31000", 209,1, "1100111");
-        model.addAttribute("results",results);
         return "search";
     }
 
