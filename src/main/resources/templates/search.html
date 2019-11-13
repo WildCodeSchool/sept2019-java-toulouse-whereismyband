@@ -61,9 +61,7 @@
                 <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
                 <li th:text="|Type de recherche: ${result.getSearchType()}|">$searchType</li>
                 <li th:text="|Instrument: ${result.getInstrumentName()}|"></li>
-                <!--<li th:text="|Niveau: ${result.getInstrumentLevel()}|">-->
                 <li th:switch="${result.getInstrumentLevel()}">
-                    <!--<div th:switch="${result.getInstrumentLevel()}">-->
                         <p th:case="1">Débutant</p>
                         <p th:case="2">Intermédiaire</p>
                         <p th:case="3">Avancé</p>
