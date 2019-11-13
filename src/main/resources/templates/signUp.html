@@ -24,11 +24,13 @@
             <div class="blockUserInfo">
                 <label for="userMail">Email</label>
                 <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
+                <p th:if="${checkEmail == false}">Mauvais format de mail (abcd123_@abcd.bc)</p>
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" class="fieldAccountInfo"
                        placeholder="Mot de passe">
                 <input type="password" id="newpassword" name="newpassword" class="fieldAccountInfo"
-                       placeholder="Confirmer le mot de passe">
+                       placeholder="Confirmer le mot de passe"/>
+                <p th:if="${checkPassword == false}">Les mots de passes ne correspondent pas</p>
             </div>
             <div class="blockUserInstrument">
                 <div class="userSingleInstrument">
@@ -66,7 +68,8 @@
                 <label for="postcode">Code postal</label>
                 <input type="text" id="postcode" name="postcode" class="fieldPostCode"
                        placeholder="Votre code postal">
-                <input type="hidden" name = "comefromhere" value = "1"/>
+                <p th:if="${checkPostcode == false}">Le format du code postal ne correspond pas (12345)</p>
+                <input type="hidden" name="comefromhere" value="1"/>
             </div>
             <div class="saveProfile">
                 <input type="submit" value="Valider" class="saveButton">

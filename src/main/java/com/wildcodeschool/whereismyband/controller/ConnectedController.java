@@ -1,15 +1,13 @@
 package com.wildcodeschool.whereismyband.controller;
 
 import com.wildcodeschool.whereismyband.entity.*;
-import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
-import com.wildcodeschool.whereismyband.repository.LevelInstrumentRepository;
-import com.wildcodeschool.whereismyband.repository.MusicianRepository;
-import com.wildcodeschool.whereismyband.repository.ResultRepository;
+import com.wildcodeschool.whereismyband.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -20,6 +18,7 @@ public class ConnectedController {
     private LevelInstrumentRepository levelInstrumentRepository = new LevelInstrumentRepository();
     private InstrumentRepository repository = new InstrumentRepository();
     private ResultRepository resultRepository = new ResultRepository();
+    private CheckerRepository checkerRepository = new CheckerRepository();
 
     @GetMapping("/profil-utilisateur")
     public String toProfile(Model model, HttpSession session) {
@@ -39,12 +38,13 @@ public class ConnectedController {
     }
 
     @PostMapping("/creation-session-recherche")
-    public String creationSession(HttpSession session,
+    public String creationSession(HttpSession session, Model model,
                                   @RequestParam(required = false) int comefromhere,
                                   @RequestParam(required = false) Long idMusician,
                                   @RequestParam(required = false) String postcode,
                                   @RequestParam(required = false, defaultValue = "") String bio,
                                   @RequestParam String userMail,
+                                  @RequestParam(required = false, defaultValue = "") String newpassword,
                                   @RequestParam String password,
                                   @RequestParam(required = false, defaultValue = "") String avatar,
                                   @RequestParam(required = false) String alias,
@@ -68,10 +68,22 @@ public class ConnectedController {
         Musician musician;
         switch (comefromhere) {
             case 1:
-                musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);
+                boolean checkPassword = checkerRepository.checkPassword(password, newpassword);
+                boolean checkEmail = checkerRepository.checkEmail(userMail);
+                boolean checkPostcode = checkerRepository.checkPostcode(postcode);
+                if (!checkPassword || !checkEmail || !checkPostcode) {
+                    model.addAttribute("checkPassword", checkPassword);
+                    model.addAttribute("checkEmail", checkEmail);
+                    model.addAttribute("checkPostcode", checkPostcode);
+                    model.addAttribute("instruments", repository.findAllInstrument());
+                    return "signUp";
+                }
+
+                musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);  //(on vient d'inscription)
                 idMusician = musician.getIdMusician();
-                LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician,mainInstrument,mainInstrumentLevel);
+                LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician, mainInstrument, mainInstrumentLevel);
                 break;
+
             case 2:
                 searchType = formatSearchType(jam, band);
                 String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
@@ -80,12 +92,15 @@ public class ConnectedController {
                         avatar, availability, searchType);
                 LevelInstrument levelInstrumentUp = levelInstrumentRepository.update(idMusician, mainInstrument, mainInstrumentLevel, previousInstrument1);
                 break;
+
             case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
                 break;
+
             case 4:
                 musician = musicianRepository.getMusicianLogIn(userMail, password); //on arrive du login
                 idMusician = musician.getIdMusician();
         }
+
         musician = musicianRepository.getMusicianById(idMusician);
         LevelInstrument levelInstrument = levelInstrumentRepository.getLevelInstrumentByIdMusician(musician.getIdMusician()).get(0);
         MusicianLevelInstrument musicianLevelInstrument = new MusicianLevelInstrument(musician.getIdMusician(), musician.getPassword(), musician.getAlias(), musician.getEmail(), musician.getPostcode(),
@@ -97,7 +112,7 @@ public class ConnectedController {
     }
 
     @GetMapping("/recherche")
-    public String toSearch(Model model, HttpSession session){
+    public String toSearch(Model model, HttpSession session) {
         //TODO vérifer password et newpassword
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         String availability = musicianLevelInstrument.getAvailability();
@@ -107,7 +122,7 @@ public class ConnectedController {
 
         List<Result> results = resultRepository.getResult(musicianLevelInstrument.getSearchType(), musicianLevelInstrument.getPostcode(),
                 musicianLevelInstrument.getIdInstrument(), musicianLevelInstrument.getLevel(), musicianLevelInstrument.getAvailability());
-        model.addAttribute("results",results);
+        model.addAttribute("results", results);
 
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
@@ -128,10 +143,10 @@ public class ConnectedController {
 
     private int formatSearchType(String jam, String band) {
         int i = 0;
-        if(jam.equals("on")) {
+        if (jam.equals("on")) {
             i += 1;
         }
-        if(band.equals("on")) {
+        if (band.equals("on")) {
             i += 2;
         }
         return i;
@@ -143,40 +158,48 @@ public class ConnectedController {
         if (week[0] == '1') {
             monday = true;
         }
+
         model.addAttribute("monday", monday);
         boolean tuesday = false;
         if (week[1] == '1') {
             tuesday = true;
         }
+
         model.addAttribute("tuesday", tuesday);
         boolean wednesday = false;
         if (week[2] == '1') {
             wednesday = true;
         }
+
         model.addAttribute("wednesday", wednesday);
         boolean thursday = false;
         if (week[3] == '1') {
             thursday = true;
         }
+
         model.addAttribute("thursday", thursday);
         boolean friday = false;
         if (week[4] == '1') {
             friday = true;
         }
+
         model.addAttribute("friday", friday);
         boolean saturday = false;
         if (week[5] == '1') {
             saturday = true;
         }
+
         model.addAttribute("saturday", saturday);
         boolean sunday = false;
         if (week[6] == '1') {
             sunday = true;
         }
+
         model.addAttribute("sunday", sunday);
     }
 
     private void sendSearchTypeToForm(Model model, int searchType) {
+
         boolean jam = false;
         boolean band = false;
 
