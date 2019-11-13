@@ -10,7 +10,7 @@ public class BandStyleRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public BandStyle save(long idStyle, long idBand) {
+    public BandStyle save(Long idStyle, Long idBand) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -41,7 +41,7 @@ public class BandStyleRepository {
         return null;
     }
 
-    public BandStyle update(long idStyle, long idBand) {
+    public BandStyle update(Long idStyle, Long idBand) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD

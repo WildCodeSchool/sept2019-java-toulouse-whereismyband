@@ -2,27 +2,27 @@ package com.wildcodeschool.whereismyband.entity;
 
 public class BandStyle {
 
-    private long idStyle;
-    private long idBand;
+    private Long idStyle;
+    private Long idBand;
 
-    public BandStyle(long idStyle, long idBand) {
+    public BandStyle(Long idStyle, Long idBand) {
         this.idStyle = idStyle;
         this.idBand = idBand;
     }
 
-    public long getIdStyle() {
+    public Long getIdStyle() {
         return idStyle;
     }
 
-    public void setIdStyle(long idStyle) {
+    public void setIdStyle(Long idStyle) {
         this.idStyle = idStyle;
     }
 
-    public long getIdBand() {
+    public Long getIdBand() {
         return idBand;
     }
 
-    public void setIdBand(long idBand) {
+    public void setIdBand(Long idBand) {
         this.idBand = idBand;
     }
 }

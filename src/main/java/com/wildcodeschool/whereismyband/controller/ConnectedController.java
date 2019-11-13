@@ -134,18 +134,18 @@ public class ConnectedController {
         model.addAttribute("instruments", repository.findAllInstrument());
 
         //verifier si ce musicien a déja un groupe
-        String ahref = "";
-        String atexte = "";
+        String bandLinHref = "";
+        String bandLinkText = "";
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
         if (band == null) {
-            ahref = "/creation-groupe";
-            atexte = "Créer mon groupe";
+            bandLinHref = "/creation-groupe";
+            bandLinkText = "Créer mon groupe";
         } else {
-            ahref = "/gestion-groupe";
-            atexte = "Gérer mes groupes";
+            bandLinHref = "/gestion-groupe";
+            bandLinkText = "Gérer mes groupes";
         }
-        model.addAttribute("ahref", ahref);
-        model.addAttribute("atexte", atexte);
+        model.addAttribute("bandLinHref", bandLinHref);
+        model.addAttribute("bandLinkText", bandLinkText);
         return "search";
     }
 
@@ -161,7 +161,7 @@ public class ConnectedController {
                              @RequestParam(required = false) String bio,
                              @RequestParam(required = false) int searchType,
                              @RequestParam(required = false) String postcode,
-                             @RequestParam(required = false) long style,
+                             @RequestParam(required = false) Long style,
                              @RequestParam(required = false) Long idMusician) {
 
         Band band = bandRepository.save(name, bio, searchType, postcode, idMusician);
@@ -185,12 +185,12 @@ public class ConnectedController {
 
     @PostMapping("/gestion-groupe")
     public String updateBand(HttpSession session, Model model,
-                             @RequestParam long idBand,
+                             @RequestParam Long idBand,
                              @RequestParam(required = false) String name,
                              @RequestParam(required = false) String bio,
                              @RequestParam(required = false) int searchType,
                              @RequestParam(required = false) String postcode,
-                             @RequestParam(required = false) long style,
+                             @RequestParam(required = false) Long style,
                              @RequestParam(required = false) Long idMusician) {
 
         Band band = bandRepository.update(idBand, name, bio, searchType, postcode, idMusician);
@@ -200,8 +200,8 @@ public class ConnectedController {
     }
 
     @PostMapping("creation-annonce")
-    public String createAnnouncement(@RequestParam long idBand,
-                                     @RequestParam long idInstrument,
+    public String createAnnouncement(@RequestParam Long idBand,
+                                     @RequestParam Long idInstrument,
                                      @RequestParam int level,
                                      @RequestParam(required = false, defaultValue = "") String monday,
                                      @RequestParam(required = false, defaultValue = "") String tuesday,
@@ -219,9 +219,9 @@ public class ConnectedController {
     }
 
     @PostMapping("desactiver-annonce")
-    public String createAnnouncement(@RequestParam long idNeed) {
+    public String createAnnouncement(@RequestParam Long idNeed) {
 
-        long id = needRepository.desactiveNeed(idNeed);
+        Long id = needRepository.desactiveNeed(idNeed);
         return "redirect:/gestion-groupe";
     }
 

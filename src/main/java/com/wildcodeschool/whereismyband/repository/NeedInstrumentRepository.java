@@ -12,7 +12,7 @@ public class NeedInstrumentRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public List<NeedInstrument> getNeedsByIdBands(long idBand) {
+    public List<NeedInstrument> getNeedsByIdBands(Long idBand) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -25,8 +25,8 @@ public class NeedInstrumentRepository {
             List<NeedInstrument> needs = new ArrayList<>();
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
-                long idNeed = resultSet.getLong("id_need");
-                long idInstrument = resultSet.getInt("id_instrument");
+                Long idNeed = resultSet.getLong("id_need");
+                Long idInstrument = resultSet.getLong("id_instrument");
                 String availability = resultSet.getString("availability");
                 int level = resultSet.getInt("level");
                 needs.add(new NeedInstrument(idNeed, idInstrument, idBand, availability, level, name));

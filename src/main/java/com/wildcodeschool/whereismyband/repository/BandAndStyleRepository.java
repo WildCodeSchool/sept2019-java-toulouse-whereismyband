@@ -12,7 +12,7 @@ public class BandAndStyleRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public BandAndStyle getBandsByIdMusician(long idMusician) {
+    public BandAndStyle getBandsByIdMusician(Long idMusician) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -28,7 +28,7 @@ public class BandAndStyleRepository {
                 String bio = resultSet.getString("bio");
                 int searchType = resultSet.getInt("search_type");
                 String postcode = resultSet.getString("postcode");
-                long idStyle = resultSet.getLong("id_style");
+                Long idStyle = resultSet.getLong("id_style");
                 return new BandAndStyle(idBand, name, bio, searchType, postcode, idMusician, idStyle);
             }
         } catch (SQLException e) {

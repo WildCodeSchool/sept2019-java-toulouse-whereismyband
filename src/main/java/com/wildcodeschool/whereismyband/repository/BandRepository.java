@@ -13,7 +13,7 @@ public class BandRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public Band save(String name, String bio, int searchType, String postcode, long idMusician) {
+    public Band save(String name, String bio, int searchType, String postcode, Long idMusician) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -47,7 +47,7 @@ public class BandRepository {
         return null;
     }
 
-    public Band update(long idBand, String name, String bio, int searchType, String postcode, long idMusician) {
+    public Band update(Long idBand, String name, String bio, int searchType, String postcode, Long idMusician) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD

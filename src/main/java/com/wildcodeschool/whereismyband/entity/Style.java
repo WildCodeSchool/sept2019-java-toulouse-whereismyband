@@ -2,19 +2,19 @@ package com.wildcodeschool.whereismyband.entity;
 
 public class Style {
 
-    private long idStyle;
+    private Long idStyle;
     private String style;
 
-    public Style(long id_style, String style) {
-        this.idStyle = id_style;
+    public Style(Long idStyle, String style) {
+        this.idStyle = idStyle;
         this.style = style;
     }
 
-    public long getIdStyle() {
+    public Long getIdStyle() {
         return idStyle;
     }
 
-    public void setIdStyle(int idStyle) {
+    public void setIdStyle(Long idStyle) {
         this.idStyle = idStyle;
     }
 

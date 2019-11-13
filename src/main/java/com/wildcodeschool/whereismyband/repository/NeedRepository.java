@@ -9,7 +9,7 @@ public class NeedRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public Need save(long idInstrument, long idBand, String availability, int level) {
+    public Need save(Long idInstrument, Long idBand, String availability, int level) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -45,7 +45,7 @@ public class NeedRepository {
         return null;
     }
 
-    public long desactiveNeed(long idNeed) {
+    public Long desactiveNeed(Long idNeed) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD

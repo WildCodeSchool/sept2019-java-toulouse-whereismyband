@@ -2,14 +2,14 @@ package com.wildcodeschool.whereismyband.entity;
 
 public class NeedInstrument {
 
-    private long idNeed;
-    private long idInstrument;
-    private long idBand;
+    private Long idNeed;
+    private Long idInstrument;
+    private Long idBand;
     private String availability;
     private int level;
     private String name;
 
-    public NeedInstrument(long idNeed, long idInstrument, long idBand, String availability, int level, String name) {
+    public NeedInstrument(Long idNeed, Long idInstrument, Long idBand, String availability, int level, String name) {
         this.idNeed = idNeed;
         this.idInstrument = idInstrument;
         this.idBand = idBand;
@@ -18,27 +18,27 @@ public class NeedInstrument {
         this.name = name;
     }
 
-    public long getIdNeed() {
+    public Long getIdNeed() {
         return idNeed;
     }
 
-    public void setIdNeed(long idNeed) {
+    public void setIdNeed(Long idNeed) {
         this.idNeed = idNeed;
     }
 
-    public long getIdInstrument() {
+    public Long getIdInstrument() {
         return idInstrument;
     }
 
-    public void setIdInstrument(long idInstrument) {
+    public void setIdInstrument(Long idInstrument) {
         this.idInstrument = idInstrument;
     }
 
-    public long getIdBand() {
+    public Long getIdBand() {
         return idBand;
     }
 
-    public void setIdBand(long idBand) {
+    public void setIdBand(Long idBand) {
         this.idBand = idBand;
     }
 

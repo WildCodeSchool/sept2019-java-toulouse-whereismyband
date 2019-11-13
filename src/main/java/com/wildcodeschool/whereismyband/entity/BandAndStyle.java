@@ -1,15 +1,15 @@
 package com.wildcodeschool.whereismyband.entity;
 
 public class BandAndStyle {
-    private long idBand;
+    private Long idBand;
     private String name;
     private String bio;
     private int searchType;
     private String postcode;
-    private long idMusician;
-    private long idStyle;
+    private Long idMusician;
+    private Long idStyle;
 
-    public BandAndStyle(long idBand, String name, String bio, int searchType, String postcode, long idMusician, long idStyle) {
+    public BandAndStyle(Long idBand, String name, String bio, int searchType, String postcode, Long idMusician, Long idStyle) {
         this.idBand = idBand;
         this.name = name;
         this.bio = bio;
@@ -19,11 +19,11 @@ public class BandAndStyle {
         this.idStyle = idStyle;
     }
 
-    public long getIdBand() {
+    public Long getIdBand() {
         return idBand;
     }
 
-    public void setIdBand(long idBand) {
+    public void setIdBand(Long idBand) {
         this.idBand = idBand;
     }
 
@@ -59,19 +59,19 @@ public class BandAndStyle {
         this.postcode = postcode;
     }
 
-    public long getIdMusician() {
+    public Long getIdMusician() {
         return idMusician;
     }
 
-    public void setIdMusician(long idMusician) {
+    public void setIdMusician(Long idMusician) {
         this.idMusician = idMusician;
     }
 
-    public long getIdStyle() {
+    public Long getIdStyle() {
         return idStyle;
     }
 
-    public void setIdStyle(long idStyle) {
+    public void setIdStyle(Long idStyle) {
         this.idStyle = idStyle;
     }
 }

@@ -55,7 +55,7 @@
             <form th:replace="form :: form">
             </form>
         </div>
-        <a th:href="${ahref}"><p th:text="${atexte}">Lien vers groupe</p></a>
+        <a th:href="${bandLinHref}"><p th:text="${bandLinkText}">Lien vers groupe</p></a>
 <!-- TODO Gérer l'affichage des résultats de recherche-->
         <ul th:each="result : ${results}" class="groupResult">
                 <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
