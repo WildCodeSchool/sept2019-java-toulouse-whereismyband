@@ -57,10 +57,19 @@
         </div>
 <!-- TODO Gérer l'affichage des résultats de recherche-->
         <ul th:each="result : ${results}" class="groupResult">
-                <li th:text="|Code Postal: ${result.getPostCode()}|">$id</li>
-                <li th:text="|Id Instrument: ${result.getIdInstrument()}|">$name</li>
-                <li th:text="|Niveau instrument: ${result.getInstrumentLevel()}|">$capacity</li>
-                <li th:text="|Disponibilité: ${result.getAvailability()}|">$country</li>
+                <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
+                <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
+                <li th:text="|Type de recherche: ${result.getSearchType()}|">$searchType</li>
+                <li th:text="|Instrument: ${result.getInstrumentName()}|"></li>
+                <!--<li th:text="|Niveau: ${result.getInstrumentLevel()}|">-->
+                <li th:switch="${result.getInstrumentLevel()}">
+                    <!--<div th:switch="${result.getInstrumentLevel()}">-->
+                        <p th:case="1">Débutant</p>
+                        <p th:case="2">Intermédiaire</p>
+                        <p th:case="3">Avancé</p>
+                        <p th:case="4">Pro</p>
+                </li>
+                <li th:text="|Disponibilité: ${result.getAvailability()}|">$availability</li>
         </ul>
     </div>
 </div>
