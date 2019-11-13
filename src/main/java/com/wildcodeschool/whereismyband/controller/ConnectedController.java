@@ -1,15 +1,13 @@
 package com.wildcodeschool.whereismyband.controller;
 
 import com.wildcodeschool.whereismyband.entity.*;
-import com.wildcodeschool.whereismyband.repository.InstrumentRepository;
-import com.wildcodeschool.whereismyband.repository.LevelInstrumentRepository;
-import com.wildcodeschool.whereismyband.repository.MusicianRepository;
-import com.wildcodeschool.whereismyband.repository.ResultRepository;
+import com.wildcodeschool.whereismyband.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -20,6 +18,7 @@ public class ConnectedController {
     private LevelInstrumentRepository levelInstrumentRepository = new LevelInstrumentRepository();
     private InstrumentRepository repository = new InstrumentRepository();
     private ResultRepository resultRepository = new ResultRepository();
+    private CheckerRepository checkerRepository = new CheckerRepository();
 
     @GetMapping("/profil-utilisateur")
     public String toProfile(Model model, HttpSession session) {
@@ -39,12 +38,13 @@ public class ConnectedController {
     }
 
     @PostMapping("/creation-session-recherche")
-    public String creationSession(HttpSession session,
+    public String creationSession(HttpSession session, Model model,
                                   @RequestParam(required = false) int comefromhere,
                                   @RequestParam(required = false) Long idMusician,
                                   @RequestParam(required = false) String postcode,
                                   @RequestParam(required = false, defaultValue = "") String bio,
                                   @RequestParam String userMail,
+                                  @RequestParam(required = false, defaultValue = "") String newpassword,
                                   @RequestParam String password,
                                   @RequestParam(required = false, defaultValue = "") String avatar,
                                   @RequestParam(required = false) String alias,
@@ -67,9 +67,20 @@ public class ConnectedController {
         Musician musician;
         switch (comefromhere) {
             case 1:
+                boolean checkPassword = checkerRepository.checkPassword(password, newpassword);
+                boolean checkEmail = checkerRepository.checkEmail(userMail);
+                boolean checkPostcode = checkerRepository.checkPostcode(postcode);
+                if (!checkPassword || !checkEmail || !checkPostcode) {
+                    model.addAttribute("checkPassword", checkPassword);
+                    model.addAttribute("checkEmail", checkEmail);
+                    model.addAttribute("checkPostcode", checkPostcode);
+                    model.addAttribute("instruments", repository.findAllInstrument());
+                    return "signUp";
+                }
+
                 musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);  //(on vient d'inscription)
                 idMusician = musician.getIdMusician();
-                LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician,mainInstrument,mainInstrumentLevel);
+                LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician, mainInstrument, mainInstrumentLevel);
                 break;
             case 2:
                 searchType = formatSearchType(jam, band);
@@ -95,7 +106,7 @@ public class ConnectedController {
     }
 
     @GetMapping("/recherche")
-    public String toSearch(Model model, HttpSession session){
+    public String toSearch(Model model, HttpSession session) {
         //TODO vérifer password et newpassword
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         String availability = musicianLevelInstrument.getAvailability();
@@ -110,8 +121,8 @@ public class ConnectedController {
 
     @GetMapping("/resultat-recherche")
     public String getResult(Model model) {
-        List<Result> results = resultRepository.getResult(2, "31000", 209,1, "1100111");
-        model.addAttribute("results",results);
+        List<Result> results = resultRepository.getResult(2, "31000", 209, 1, "1100111");
+        model.addAttribute("results", results);
         return "search";
     }
 
