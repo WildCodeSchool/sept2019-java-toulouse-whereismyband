@@ -1,6 +1,7 @@
 package com.wildcodeschool.whereismyband.repository;
 
 import com.wildcodeschool.whereismyband.entity.Need;
+
 import java.sql.*;
 
 public class NeedRepository {
@@ -36,13 +37,15 @@ public class NeedRepository {
             } else {
                 throw new SQLException("failed to get inserted id");
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
-    public long desactiveNeed(long idNeed){
+    public long desactiveNeed(long idNeed) {
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -56,13 +59,17 @@ public class NeedRepository {
             }
 
             ResultSet generatedKeys = statement.getGeneratedKeys();
+
             if (statement.executeUpdate() != 1) {
                 throw new SQLException("failed to update data");
             }
+
             return idNeed;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return idNeed;
     }
 }

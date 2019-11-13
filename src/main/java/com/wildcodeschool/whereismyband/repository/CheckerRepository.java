@@ -9,19 +9,19 @@ public class CheckerRepository {
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     public boolean checkEmail(String email) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX .matcher(email);
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(email);
         return matcher.find();
     }
 
-    public boolean checkPassword (String pass, String checker){
+    public boolean checkPassword(String pass, String checker) {
         return pass.equals(checker);
     }
 
-    public boolean checkPostcode (String postcode){
+    public boolean checkPostcode(String postcode) {
 
         if (postcode.length() == 5) {
-            for (int i = 0; i < 5 ; i++){
-                if (postcode.charAt(i) < 48 || postcode.charAt(i) > 57){
+            for (int i = 0; i < 5; i++) {
+                if (postcode.charAt(i) < 48 || postcode.charAt(i) > 57) {
                     return false;
                 }
             }
