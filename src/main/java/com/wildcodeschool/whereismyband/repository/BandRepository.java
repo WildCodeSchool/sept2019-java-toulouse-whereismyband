@@ -2,7 +2,6 @@ package com.wildcodeschool.whereismyband.repository;
 
 import com.wildcodeschool.whereismyband.entity.Band;
 import com.wildcodeschool.whereismyband.entity.BandStyle;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

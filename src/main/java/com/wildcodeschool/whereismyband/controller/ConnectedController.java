@@ -133,7 +133,6 @@ public class ConnectedController {
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
 
-        //verifier si ce musicien a déja un groupe
         String bandLinHref = "";
         String bandLinkText = "";
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
@@ -172,12 +171,12 @@ public class ConnectedController {
 
     @GetMapping("/gestion-groupe")
     public String viewBand(HttpSession session, Model model) {
+        
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
         model.addAttribute("band", band);
         model.addAttribute("styles", styleRepository.findAllStyle());
         model.addAttribute("instruments", repository.findAllInstrument());
-
         model.addAttribute("needs", needInstrumentRepository.getNeedsByIdBands(band.getIdBand()));
 
         return "need";
