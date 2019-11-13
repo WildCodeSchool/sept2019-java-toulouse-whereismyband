@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ConnectedController {
     private BandAndStyleRepository bandAndStyleRepository = new BandAndStyleRepository();
     private NeedRepository needRepository = new NeedRepository();
     private NeedInstrumentRepository needInstrumentRepository = new NeedInstrumentRepository();
+    private CheckerRepository checkerRepository = new CheckerRepository();
 
     @GetMapping("/profil-utilisateur")
     public String toProfile(Model model, HttpSession session) {
@@ -42,12 +44,13 @@ public class ConnectedController {
     }
 
     @PostMapping("/creation-session-recherche")
-    public String creationSession(HttpSession session,
+    public String creationSession(HttpSession session, Model model,
                                   @RequestParam(required = false) int comefromhere,
                                   @RequestParam(required = false) Long idMusician,
                                   @RequestParam(required = false) String postcode,
                                   @RequestParam(required = false, defaultValue = "") String bio,
                                   @RequestParam String userMail,
+                                  @RequestParam(required = false, defaultValue = "") String newpassword,
                                   @RequestParam String password,
                                   @RequestParam(required = false, defaultValue = "") String avatar,
                                   @RequestParam(required = false) String alias,
@@ -71,10 +74,22 @@ public class ConnectedController {
         Musician musician;
         switch (comefromhere) {
             case 1:
-                musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);
+                boolean checkPassword = checkerRepository.checkPassword(password, newpassword);
+                boolean checkEmail = checkerRepository.checkEmail(userMail);
+                boolean checkPostcode = checkerRepository.checkPostcode(postcode);
+                if (!checkPassword || !checkEmail || !checkPostcode) {
+                    model.addAttribute("checkPassword", checkPassword);
+                    model.addAttribute("checkEmail", checkEmail);
+                    model.addAttribute("checkPostcode", checkPostcode);
+                    model.addAttribute("instruments", repository.findAllInstrument());
+                    return "signUp";
+                }
+
+                musician = musicianRepository.save(password, userMail, userMail, postcode, bio, avatar, availability, searchType);  //(on vient d'inscription)
                 idMusician = musician.getIdMusician();
-                LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician,mainInstrument,mainInstrumentLevel);
+                LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician, mainInstrument, mainInstrumentLevel);
                 break;
+
             case 2:
                 searchType = formatSearchType(jam, band);
                 String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
@@ -83,12 +98,15 @@ public class ConnectedController {
                         avatar, availability, searchType);
                 LevelInstrument levelInstrumentUp = levelInstrumentRepository.update(idMusician, mainInstrument, mainInstrumentLevel, previousInstrument1);
                 break;
+
             case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
                 break;
+
             case 4:
                 musician = musicianRepository.getMusicianLogIn(userMail, password); //on arrive du login
                 idMusician = musician.getIdMusician();
         }
+
         musician = musicianRepository.getMusicianById(idMusician);
         LevelInstrument levelInstrument = levelInstrumentRepository.getLevelInstrumentByIdMusician(musician.getIdMusician()).get(0);
         MusicianLevelInstrument musicianLevelInstrument = new MusicianLevelInstrument(musician.getIdMusician(), musician.getPassword(), musician.getAlias(), musician.getEmail(), musician.getPostcode(),
@@ -100,7 +118,7 @@ public class ConnectedController {
     }
 
     @GetMapping("/recherche")
-    public String toSearch(Model model, HttpSession session){
+    public String toSearch(Model model, HttpSession session) {
         //TODO vérifer password et newpassword
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         String availability = musicianLevelInstrument.getAvailability();
@@ -110,21 +128,20 @@ public class ConnectedController {
 
         List<Result> results = resultRepository.getResult(musicianLevelInstrument.getSearchType(), musicianLevelInstrument.getPostcode(),
                 musicianLevelInstrument.getIdInstrument(), musicianLevelInstrument.getLevel(), musicianLevelInstrument.getAvailability());
-        model.addAttribute("results",results);
 
+        model.addAttribute("results", results);
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
 
         //verifier si ce musicien a déja un groupe
-        String ahref="";
-        String atexte="";
+        String ahref = "";
+        String atexte = "";
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
-        if(band == null){
-            ahref="/creation-groupe";
+        if (band == null) {
+            ahref = "/creation-groupe";
             atexte = "Créer mon groupe";
-        }
-        else {
-            ahref="/gestion-groupe";
+        } else {
+            ahref = "/gestion-groupe";
             atexte = "Gérer mes groupes";
         }
         model.addAttribute("ahref", ahref);
@@ -141,11 +158,11 @@ public class ConnectedController {
 
     @PostMapping("/creation-groupe")
     public String insertBand(@RequestParam(required = false) String name,
-                                     @RequestParam(required = false) String bio,
-                                     @RequestParam(required = false) int searchType,
-                                     @RequestParam(required = false) String postcode,
-                                     @RequestParam(required = false) long style,
-                                     @RequestParam(required = false) Long idMusician) {
+                             @RequestParam(required = false) String bio,
+                             @RequestParam(required = false) int searchType,
+                             @RequestParam(required = false) String postcode,
+                             @RequestParam(required = false) long style,
+                             @RequestParam(required = false) Long idMusician) {
 
         Band band = bandRepository.save(name, bio, searchType, postcode, idMusician);
         BandStyle bandStyle = bandStyleRepository.save(band.getIdBand(), style);
@@ -154,7 +171,7 @@ public class ConnectedController {
     }
 
     @GetMapping("/gestion-groupe")
-    public String viewBand(HttpSession session, Model model){
+    public String viewBand(HttpSession session, Model model) {
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
         model.addAttribute("band", band);
@@ -192,7 +209,7 @@ public class ConnectedController {
                                      @RequestParam(required = false, defaultValue = "") String thursday,
                                      @RequestParam(required = false, defaultValue = "") String friday,
                                      @RequestParam(required = false, defaultValue = "") String saturday,
-                                     @RequestParam(required = false, defaultValue = "") String sunday){
+                                     @RequestParam(required = false, defaultValue = "") String sunday) {
 
         String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
@@ -202,7 +219,7 @@ public class ConnectedController {
     }
 
     @PostMapping("desactiver-annonce")
-    public String createAnnouncement(@RequestParam long idNeed){
+    public String createAnnouncement(@RequestParam long idNeed) {
 
         long id = needRepository.desactiveNeed(idNeed);
         return "redirect:/gestion-groupe";
@@ -222,10 +239,10 @@ public class ConnectedController {
 
     private int formatSearchType(String jam, String band) {
         int i = 0;
-        if(jam.equals("on")) {
+        if (jam.equals("on")) {
             i += 1;
         }
-        if(band.equals("on")) {
+        if (band.equals("on")) {
             i += 2;
         }
         return i;
@@ -237,40 +254,48 @@ public class ConnectedController {
         if (week[0] == '1') {
             monday = true;
         }
+
         model.addAttribute("monday", monday);
         boolean tuesday = false;
         if (week[1] == '1') {
             tuesday = true;
         }
+
         model.addAttribute("tuesday", tuesday);
         boolean wednesday = false;
         if (week[2] == '1') {
             wednesday = true;
         }
+
         model.addAttribute("wednesday", wednesday);
         boolean thursday = false;
         if (week[3] == '1') {
             thursday = true;
         }
+
         model.addAttribute("thursday", thursday);
         boolean friday = false;
         if (week[4] == '1') {
             friday = true;
         }
+
         model.addAttribute("friday", friday);
         boolean saturday = false;
         if (week[5] == '1') {
             saturday = true;
         }
+
         model.addAttribute("saturday", saturday);
         boolean sunday = false;
         if (week[6] == '1') {
             sunday = true;
         }
+
         model.addAttribute("sunday", sunday);
     }
 
     private void sendSearchTypeToForm(Model model, int searchType) {
+
         boolean jam = false;
         boolean band = false;
 
