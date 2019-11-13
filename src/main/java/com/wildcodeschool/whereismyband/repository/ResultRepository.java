@@ -57,12 +57,11 @@ public class ResultRepository {
                 idInstrument = resultSet.getLong("id_instrument");
                 levelInstrument = resultSet.getInt("level");
                 String availabilityBand = resultSet.getString("availability");
-                //long searchId = resultSet.getLong("id_search");
                 String instrumentName = resultSet.getString("instrument.name");
                 long idBand = resultSet.getLong("id_band");
                 String bandName = resultSet.getString("band.name");
                 String bio = resultSet.getString("bio");
-                //TODO : tester les dispos.
+                
                 if (checkAvailability(availability, availabilityBand)) {
                     availabilityBand = weekAvailability(availabilityBand);
                     results.add(new Result(searchType, postCode,
