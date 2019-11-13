@@ -48,21 +48,22 @@ public class ConnectedController {
                                   @RequestParam String password,
                                   @RequestParam(required = false, defaultValue = "") String avatar,
                                   @RequestParam(required = false) String alias,
-                                  @RequestParam(required = false, defaultValue = "false") boolean monday,
-                                  @RequestParam(required = false, defaultValue = "false") boolean tuesday,
-                                  @RequestParam(required = false, defaultValue = "false") boolean wednesday,
-                                  @RequestParam(required = false, defaultValue = "false") boolean thursday,
-                                  @RequestParam(required = false, defaultValue = "false") boolean friday,
-                                  @RequestParam(required = false, defaultValue = "false") boolean saturday,
-                                  @RequestParam(required = false, defaultValue = "false") boolean sunday,
-                                  @RequestParam(required = false, defaultValue = "false") boolean jam,
-                                  @RequestParam(required = false, defaultValue = "false") boolean band,
+                                  @RequestParam(required = false, defaultValue = "") String monday,
+                                  @RequestParam(required = false, defaultValue = "") String tuesday,
+                                  @RequestParam(required = false, defaultValue = "") String wednesday,
+                                  @RequestParam(required = false, defaultValue = "") String thursday,
+                                  @RequestParam(required = false, defaultValue = "") String friday,
+                                  @RequestParam(required = false, defaultValue = "") String saturday,
+                                  @RequestParam(required = false, defaultValue = "") String sunday,
+                                  @RequestParam(required = false, defaultValue = "") String jam,
+                                  @RequestParam(required = false, defaultValue = "") String band,
                                   @RequestParam(required = false, defaultValue = "1111111") String availability,
                                   @RequestParam(required = false, defaultValue = "3") int searchType,
                                   @RequestParam(required = false) Long mainInstrument,
                                   @RequestParam(required = false, defaultValue = "0") int mainInstrumentLevel,
                                   @RequestParam(required = false) Long secondInstrument,
-                                  @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel) {
+                                  @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel,
+                                  @RequestParam(required = false) Long previousInstrument1) {
 
         Musician musician;
         switch (comefromhere) {
@@ -82,19 +83,24 @@ public class ConnectedController {
                 idMusician = musician.getIdMusician();
                 LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician, mainInstrument, mainInstrumentLevel);
                 break;
+
             case 2:
                 searchType = formatSearchType(jam, band);
-                boolean[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
+                String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
                 availability = formatAvailability(week);
                 musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio,
-                        avatar, availability, searchType); //(on vient de profil)
+                        avatar, availability, searchType);
+                LevelInstrument levelInstrumentUp = levelInstrumentRepository.update(idMusician, mainInstrument, mainInstrumentLevel, previousInstrument1);
                 break;
+
             case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
                 break;
+
             case 4:
                 musician = musicianRepository.getMusicianLogIn(userMail, password); //on arrive du login
                 idMusician = musician.getIdMusician();
         }
+
         musician = musicianRepository.getMusicianById(idMusician);
         LevelInstrument levelInstrument = levelInstrumentRepository.getLevelInstrumentByIdMusician(musician.getIdMusician()).get(0);
         MusicianLevelInstrument musicianLevelInstrument = new MusicianLevelInstrument(musician.getIdMusician(), musician.getPassword(), musician.getAlias(), musician.getEmail(), musician.getPostcode(),
@@ -114,36 +120,33 @@ public class ConnectedController {
         int searchType = musicianLevelInstrument.getSearchType();
         this.sendSearchTypeToForm(model, searchType);
 
+        List<Result> results = resultRepository.getResult(musicianLevelInstrument.getSearchType(), musicianLevelInstrument.getPostcode(),
+                musicianLevelInstrument.getIdInstrument(), musicianLevelInstrument.getLevel(), musicianLevelInstrument.getAvailability());
+        model.addAttribute("results", results);
+
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
         return "search";
     }
 
-    @GetMapping("/resultat-recherche")
-    public String getResult(Model model) {
-        List<Result> results = resultRepository.getResult(2, "31000", 209, 1, "1100111");
-        model.addAttribute("results", results);
-        return "search";
-    }
-
-    private String formatAvailability(boolean[] week) {
-        char[] availability = {'0', '0', '0', '0', '0', '0', '0'};
-        int i = 0;
-        for (boolean day : week) {
-            if (day) {
-                availability[i] = 1;
+    private String formatAvailability(String[] week) {
+        String availability = "";
+        for (String day : week) {
+            if (day.equals("on")) {
+                availability += "1";
+            } else {
+                availability += "0";
             }
-            i++;
         }
-        return String.valueOf(availability);
+        return availability;
     }
 
-    private int formatSearchType(boolean jam, boolean band) {
+    private int formatSearchType(String jam, String band) {
         int i = 0;
-        if (jam) {
+        if (jam.equals("on")) {
             i += 1;
         }
-        if (band) {
+        if (band.equals("on")) {
             i += 2;
         }
         return i;
@@ -155,40 +158,48 @@ public class ConnectedController {
         if (week[0] == '1') {
             monday = true;
         }
+
         model.addAttribute("monday", monday);
         boolean tuesday = false;
         if (week[1] == '1') {
             tuesday = true;
         }
+
         model.addAttribute("tuesday", tuesday);
         boolean wednesday = false;
         if (week[2] == '1') {
             wednesday = true;
         }
+
         model.addAttribute("wednesday", wednesday);
         boolean thursday = false;
         if (week[3] == '1') {
             thursday = true;
         }
+
         model.addAttribute("thursday", thursday);
         boolean friday = false;
         if (week[4] == '1') {
             friday = true;
         }
+
         model.addAttribute("friday", friday);
         boolean saturday = false;
         if (week[5] == '1') {
             saturday = true;
         }
+
         model.addAttribute("saturday", saturday);
         boolean sunday = false;
         if (week[6] == '1') {
             sunday = true;
         }
+
         model.addAttribute("sunday", sunday);
     }
 
     private void sendSearchTypeToForm(Model model, int searchType) {
+
         boolean jam = false;
         boolean band = false;
 
