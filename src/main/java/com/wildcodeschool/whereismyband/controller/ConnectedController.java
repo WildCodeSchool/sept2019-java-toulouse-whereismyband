@@ -24,6 +24,7 @@ public class ConnectedController {
     private NeedRepository needRepository = new NeedRepository();
     private NeedInstrumentRepository needInstrumentRepository = new NeedInstrumentRepository();
     private CheckerRepository checkerRepository = new CheckerRepository();
+    private SearchRepository searchRepository = new SearchRepository();
 
     @GetMapping("/profil-utilisateur")
     public String toProfile(Model model, HttpSession session) {
@@ -72,9 +73,11 @@ public class ConnectedController {
                                   @RequestParam(required = false, defaultValue = "0") Long secondInstrument,
                                   @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel,
                                   @RequestParam(required = false) Long previousInstrument1,
-                                  @RequestParam(required = false, defaultValue = "0") Long previousInstrument2) {
+                                  @RequestParam(required = false, defaultValue = "0") Long previousInstrument2,
+                                  @RequestParam(required = false, defaultValue = "0") Long idStyle) {
 
         Musician musician;
+        String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         switch (comefromhere) {
             case 1: //inscription
                 boolean checkPassword = checkerRepository.checkPassword(password, newpassword);
@@ -99,7 +102,6 @@ public class ConnectedController {
             case 2: //profil
                 // TODO : gérer l'ajout d'un 2eme instru depuis un compte qui n'en a pas !
                 searchType = formatSearchType(jam, band);
-                String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
                 availability = formatAvailability(week);
                 musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio,
                         avatar, availability, searchType);
@@ -116,6 +118,10 @@ public class ConnectedController {
                 break;
 
             case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
+                searchType = formatSearchType(jam, band);
+                availability = formatAvailability(week);
+                Search search = searchRepository.save(postcode, availability, searchType, mainInstrument, mainInstrumentLevel, idStyle, idMusician);
+                List<Result> results = resultRepository.getResult(search.getSearchType(), search.getPostcode(), search.getIdInstrument(), search.getLevel(), search.getAvailability());
                 break;
 
             case 4: //login
@@ -162,6 +168,7 @@ public class ConnectedController {
         model.addAttribute("results", results);
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
+        model.addAttribute("styles", styleRepository.findAllStyle());
 
         String bandLinkHref = "";
         String bandLinkText = "";

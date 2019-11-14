@@ -36,9 +36,12 @@
     <div class="blockMusicStyle">
         <label for="searchStyleD">Style</label>
         <div class="musicStyle">
-            <select id="searchStyleD" class="fieldStyle">
-                <option value="Hip hop">Hip hop</option>
-                <option value="Jazz">Jazz</option>
+            <select id="searchStyleD" name="style" class="fieldStyle">
+                <option th:each="style : ${styles}"
+                        th:value="${style.idStyle}"
+                        th:text="${style.style}"
+                        class="optionTh">
+                </option>
             </select>
         </div>
     </div>
