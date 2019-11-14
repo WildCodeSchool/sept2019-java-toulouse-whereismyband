@@ -10,8 +10,10 @@ public class Search {
     private int level;
     private Long idStyle;
     private Long idMusician;
+    private Long idInstrument2;
+    private int level2;
 
-    public Search(Long idSearch, String postcode, String availability, int searchType, Long idInstrument, int level, Long idStyle, Long idMusician) {
+    public Search(Long idSearch, String postcode, String availability, int searchType, Long idInstrument, int level, Long idStyle, Long idMusician, Long idInstrument2, int level2) {
         this.idSearch = idSearch;
         this.postcode = postcode;
         this.availability = availability;
@@ -20,6 +22,8 @@ public class Search {
         this.level = level;
         this.idStyle = idStyle;
         this.idMusician = idMusician;
+        this.idInstrument2 = idInstrument2;
+        this.level2 = level2;
     }
 
     public Long getIdSearch() {
@@ -84,5 +88,21 @@ public class Search {
 
     public void setIdMusician(Long idMusician) {
         this.idMusician = idMusician;
+    }
+
+    public Long getIdInstrument2() {
+        return idInstrument2;
+    }
+
+    public void setIdInstrument2(Long idInstrument2) {
+        this.idInstrument2 = idInstrument2;
+    }
+
+    public int getLevel2() {
+        return level2;
+    }
+
+    public void setLevel2(int level2) {
+        this.level2 = level2;
     }
 }

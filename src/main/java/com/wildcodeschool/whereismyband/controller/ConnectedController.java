@@ -74,7 +74,7 @@ public class ConnectedController {
                                   @RequestParam(required = false, defaultValue = "0") int secondInstrumentLevel,
                                   @RequestParam(required = false) Long previousInstrument1,
                                   @RequestParam(required = false, defaultValue = "0") Long previousInstrument2,
-                                  @RequestParam(required = false, defaultValue = "0") Long idStyle) {
+                                  @RequestParam(required = false, defaultValue = "0") Long style) {
 
         Musician musician;
         String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
@@ -120,8 +120,15 @@ public class ConnectedController {
             case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
-                Search search = searchRepository.save(postcode, availability, searchType, mainInstrument, mainInstrumentLevel, idStyle, idMusician);
-                List<Result> results = resultRepository.getResult(search.getSearchType(), search.getPostcode(), search.getIdInstrument(), search.getLevel(), search.getAvailability());
+                Search verifSearch = searchRepository.getSearchByIdMusician(idMusician);
+                if(verifSearch == null) {
+                    Search search = searchRepository.save(postcode, availability, searchType, mainInstrument,
+                            mainInstrumentLevel, style, idMusician, secondInstrument, secondInstrumentLevel);
+                } else {
+                    Search search = searchRepository.update(verifSearch.getIdSearch(), postcode, availability,
+                            searchType, mainInstrument, mainInstrumentLevel, style, idMusician, secondInstrument,
+                            secondInstrumentLevel);
+                }
                 break;
 
             case 4: //login
@@ -158,8 +165,9 @@ public class ConnectedController {
         this.sendSearchTypeToForm(model, searchType);
 
         List<LevelInstrument> musicianInstruments = levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician());
-        List<Result> results = resultRepository.getResult(musicianLevelInstrument.getSearchType(), musicianLevelInstrument.getPostcode(),
-                musicianLevelInstrument.getIdInstrument(), musicianLevelInstrument.getLevel(), musicianLevelInstrument.getAvailability());
+        Search search = searchRepository.getSearchByIdMusician(musicianLevelInstrument.getIdMusician());
+        List<Result> results = resultRepository.getResult(search.getIdSearch(), search.getSearchType(), search.getPostcode(), search.getIdStyle(), search.getIdInstrument(), search.getLevel(), search.getAvailability());
+
 
 
         boolean twoInstrument = musicianInstruments.size() > 1;

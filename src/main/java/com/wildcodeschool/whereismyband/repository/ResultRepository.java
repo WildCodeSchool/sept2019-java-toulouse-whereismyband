@@ -11,7 +11,7 @@ public class ResultRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public List<Result> getResult(int searchType, String postCode, /*long idStyle,*/ long idInstrument, int levelInstrument, String availability) {
+    public List<Result> getResult(Long idSearch, int searchType, String postCode, long idStyle, long idInstrument, int levelInstrument, String availability) {
 
         try {
             Connection connection = DriverManager.getConnection(
@@ -22,29 +22,32 @@ public class ResultRepository {
             PreparedStatement statement;
             if (searchType == 3) {
                 statement = connection.prepareStatement(
-                        "SELECT * FROM band " +
-                                "JOIN need ON band.id_band = need.id_band " +
-                                "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
-                                "WHERE band.postcode = ? AND need.id_instrument = ? " +
-                                "AND need.level = ?;"
+                        "SELECT * FROM band JOIN need ON band.id_band = need.id_band" +
+                                " JOIN instrument ON instrument.id_instrument = need.id_instrument" +
+                                " JOIN band_style ON band.id_band = band_style.id_band" +
+                                " JOIN style ON style.id_style = band_style.id_style" +
+                                " WHERE band.postcode = ? AND need.id_instrument = ? " +
+                                "AND need.level = ? AND band_style.id_style = ?;"
                 );
                 statement.setString(1, postCode);
-                //statement.setLong(3, idStyle);
                 statement.setLong(2, idInstrument);
                 statement.setInt(3, levelInstrument);
+                statement.setLong(4, idStyle);
             } else {
                 statement = connection.prepareStatement(
-                        "SELECT * FROM band " +
-                                "JOIN need ON band.id_band = need.id_band " +
-                                "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
-                                "WHERE band.search_type = ? AND band.postcode = ? AND need.id_instrument = ? " +
-                                "AND need.level = ?;"
+                        "SELECT * FROM band JOIN need ON band.id_band = need.id_band" +
+                                " JOIN instrument ON instrument.id_instrument = need.id_instrument" +
+                                " JOIN band_style ON band.id_band = band_style.id_band" +
+                                " JOIN style ON style.id_style = band_style.id_style" +
+                                " WHERE band.postcode = ? AND need.id_instrument = ? " +
+                                " AND need.level = ? AND band_style.id_style = ? AND band.search_type = ?;"
                 );
-                statement.setInt(1, searchType);
-                statement.setString(2, postCode);
-                //statement.setLong(3, idStyle);
-                statement.setLong(3, idInstrument);
-                statement.setInt(4, levelInstrument);
+
+                statement.setString(1, postCode);
+                statement.setLong(2, idInstrument);
+                statement.setInt(3, levelInstrument);
+                statement.setLong(4, idStyle);
+                statement.setInt(5, searchType);
             }
 
             resultSet = statement.executeQuery();
@@ -53,7 +56,7 @@ public class ResultRepository {
             while (resultSet.next()) {
                 searchType = resultSet.getInt("search_type");
                 postCode = resultSet.getString("postcode");
-                //idStyle = resultSet.getLong("style");
+                idStyle = resultSet.getLong("id_style");
                 idInstrument = resultSet.getLong("id_instrument");
                 levelInstrument = resultSet.getInt("level");
                 String availabilityBand = resultSet.getString("availability");
@@ -61,11 +64,15 @@ public class ResultRepository {
                 long idBand = resultSet.getLong("id_band");
                 String bandName = resultSet.getString("band.name");
                 String bio = resultSet.getString("bio");
+                Long idMusician = resultSet.getLong("id_musician");
+                String style = resultSet.getString("style");
+
                 
                 if (checkAvailability(availability, availabilityBand)) {
                     availabilityBand = weekAvailability(availabilityBand);
-                    results.add(new Result(searchType, postCode,
-                            idInstrument, instrumentName, levelInstrument, idBand, bandName, availabilityBand, bio));
+                    results.add(new Result(idMusician, idSearch, searchType, postCode, idInstrument,
+                            instrumentName, levelInstrument, idBand, bandName, availability, bio, idStyle,
+                            style));
                 }
             }
             return results;
