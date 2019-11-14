@@ -80,13 +80,14 @@
         </div>
         <div th:if="${twoInstrument == true}" class="userSingleInstrument">
             <select id="secondInstrumentDT" name="secondInstrument" class="fieldInstrument">
+                <option value="0" selected>Votre instrument secondaire</option>
                 <option th:each="instrument : ${instruments}"
                         th:value="${instrument.idInstrument}"
                         th:text="${instrument.name}"
                         th:selected="${instrument.idInstrument == search.getIdInstrument2()}"></option>
             </select>
             <select id="secondInstrumentLevelDT" name="secondInstrumentLevel" class="fieldLevel">
-                <option value="0" disabled th:selected="${search.getLevel() == 0 }">Votre niveau</option>
+                <option value="0" th:selected="${search.getLevel() == 0 }">Votre niveau</option>
                 <option value="1" th:selected="${search.getLevel2() == 1 }">Débutant</option>
                 <option value="2" th:selected="${search.getLevel2() == 2 }">Intermédiaire</option>
                 <option value="3" th:selected="${search.getLevel2() == 3 }">Avancé</option>
