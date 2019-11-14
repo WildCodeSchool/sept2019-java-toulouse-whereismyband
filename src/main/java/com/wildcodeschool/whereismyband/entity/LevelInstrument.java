@@ -7,6 +7,7 @@ public class LevelInstrument {
     private Long idMnstrument;
     private int level;
 
+
     public LevelInstrument(Long idMusician, Long idMnstrument, int level) {
         this.idMusician = idMusician;
         this.idMnstrument = idMnstrument;
