@@ -1,7 +1,6 @@
 package com.wildcodeschool.whereismyband.repository;
 
 import com.wildcodeschool.whereismyband.entity.LevelInstrument;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,5 +79,25 @@ public class LevelInstrumentRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void deleteSecondInstrument(Long idMusician, Long previousInstrument) {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM level_instrument WHERE id_musician=? AND id_instrument = ?;"
+            );
+            statement.setLong(1, idMusician);
+            statement.setLong(2, previousInstrument);
+
+            if (statement.executeUpdate() != 1) {
+                throw new SQLException("failed to delete data");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
