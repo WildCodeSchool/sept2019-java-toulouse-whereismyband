@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -132,7 +131,7 @@ public class ConnectedController {
                         secondInstrumentLevel);
                 break;
 
-            case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
+            case 3: //(on vient de la recherche)
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
                 if (secondInstrument != 0) {
@@ -155,8 +154,14 @@ public class ConnectedController {
                 break;
 
             case 4: //login
+                if (musicianRepository.getMusicianLogIn(userMail, password) == null){
+                    model.addAttribute("errorMessage",true);
+                    model.addAttribute("instruments", repository.findAllInstrument());
+                    return "login";
+                }
                 musician = musicianRepository.getMusicianLogIn(userMail, password);
                 idMusician = musician.getIdMusician();
+                break;
         }
 
         musician = musicianRepository.getMusicianById(idMusician);
@@ -195,6 +200,11 @@ public class ConnectedController {
         List<Result> results = resultRepository.getResult(search.getIdSearch(), search.getSearchType(),
                 search.getPostcode(), search.getIdStyle(), search.getIdInstrument(), search.getLevel(),
                 search.getAvailability(), search.getIdInstrument2(), search.getLevel2());
+        boolean error = false;
+        if (results.size() == 0){
+            error = true;
+        }
+        model.addAttribute("error",error);
         model.addAttribute("twoInstrument", twoInstrument);
         model.addAttribute("results", results);
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));

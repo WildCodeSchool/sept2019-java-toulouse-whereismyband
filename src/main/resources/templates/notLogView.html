@@ -31,8 +31,7 @@
                     </div>
                 </form>
             </section>
-            <ul class="groupResult">
-                <p th:if="${erreur} == true">Aucun résultat ou code postal incorrect</p>
+                <p class = "resultError" th:if="${erreur} == true">Aucun résultat ou code postal incorrect</p>
                 <ul th:each="result : ${results}" class="groupResult">
                     <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
                     <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
