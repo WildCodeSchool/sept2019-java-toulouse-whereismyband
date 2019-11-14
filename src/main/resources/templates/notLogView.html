@@ -41,7 +41,6 @@
                         <p th:case="2">Type de recherche : groupe</p>
                         <p th:case="3">Type de recherche : groupe et session jam</p>
                     </li>
-                    </li>
                     <li th:text="|Instrument: ${result.getInstrumentName()}|"></li>
                     <li th:switch="${result.getInstrumentLevel()}">
                         <p th:case="1">Débutant</p>

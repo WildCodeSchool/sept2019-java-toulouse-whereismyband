@@ -1,6 +1,7 @@
 package com.wildcodeschool.whereismyband.repository;
 
 import com.wildcodeschool.whereismyband.entity.Result;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class ResultRepository {
 
     public List<Result> getResult(int searchType, String postCode, /*long idStyle,*/ long idInstrument, int levelInstrument, String availability) {
 
+        postCode = postCode.substring(0, 2) + '%';
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -111,7 +113,7 @@ public class ResultRepository {
     }
 
     public List<Result> getResultNotLog(String postcode) {
-        postcode = postcode.substring(0, 2)+'%';
+        postcode = postcode.substring(0, 2) + '%';
         try {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
@@ -120,15 +122,15 @@ public class ResultRepository {
             ResultSet resultSet;
             PreparedStatement statement;
 
-                statement = connection.prepareStatement(
-                        "SELECT * FROM band " +
-                                "JOIN need ON band.id_band = need.id_band " +
-                                "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
-                                "WHERE band.postcode LIKE ?" +
-                                "LIMIT 3;"
-                );
+            statement = connection.prepareStatement(
+                    "SELECT * FROM band " +
+                            "JOIN need ON band.id_band = need.id_band " +
+                            "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
+                            "WHERE band.postcode LIKE ?" +
+                            "LIMIT 3;"
+            );
 
-                statement.setString(1, postcode);
+            statement.setString(1, postcode);
 
             resultSet = statement.executeQuery();
             List<Result> results = new ArrayList<>();
