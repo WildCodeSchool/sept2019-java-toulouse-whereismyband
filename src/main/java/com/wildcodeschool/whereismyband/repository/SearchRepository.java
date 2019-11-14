@@ -16,7 +16,7 @@ public class SearchRepository {
             );
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO search (postcode, availability, search_type, id_instrument, level, id_style, id_musician, id_instrument2, level2) " +
-                            "VALUES (?, ?, ?, ?, ?, ?, ?);",
+                            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
                     Statement.RETURN_GENERATED_KEYS
             );
             statement.setString(1, postcode);
@@ -95,12 +95,12 @@ public class SearchRepository {
                     String postcode = resultSet.getString("postcode");
                     String availability = resultSet.getString("availability");
                     int searchType = resultSet.getInt("search_type");
-                    Long idInsrument = resultSet.getLong("id_instrument");
+                    Long idInstrument = resultSet.getLong("id_instrument");
                     int level = resultSet.getInt("level");
                     Long idStyle = resultSet.getLong("id_style");
-                    Long idInsrument2 = resultSet.getLong("id_instrument2");
+                    Long idInstrument2 = resultSet.getLong("id_instrument2");
                     int level2 = resultSet.getInt("level2");
-                    return new Search(idSearch, postcode, availability, searchType, idInsrument, level, idStyle, idMusician, idInsrument2, level2);
+                    return new Search(idSearch, postcode, availability, searchType, idInstrument, level, idStyle, idMusician, idInstrument2, level2);
                 }
             } catch (
                     SQLException e) {

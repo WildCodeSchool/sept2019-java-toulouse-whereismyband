@@ -1,6 +1,7 @@
 package com.wildcodeschool.whereismyband.repository;
 
 import com.wildcodeschool.whereismyband.entity.Result;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,23 @@ public class ResultRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
-    public List<Result> getResult(Long idSearch, int searchType, String postCode, long idStyle, long idInstrument, int levelInstrument, String availability) {
+    public List<Result> getResult(Long idSearch, int searchType, String postCode, long idStyle, long idInstrument,
+                                  int levelInstrument, String availability, long idInstrument2, int levelInstrument2) {
+
+        String request = "SELECT * FROM band JOIN need ON band.id_band = need.id_band " +
+                "JOIN instrument ON instrument.id_instrument = need.id_instrument JOIN band_style ON band.id_band = band_style.id_band " +
+                "JOIN style ON style.id_style = band_style.id_style WHERE";
+        if (searchType == 1 || searchType == 2) {
+            request += " band.search_type = " + String.valueOf(searchType) + " AND";
+        }
+        if (idStyle > 1) {
+            request += " band_style.id_style = " + String.valueOf(idStyle) + " AND";
+        }
+        request += " (need.id_instrument = " + String.valueOf(idInstrument) + " AND need.level = " + String.valueOf(levelInstrument) + ")";
+        if (idInstrument2 > 0) {
+            request += " OR (need.id_instrument = " + String.valueOf(idInstrument) + " AND need.level = " + String.valueOf(levelInstrument) + ")";
+        }
+        request += ";";
 
         try {
             Connection connection = DriverManager.getConnection(
@@ -20,35 +37,7 @@ public class ResultRepository {
 
             ResultSet resultSet;
             PreparedStatement statement;
-            if (searchType == 3) {
-                statement = connection.prepareStatement(
-                        "SELECT * FROM band JOIN need ON band.id_band = need.id_band" +
-                                " JOIN instrument ON instrument.id_instrument = need.id_instrument" +
-                                " JOIN band_style ON band.id_band = band_style.id_band" +
-                                " JOIN style ON style.id_style = band_style.id_style" +
-                                " WHERE band.postcode = ? AND need.id_instrument = ? " +
-                                "AND need.level = ? AND band_style.id_style = ?;"
-                );
-                statement.setString(1, postCode);
-                statement.setLong(2, idInstrument);
-                statement.setInt(3, levelInstrument);
-                statement.setLong(4, idStyle);
-            } else {
-                statement = connection.prepareStatement(
-                        "SELECT * FROM band JOIN need ON band.id_band = need.id_band" +
-                                " JOIN instrument ON instrument.id_instrument = need.id_instrument" +
-                                " JOIN band_style ON band.id_band = band_style.id_band" +
-                                " JOIN style ON style.id_style = band_style.id_style" +
-                                " WHERE band.postcode = ? AND need.id_instrument = ? " +
-                                " AND need.level = ? AND band_style.id_style = ? AND band.search_type = ?;"
-                );
-
-                statement.setString(1, postCode);
-                statement.setLong(2, idInstrument);
-                statement.setInt(3, levelInstrument);
-                statement.setLong(4, idStyle);
-                statement.setInt(5, searchType);
-            }
+            statement = connection.prepareStatement(request);
 
             resultSet = statement.executeQuery();
             List<Result> results = new ArrayList<>();
@@ -67,7 +56,7 @@ public class ResultRepository {
                 Long idMusician = resultSet.getLong("id_musician");
                 String style = resultSet.getString("style");
 
-                
+
                 if (checkAvailability(availability, availabilityBand)) {
                     availabilityBand = weekAvailability(availabilityBand);
                     results.add(new Result(idMusician, idSearch, searchType, postCode, idInstrument,

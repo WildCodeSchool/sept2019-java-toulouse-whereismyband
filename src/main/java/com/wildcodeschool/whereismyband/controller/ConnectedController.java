@@ -77,6 +77,7 @@ public class ConnectedController {
                                   @RequestParam(required = false, defaultValue = "0") Long style) {
 
         Musician musician;
+        Search search;
         String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         switch (comefromhere) {
             case 1: //inscription
@@ -96,6 +97,11 @@ public class ConnectedController {
                 LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician, mainInstrument, mainInstrumentLevel);
                 if (secondInstrument != 0) {
                     LevelInstrument levelSecondInstrument = levelInstrumentRepository.save(idMusician, secondInstrument, secondInstrumentLevel);
+                    search = searchRepository.save(postcode, availability, searchType, mainInstrument,
+                            mainInstrumentLevel, style, idMusician, secondInstrument, secondInstrumentLevel);
+                } else {
+                    search = searchRepository.save(postcode, availability, searchType, mainInstrument,
+                            mainInstrumentLevel, style, idMusician, 0l, 0);
                 }
                 break;
 
@@ -107,6 +113,7 @@ public class ConnectedController {
                         avatar, availability, searchType);
                 LevelInstrument levelInstrumentUp = levelInstrumentRepository.update(idMusician, mainInstrument,
                         mainInstrumentLevel, previousInstrument1);
+                Search getSearch = searchRepository.getSearchByIdMusician(musician.getIdMusician());
                 if (secondInstrument != 0) {
                     if (previousInstrument2 == 0) {
                         LevelInstrument levelSecondInstrument = levelInstrumentRepository.save(idMusician, secondInstrument, secondInstrumentLevel);
@@ -114,18 +121,32 @@ public class ConnectedController {
 
                     LevelInstrument levelSecondInstrumentUp = levelInstrumentRepository.update(idMusician, secondInstrument,
                             secondInstrumentLevel, previousInstrument2);
+                    search = searchRepository.update(getSearch.getIdSearch(), postcode, availability,
+                            searchType, mainInstrument, mainInstrumentLevel, style, idMusician, secondInstrument,
+                            secondInstrumentLevel);
                 }
+                search = searchRepository.update(getSearch.getIdSearch(), postcode, availability,
+                        searchType, mainInstrument, mainInstrumentLevel, style, idMusician, secondInstrument,
+                        secondInstrumentLevel);
                 break;
 
             case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
+                if (secondInstrument != 0) {
+                    if (previousInstrument2 == 0) {
+                        LevelInstrument levelSecondInstrument = levelInstrumentRepository.save(idMusician, secondInstrument, secondInstrumentLevel);
+                    } else {
+                        LevelInstrument levelSecondInstrumentUp = levelInstrumentRepository.update(idMusician, secondInstrument,
+                                secondInstrumentLevel, previousInstrument2);
+                    }
+                }
                 Search verifSearch = searchRepository.getSearchByIdMusician(idMusician);
                 if(verifSearch == null) {
-                    Search search = searchRepository.save(postcode, availability, searchType, mainInstrument,
+                    search = searchRepository.save(postcode, availability, searchType, mainInstrument,
                             mainInstrumentLevel, style, idMusician, secondInstrument, secondInstrumentLevel);
                 } else {
-                    Search search = searchRepository.update(verifSearch.getIdSearch(), postcode, availability,
+                    search = searchRepository.update(verifSearch.getIdSearch(), postcode, availability,
                             searchType, mainInstrument, mainInstrumentLevel, style, idMusician, secondInstrument,
                             secondInstrumentLevel);
                 }
@@ -159,25 +180,22 @@ public class ConnectedController {
     public String toSearch(Model model, HttpSession session) {
         //TODO vérifer password et newpassword
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
-        String availability = musicianLevelInstrument.getAvailability();
-        this.sendAvaibilityToForm(model, availability);
-        int searchType = musicianLevelInstrument.getSearchType();
-        this.sendSearchTypeToForm(model, searchType);
-
-        List<LevelInstrument> musicianInstruments = levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician());
         Search search = searchRepository.getSearchByIdMusician(musicianLevelInstrument.getIdMusician());
-        List<Result> results = resultRepository.getResult(search.getIdSearch(), search.getSearchType(), search.getPostcode(), search.getIdStyle(), search.getIdInstrument(), search.getLevel(), search.getAvailability());
-
-
-
-        boolean twoInstrument = musicianInstruments.size() > 1;
-
+        model.addAttribute("search", search);
+        String availability = search.getAvailability();
+        this.sendAvaibilityToForm(model, availability);
+        int searchType = search.getSearchType();
+        this.sendSearchTypeToForm(model, searchType);
+        List<LevelInstrument> musicianInstruments = levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician());
+        boolean twoInstrument = search.getIdInstrument2() != 0;
+        List<Result> results = resultRepository.getResult(search.getIdSearch(), search.getSearchType(),
+                search.getPostcode(), search.getIdStyle(), search.getIdInstrument(), search.getLevel(),
+                search.getAvailability(), search.getIdInstrument2(), search.getLevel2());
         model.addAttribute("twoInstrument", twoInstrument);
         model.addAttribute("results", results);
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
         model.addAttribute("styles", styleRepository.findAllStyle());
-
         String bandLinkHref = "";
         String bandLinkText = "";
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
@@ -188,6 +206,7 @@ public class ConnectedController {
             bandLinkHref = "/gestion-groupe";
             bandLinkText = "Gérer mes groupes";
         }
+
         model.addAttribute("bandLinkHref", bandLinkHref);
         model.addAttribute("bandLinkText", bandLinkText);
 
