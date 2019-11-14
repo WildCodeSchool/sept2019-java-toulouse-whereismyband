@@ -1,6 +1,7 @@
 package com.wildcodeschool.whereismyband.repository;
 
 import com.wildcodeschool.whereismyband.entity.Musician;
+
 import java.sql.*;
 
 public class MusicianRepository {

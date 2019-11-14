@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -98,13 +99,14 @@ public class ConnectedController {
                     LevelInstrument levelSecondInstrument = levelInstrumentRepository.save(idMusician, secondInstrument, secondInstrumentLevel);
                 }
                 break;
-
             case 2: //profil
-                // TODO : gérer l'ajout d'un 2eme instru depuis un compte qui n'en a pas !
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
                 musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio,
                         avatar, availability, searchType);
+                if (secondInstrument == 0 && previousInstrument2 != 0) {
+                    levelInstrumentRepository.deleteSecondInstrument(idMusician, previousInstrument2);
+                }
                 LevelInstrument levelInstrumentUp = levelInstrumentRepository.update(idMusician, mainInstrument,
                         mainInstrumentLevel, previousInstrument1);
                 if (secondInstrument != 0) {
@@ -134,6 +136,7 @@ public class ConnectedController {
 
         MusicianLevelInstrument musicianLevelInstrument;
         if (secondInstrument == 0) {
+
             musicianLevelInstrument = new MusicianLevelInstrument(musician.getIdMusician(), musician.getPassword(), musician.getAlias(), musician.getEmail(), musician.getPostcode(),
                     musician.getBio(), musician.getAvatar(), musician.getAvailability(), musician.getSearchType(), levelInstrument.getIdMnstrument(), levelInstrument.getLevel());
         } else {
@@ -142,6 +145,7 @@ public class ConnectedController {
                     musician.getBio(), musician.getAvatar(), musician.getAvailability(), musician.getSearchType(), levelInstrument.getIdMnstrument(),
                     levelInstrument.getLevel(), levelInstrument2.getIdMnstrument(), levelInstrument2.getLevel());
         }
+
         session.setAttribute("musicianLevelInstrument", musicianLevelInstrument);
         //TODO : gerer 2eme instru
         //TODO : constructeur musician_levelInstrument a remplir avec les infos d'avant puis le passer dans une session recherche.
@@ -182,7 +186,6 @@ public class ConnectedController {
         }
         model.addAttribute("bandLinkHref", bandLinkHref);
         model.addAttribute("bandLinkText", bandLinkText);
-
         return "search";
     }
 
@@ -203,20 +206,18 @@ public class ConnectedController {
 
         Band band = bandRepository.save(name, bio, searchType, postcode, idMusician);
         BandStyle bandStyle = bandStyleRepository.save(band.getIdBand(), style);
-
         return "band";
     }
 
     @GetMapping("/gestion-groupe")
     public String viewBand(HttpSession session, Model model) {
-        
+
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
         model.addAttribute("band", band);
         model.addAttribute("styles", styleRepository.findAllStyle());
         model.addAttribute("instruments", repository.findAllInstrument());
         model.addAttribute("needs", needInstrumentRepository.getNeedsByIdBands(band.getIdBand()));
-
         return "need";
     }
 
@@ -251,7 +252,6 @@ public class ConnectedController {
         String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
         String availability = formatAvailability(week);
         Need need = needRepository.save(idInstrument, idBand, availability, level);
-
         return "redirect:/gestion-groupe";
     }
 

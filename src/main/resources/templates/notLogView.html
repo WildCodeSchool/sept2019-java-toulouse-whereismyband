@@ -32,19 +32,24 @@
                 </form>
             </section>
             <ul class="groupResult">
-                <li><a th:href="@{/inscription}">
-                    <div class="searchResultName">Nom du groupe</div>
-                    <div class="searchResultDistanceStyle">Distance | Style</div>
-                </a></li>
-                <li><a th:href="@{/inscription}">
-                    <div class="searchResultName">Nom du groupe</div>
-                    <div class="searchResultDistanceStyle">Distance | Style</div>
-                </a></li>
-                <li><a th:href="@{/inscription}">
-                    <div class="searchResultName">Nom du groupe</div>
-                    <div class="searchResultDistanceStyle">Distance | Style</div>
-                </a></li>
-            </ul>
+                <p th:if="${erreur} == true">Aucun résultat ou code postal incorrect</p>
+                <ul th:each="result : ${results}" class="groupResult">
+                    <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
+                    <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
+                    <li th:switch="${result.getSearchType()}">
+                        <p th:case="1">Type de recherche : session jam</p>
+                        <p th:case="2">Type de recherche : groupe</p>
+                        <p th:case="3">Type de recherche : groupe et session jam</p>
+                    </li>
+                    <li th:text="|Instrument: ${result.getInstrumentName()}|"></li>
+                    <li th:switch="${result.getInstrumentLevel()}">
+                        <p th:case="1">Débutant</p>
+                        <p th:case="2">Intermédiaire</p>
+                        <p th:case="3">Avancé</p>
+                        <p th:case="4">Pro</p>
+                    </li>
+                    <li th:text="|Disponibilité: ${result.getAvailability()}|">$availability</li>
+                </ul>
         </div>
     </div>
     <footer th:replace="footer :: footer">
