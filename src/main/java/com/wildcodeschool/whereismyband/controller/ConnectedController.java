@@ -73,7 +73,7 @@ public class ConnectedController {
 
         Musician musician;
         switch (comefromhere) {
-            case 1:
+            case 1: //inscription
                 boolean checkPassword = checkerRepository.checkPassword(password, newpassword);
                 boolean checkEmail = checkerRepository.checkEmail(userMail);
                 boolean checkPostcode = checkerRepository.checkPostcode(postcode);
@@ -90,7 +90,7 @@ public class ConnectedController {
                 LevelInstrument levelInstrument = levelInstrumentRepository.save(idMusician, mainInstrument, mainInstrumentLevel);
                 break;
 
-            case 2:
+            case 2: //profil
                 searchType = formatSearchType(jam, band);
                 String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
                 availability = formatAvailability(week);
@@ -102,8 +102,8 @@ public class ConnectedController {
             case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
                 break;
 
-            case 4:
-                musician = musicianRepository.getMusicianLogIn(userMail, password); //on arrive du login
+            case 4: //login
+                musician = musicianRepository.getMusicianLogIn(userMail, password);
                 idMusician = musician.getIdMusician();
         }
 
@@ -133,17 +133,17 @@ public class ConnectedController {
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
 
-        String bandLinHref = "";
+        String bandLinkHref = "";
         String bandLinkText = "";
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
         if (band == null) {
-            bandLinHref = "/creation-groupe";
+            bandLinkHref = "/creation-groupe";
             bandLinkText = "Créer mon groupe";
         } else {
-            bandLinHref = "/gestion-groupe";
+            bandLinkHref = "/gestion-groupe";
             bandLinkText = "Gérer mes groupes";
         }
-        model.addAttribute("bandLinHref", bandLinHref);
+        model.addAttribute("bandLinkHref", bandLinkHref);
         model.addAttribute("bandLinkText", bandLinkText);
         return "search";
     }
