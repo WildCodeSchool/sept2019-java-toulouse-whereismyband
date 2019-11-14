@@ -59,7 +59,7 @@
                 <option value="4" th:selected="${levels.get(0).getLevel() == 4 }">Pro</option>
             </select>
         </div>
-        <div class="userSingleInstrument">
+        <div th:if="${twoInstrument == false}" class="userSingleInstrument">
             <select id="secondInstrumentD" name="secondInstrument" class="fieldInstrument">
                 <option value="0" disabled selected>Votre instrument secondaire</option>
                 <option th:each="instrument : ${instruments}"
@@ -72,6 +72,21 @@
                 <option value="2">Intermédiaire</option>
                 <option value="3">Avancé</option>
                 <option value="4">Pro</option>
+            </select>
+        </div>
+        <div th:if="${twoInstrument == true}" class="userSingleInstrument">
+            <select id="secondInstrumentDT" name="secondInstrument" class="fieldInstrument">
+                <option value="0" disabled selected>Votre instrument secondaire</option>
+                <option th:each="instrument : ${instruments}"
+                        th:value="${instrument.idInstrument}"
+                        th:text="${instrument.name}"
+                        th:selected="${instrument.idInstrument == levels.get(1).getIdMnstrument()}"></option>
+            </select>
+            <select id="secondInstrumentLevelDT" name="secondInstrumentLevel" class="fieldLevel">
+                <option value="1" th:selected="${levels.get(1).getLevel() == 1 }">Débutant</option>
+                <option value="2" th:selected="${levels.get(1).getLevel() == 2 }">Intermédiaire</option>
+                <option value="3" th:selected="${levels.get(1).getLevel() == 3 }">Avancé</option>
+                <option value="4" th:selected="${levels.get(1).getLevel() == 4 }">Pro</option>
             </select>
         </div>
     </div>

@@ -12,7 +12,41 @@ public class MusicianLevelInstrument {
     private String availability;
     private int searchType;
     private Long idInstrument;
+    private Long idSecondInstrument;
     private int level;
+    private int secondLevel;
+
+    public MusicianLevelInstrument(Long idMusician, String password, String alias, String email, String postcode, String bio,
+                                   String avatar, String availability, int searchType, Long idInstrument, int level) {
+        this.idMusician = idMusician;
+        this.password = password;
+        this.alias = alias;
+        this.email = email;
+        this.postcode = postcode;
+        this.bio = bio;
+        this.avatar = avatar;
+        this.availability = availability;
+        this.searchType = searchType;
+        this.idInstrument = idInstrument;
+        this.level = level;
+    }
+
+    public MusicianLevelInstrument(Long idMusician, String password, String alias, String email, String postcode, String bio,
+                                   String avatar, String availability, int searchType, Long idInstrument, int level, Long idSecondInstrument, int secondLevel) {
+        this.idMusician = idMusician;
+        this.password = password;
+        this.alias = alias;
+        this.email = email;
+        this.postcode = postcode;
+        this.bio = bio;
+        this.avatar = avatar;
+        this.availability = availability;
+        this.searchType = searchType;
+        this.idInstrument = idInstrument;
+        this.level = level;
+        this.idSecondInstrument = idSecondInstrument;
+        this.secondLevel = secondLevel;
+    }
 
     public Long getIdInstrument() {
         return idInstrument;
@@ -30,19 +64,20 @@ public class MusicianLevelInstrument {
         this.level = level;
     }
 
-    public MusicianLevelInstrument(Long idMusician, String password, String alias, String email, String postcode, String bio,
-                                   String avatar, String availability, int searchType, Long idInstrument, int level) {
-        this.idMusician = idMusician;
-        this.password = password;
-        this.alias = alias;
-        this.email = email;
-        this.postcode = postcode;
-        this.bio = bio;
-        this.avatar = avatar;
-        this.availability = availability;
-        this.searchType = searchType;
-        this.idInstrument = idInstrument;
-        this.level = level;
+    public Long getIdSecondInstrument() {
+        return idSecondInstrument;
+    }
+
+    public void setIdSecondInstrument(Long idSecondInstrument) {
+        this.idSecondInstrument = idSecondInstrument;
+    }
+
+    public int getSecondLevel() {
+        return secondLevel;
+    }
+
+    public void setSecondLevel(int secondLevel) {
+        this.secondLevel = secondLevel;
     }
 
     public Long getIdMusician() {
