@@ -73,14 +73,14 @@
                 </div>
                 <div th:if="${twoInstrument == true}" class="userSingleInstrument">
                     <select id="secondInstrumentDT" name="secondInstrument" class="fieldInstrument">
-                        <option value="0" selected>Votre instrument secondaire</option>
+                        <option value="0">Votre instrument secondaire</option>
                         <option th:each="instrument : ${instruments}"
                                 th:value="${instrument.idInstrument}"
                                 th:text="${instrument.name}"
                                 th:selected="${instrument.idInstrument == levels.get(1).getIdMnstrument()}"></option>
                     </select>
                     <select id="secondInstrumentLevelDT" name="secondInstrumentLevel" class="fieldLevel">
-                        <option value="0" th:selected="${levels.get(0).getLevel() == 0 }">Votre niveau</option>
+                        <option value="0" th:selected="${levels.get(1).getLevel() == 0 }">Votre niveau</option>
                         <option value="1" th:selected="${levels.get(1).getLevel() == 1 }">Débutant</option>
                         <option value="2" th:selected="${levels.get(1).getLevel() == 2 }">Intermédiaire</option>
                         <option value="3" th:selected="${levels.get(1).getLevel() == 3 }">Avancé</option>
