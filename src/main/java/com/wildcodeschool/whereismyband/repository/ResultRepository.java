@@ -17,20 +17,37 @@ public class ResultRepository {
             Connection connection = DriverManager.getConnection(
                     DB_URL, DB_USER, DB_PASSWORD
             );
-            PreparedStatement statement = connection.prepareStatement(
-                    "SELECT * FROM band " +
-                            "JOIN need ON band.id_band = need.id_band " +
-                            "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
-                            "WHERE band.search_type = ? AND band.postcode = ? AND need.id_instrument = ? " +
-                            "AND need.level = ?;"
-            );
-            statement.setInt(1, searchType);
-            statement.setString(2, postCode);
-            //statement.setLong(3, idStyle);
-            statement.setLong(3, idInstrument);
-            statement.setInt(4, levelInstrument);
 
-            ResultSet resultSet = statement.executeQuery();
+            ResultSet resultSet;
+            PreparedStatement statement;
+            if (searchType == 3) {
+                statement = connection.prepareStatement(
+                        "SELECT * FROM band " +
+                                "JOIN need ON band.id_band = need.id_band " +
+                                "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
+                                "WHERE band.postcode = ? AND need.id_instrument = ? " +
+                                "AND need.level = ?;"
+                );
+                statement.setString(1, postCode);
+                //statement.setLong(3, idStyle);
+                statement.setLong(2, idInstrument);
+                statement.setInt(3, levelInstrument);
+            } else {
+                statement = connection.prepareStatement(
+                        "SELECT * FROM band " +
+                                "JOIN need ON band.id_band = need.id_band " +
+                                "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
+                                "WHERE band.search_type = ? AND band.postcode = ? AND need.id_instrument = ? " +
+                                "AND need.level = ?;"
+                );
+                statement.setInt(1, searchType);
+                statement.setString(2, postCode);
+                //statement.setLong(3, idStyle);
+                statement.setLong(3, idInstrument);
+                statement.setInt(4, levelInstrument);
+            }
+
+            resultSet = statement.executeQuery();
             List<Result> results = new ArrayList<>();
 
             while (resultSet.next()) {
@@ -40,13 +57,13 @@ public class ResultRepository {
                 idInstrument = resultSet.getLong("id_instrument");
                 levelInstrument = resultSet.getInt("level");
                 String availabilityBand = resultSet.getString("availability");
-                //long searchId = resultSet.getLong("id_search");
                 String instrumentName = resultSet.getString("instrument.name");
                 long idBand = resultSet.getLong("id_band");
                 String bandName = resultSet.getString("band.name");
                 String bio = resultSet.getString("bio");
-                //TODO : tester les dispos.
+                
                 if (checkAvailability(availability, availabilityBand)) {
+                    availabilityBand = weekAvailability(availabilityBand);
                     results.add(new Result(searchType, postCode,
                             idInstrument, instrumentName, levelInstrument, idBand, bandName, availabilityBand, bio));
                 }
@@ -65,5 +82,31 @@ public class ResultRepository {
             }
         }
         return false;
+    }
+
+    private String weekAvailability(String availabilityBand) {
+        StringBuilder s = new StringBuilder();
+        if (availabilityBand.charAt(0) == '1') {
+            s.append("Lun ");
+        }
+        if (availabilityBand.charAt(1) == '1') {
+            s.append("Mar ");
+        }
+        if (availabilityBand.charAt(2) == '1') {
+            s.append("Mer ");
+        }
+        if (availabilityBand.charAt(3) == '1') {
+            s.append("Jeu ");
+        }
+        if (availabilityBand.charAt(4) == '1') {
+            s.append("Ven ");
+        }
+        if (availabilityBand.charAt(5) == '1') {
+            s.append("Sam ");
+        }
+        if (availabilityBand.charAt(6) == '1') {
+            s.append("Dim ");
+        }
+        return s.toString();
     }
 }

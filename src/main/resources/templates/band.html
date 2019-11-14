@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="js/modernizr.custom.js"></script>
+    <title>WhereIsMyBand</title>
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="js/responsiveslides.min.js"></script>
+</head>
+<div class="globalContainer">
+    <header th:replace="header :: header"></header>
+    <div class="mainContent mainContentLogSign">
+        <h2>Créer mon groupe</h2>
+        <form method="post" th:action="@{/creation-groupe}">
+            <div class="blockUserInfo">
+                <label for="name">Nom du groupe</label>
+                <input type="text" id="name" name="name" placeholder="Le nom de votre groupe"/>
+                <label for="postcode">Code postal</label>
+                <input type="text" id="postcode" name="postcode" class="fieldAccountInfo"
+                       placeholder="Votre code postal" th:value="${session.musicianLevelInstrument.getPostcode()}">
+                <label for="searchType">Vous jouez ?</label>
+                <select id="searchType" name="searchType" class="fieldInstrument">
+                    <option value="1" class="optionTh">En sessions</option>
+                    <option value="2" class="optionTh">En groupe</option>
+                    <option value="3" class="optionTh">Les deux</option>
+                </select>
+                <label for="style">Votre style</label>
+                <select id="style" name="style" class="fieldInstrument">
+                    <option th:each="style : ${styles}"
+                            th:value="${style.idStyle}"
+                            th:text="${style.style}"
+                            class="optionTh"
+                    ></option>
+                </select>
+                <label for="bio">Votre groupe</label>
+                <textarea id="bio" name="bio" class="fieldUserBiography"
+                          placeholder="Dites nous en plus !!!"></textarea>
+                <input type="hidden" name="idMusician" th:value="${session.musicianLevelInstrument.getIdMusician()}"/>
+            </div>
+            <div class="saveProfile">
+                <input type="submit" value="Valider" class="saveButton">
+            </div>
+        </form>
+    </div>
+    <footer th:replace="footer :: footer">
+    </footer>
+</div>
+</body>
+</html>

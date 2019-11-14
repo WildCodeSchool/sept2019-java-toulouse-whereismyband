@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -18,6 +17,12 @@ public class ConnectedController {
     private LevelInstrumentRepository levelInstrumentRepository = new LevelInstrumentRepository();
     private InstrumentRepository repository = new InstrumentRepository();
     private ResultRepository resultRepository = new ResultRepository();
+    private StyleRepository styleRepository = new StyleRepository();
+    private BandRepository bandRepository = new BandRepository();
+    private BandStyleRepository bandStyleRepository = new BandStyleRepository();
+    private BandAndStyleRepository bandAndStyleRepository = new BandAndStyleRepository();
+    private NeedRepository needRepository = new NeedRepository();
+    private NeedInstrumentRepository needInstrumentRepository = new NeedInstrumentRepository();
     private CheckerRepository checkerRepository = new CheckerRepository();
 
     @GetMapping("/profil-utilisateur")
@@ -150,6 +155,7 @@ public class ConnectedController {
         List<Result> results = resultRepository.getResult(musicianLevelInstrument.getSearchType(), musicianLevelInstrument.getPostcode(),
                 musicianLevelInstrument.getIdInstrument(), musicianLevelInstrument.getLevel(), musicianLevelInstrument.getAvailability());
 
+
         boolean twoInstrument = musicianInstruments.size() > 1;
 
         model.addAttribute("twoInstrument", twoInstrument);
@@ -157,7 +163,96 @@ public class ConnectedController {
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
         model.addAttribute("instruments", repository.findAllInstrument());
 
+        String bandLinHref = "";
+        String bandLinkText = "";
+        BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
+        if (band == null) {
+            bandLinHref = "/creation-groupe";
+            bandLinkText = "Créer mon groupe";
+        } else {
+            bandLinHref = "/gestion-groupe";
+            bandLinkText = "Gérer mes groupes";
+        }
+        model.addAttribute("bandLinHref", bandLinHref);
+        model.addAttribute("bandLinkText", bandLinkText);
+
         return "search";
+    }
+
+    @GetMapping("/creation-groupe")
+    public String createBand(Model model, HttpSession session) {
+        model.addAttribute("styles", styleRepository.findAllStyle());
+        MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
+        return "band";
+    }
+
+    @PostMapping("/creation-groupe")
+    public String insertBand(@RequestParam(required = false) String name,
+                             @RequestParam(required = false) String bio,
+                             @RequestParam(required = false) int searchType,
+                             @RequestParam(required = false) String postcode,
+                             @RequestParam(required = false) Long style,
+                             @RequestParam(required = false) Long idMusician) {
+
+        Band band = bandRepository.save(name, bio, searchType, postcode, idMusician);
+        BandStyle bandStyle = bandStyleRepository.save(band.getIdBand(), style);
+
+        return "band";
+    }
+
+    @GetMapping("/gestion-groupe")
+    public String viewBand(HttpSession session, Model model) {
+        
+        MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
+        BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
+        model.addAttribute("band", band);
+        model.addAttribute("styles", styleRepository.findAllStyle());
+        model.addAttribute("instruments", repository.findAllInstrument());
+        model.addAttribute("needs", needInstrumentRepository.getNeedsByIdBands(band.getIdBand()));
+
+        return "need";
+    }
+
+    @PostMapping("/gestion-groupe")
+    public String updateBand(HttpSession session, Model model,
+                             @RequestParam Long idBand,
+                             @RequestParam(required = false) String name,
+                             @RequestParam(required = false) String bio,
+                             @RequestParam(required = false) int searchType,
+                             @RequestParam(required = false) String postcode,
+                             @RequestParam(required = false) Long style,
+                             @RequestParam(required = false) Long idMusician) {
+
+        Band band = bandRepository.update(idBand, name, bio, searchType, postcode, idMusician);
+        BandStyle bandStyle = bandStyleRepository.update(band.getIdBand(), style);
+
+        return "redirect:/gestion-groupe";
+    }
+
+    @PostMapping("creation-annonce")
+    public String createAnnouncement(@RequestParam Long idBand,
+                                     @RequestParam Long idInstrument,
+                                     @RequestParam int level,
+                                     @RequestParam(required = false, defaultValue = "") String monday,
+                                     @RequestParam(required = false, defaultValue = "") String tuesday,
+                                     @RequestParam(required = false, defaultValue = "") String wednesday,
+                                     @RequestParam(required = false, defaultValue = "") String thursday,
+                                     @RequestParam(required = false, defaultValue = "") String friday,
+                                     @RequestParam(required = false, defaultValue = "") String saturday,
+                                     @RequestParam(required = false, defaultValue = "") String sunday) {
+
+        String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
+        String availability = formatAvailability(week);
+        Need need = needRepository.save(idInstrument, idBand, availability, level);
+
+        return "redirect:/gestion-groupe";
+    }
+
+    @PostMapping("desactiver-annonce")
+    public String createAnnouncement(@RequestParam Long idNeed) {
+
+        Long id = needRepository.desactiveNeed(idNeed);
+        return "redirect:/gestion-groupe";
     }
 
     private String formatAvailability(String[] week) {

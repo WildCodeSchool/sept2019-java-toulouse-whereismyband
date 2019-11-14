@@ -3,19 +3,19 @@ package com.wildcodeschool.whereismyband.entity;
 public class Result {
 
     //TODO gérer le style dans la recherche
-    private long idMusician;
-    private long searchId;
+    private Long idMusician;
+    private Long searchId;
     private int searchType;
     private String postCode;
-    private long idInstrument;
+    private Long idInstrument;
     private String instrumentName;
     private int instrumentLevel;
-    private long idBand;
+    private Long idBand;
     private String bandName;
     private String availability;
     private String bio;
 
-    public Result(long searchId, int searchType, String postCode, long idInstrument, int instrumentLevel, String availability, long idMusician) {
+    public Result(Long searchId, int searchType, String postCode, Long idInstrument, int instrumentLevel, String availability, Long idMusician) {
         this.searchId = searchId;
         this.searchType = searchType;
         this.postCode = postCode;
@@ -26,8 +26,8 @@ public class Result {
     }
 
     public Result(int searchType, String postCode,
-                  long idInstrument, String instrumentName, int instrumentLevel,
-                  long idBand, String bandName, String availability, String bio) {
+                  Long idInstrument, String instrumentName, int instrumentLevel,
+                  Long idBand, String bandName, String availability, String bio) {
         this.searchType = searchType;
         this.postCode = postCode;
         this.idInstrument = idInstrument;
@@ -51,11 +51,11 @@ public class Result {
         return instrumentLevel;
     }
 
-    public long getIdBand() {
+    public Long getIdBand() {
         return idBand;
     }
 
-    public void setIdBand(long idBand) {
+    public void setIdBand(Long idBand) {
         this.idBand = idBand;
     }
 
@@ -75,11 +75,11 @@ public class Result {
         this.bio = bio;
     }
 
-    public long getSearchId() {
+    public Long getSearchId() {
         return searchId;
     }
 
-    public void setSearchId(long searchId) {
+    public void setSearchId(Long searchId) {
         this.searchId = searchId;
     }
 
@@ -95,11 +95,11 @@ public class Result {
         this.instrumentLevel = instrumentLevel;
     }
 
-    public long getIdMusician() {
+    public Long getIdMusician() {
         return idMusician;
     }
 
-    public void setIdMusician(long idMusician) {
+    public void setIdMusician(Long idMusician) {
         this.idMusician = idMusician;
     }
 
@@ -111,11 +111,11 @@ public class Result {
         this.postCode = postCode;
     }
 
-    public long getIdInstrument() {
+    public Long getIdInstrument() {
         return idInstrument;
     }
 
-    public void setIdInstrument(long idInstrument) {
+    public void setIdInstrument(Long idInstrument) {
         this.idInstrument = idInstrument;
     }
 
