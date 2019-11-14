@@ -97,7 +97,6 @@ public class ConnectedController {
                 break;
 
             case 2:
-                // TODO : gérer l'ajout d'un 2eme instru depuis un compte qui n'en a pas !
                 searchType = formatSearchType(jam, band);
                 String[] week = {monday, tuesday, wednesday, thursday, friday, saturday, sunday};
                 availability = formatAvailability(week);

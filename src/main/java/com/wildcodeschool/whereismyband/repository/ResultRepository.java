@@ -61,7 +61,7 @@ public class ResultRepository {
                 long idBand = resultSet.getLong("id_band");
                 String bandName = resultSet.getString("band.name");
                 String bio = resultSet.getString("bio");
-                
+
                 if (checkAvailability(availability, availabilityBand)) {
                     availabilityBand = weekAvailability(availabilityBand);
                     results.add(new Result(searchType, postCode,
@@ -108,5 +108,49 @@ public class ResultRepository {
             s.append("Dim ");
         }
         return s.toString();
+    }
+
+    public List<Result> getResultNotLog(String postcode) {
+        postcode = postcode.substring(0, 2)+'%';
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+
+            ResultSet resultSet;
+            PreparedStatement statement;
+
+                statement = connection.prepareStatement(
+                        "SELECT * FROM band " +
+                                "JOIN need ON band.id_band = need.id_band " +
+                                "JOIN instrument ON instrument.id_instrument = need.id_instrument " +
+                                "WHERE band.postcode LIKE ?" +
+                                "LIMIT 3;"
+                );
+
+                statement.setString(1, postcode);
+
+            resultSet = statement.executeQuery();
+            List<Result> results = new ArrayList<>();
+
+            while (resultSet.next()) {
+                int searchType = resultSet.getInt("search_type");
+                postcode = resultSet.getString("postcode");
+                Long idInstrument = resultSet.getLong("id_instrument");
+                int levelInstrument = resultSet.getInt("level");
+                String availabilityBand = resultSet.getString("availability");
+                String instrumentName = resultSet.getString("instrument.name");
+                long idBand = resultSet.getLong("id_band");
+                String bandName = resultSet.getString("band.name");
+                String bio = resultSet.getString("bio");
+                availabilityBand = weekAvailability(availabilityBand);
+                results.add(new Result(searchType, postcode,
+                        idInstrument, instrumentName, levelInstrument, idBand, bandName, availabilityBand, bio));
+            }
+            return results;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
