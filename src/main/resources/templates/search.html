@@ -55,6 +55,7 @@
             <form th:replace="form :: form">
             </form>
         </div>
+        <p class ="resultError" th:if="${error} == true">Aucun resultat correspondant à votre recherche</p>
         <a th:href="${bandLinkHref}"><p th:text="${bandLinkText}">Lien vers groupe</p></a>
         <ul th:each="result : ${results}" class="groupResult">
             <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>

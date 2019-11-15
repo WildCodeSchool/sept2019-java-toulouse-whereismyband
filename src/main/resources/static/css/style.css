@@ -583,6 +583,12 @@ header {
     align-items: center;
 }
 
+.resultError{
+    color: #D6390C;
+    text-align: center;
+    font-weight: bolder;
+}
+
 @media screen and (min-width: 761px) {
     .medQProfil {
         display: grid;
