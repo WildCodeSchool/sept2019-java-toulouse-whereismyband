@@ -67,25 +67,27 @@
             <form th:replace="form :: form">
             </form>
         </div>
-        <p class ="resultError" th:if="${error} == true">Aucun resultat correspondant à votre recherche</p>
-        <a th:href="${bandLinkHref}"><p th:text="${bandLinkText}">Lien vers groupe</p></a>
-        <ul th:each="result : ${results}" class="groupResult">
-            <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
-            <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
-            <li th:switch="${result.getSearchType()}">
-                <p th:case="1">Type de recherche : session jam</p>
-                <p th:case="2">Type de recherche : groupe</p>
-                <p th:case="3">Type de recherche : groupe et session jam</p>
-            </li>
-            <li th:text="|Instrument: ${result.getInstrumentName()}|"></li>
-            <li th:switch="${result.getInstrumentLevel()}">
-                <p th:case="1">Débutant</p>
-                <p th:case="2">Intermédiaire</p>
-                <p th:case="3">Avancé</p>
-                <p th:case="4">Pro</p>
-            </li>
-            <li th:text="|Disponibilité: ${result.getAvailability()}|">$availability</li>
-        </ul>
+        <div class="resultFlow">
+            <p class ="resultError" th:if="${error} == true">Aucun resultat correspondant à votre recherche</p>
+            <ul th:each="result : ${results}" class="groupResults groupResultsSearch">
+                <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
+                <li th:text="|Style: ${result.getStyle()}|">$style</li>
+                <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
+                <li th:switch="${result.getSearchType()}">
+                    <p th:case="1">Type de recherche : session jam</p>
+                    <p th:case="2">Type de recherche : groupe</p>
+                    <p th:case="3">Type de recherche : groupe et session jam</p>
+                </li>
+                <li th:text="|Instrument: ${result.getInstrumentName()}|"></li>
+                <li th:switch="${result.getInstrumentLevel()}">
+                    <p th:case="1">Débutant</p>
+                    <p th:case="2">Intermédiaire</p>
+                    <p th:case="3">Avancé</p>
+                    <p th:case="4">Pro</p>
+                </li>
+                <li th:text="|Disponibilité: ${result.getAvailability()}|">$availability</li>
+            </ul>
+        </div>
     </div>
 </div>
 <footer th:replace="footer :: footer">
