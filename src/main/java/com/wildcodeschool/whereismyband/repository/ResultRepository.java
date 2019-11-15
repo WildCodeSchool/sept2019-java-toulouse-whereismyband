@@ -152,4 +152,50 @@ public class ResultRepository {
         }
         return null;
     }
+
+    public List<Result> getResultNews() {
+
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+
+            ResultSet resultSet;
+            PreparedStatement statement;
+
+            statement = connection.prepareStatement(
+                    "SELECT * FROM band JOIN need ON band.id_band = need.id_band " +
+                            "JOIN instrument ON instrument.id_instrument = need.id_instrument JOIN band_style ON band.id_band = band_style.id_band" +
+                            " JOIN style ON style.id_style = band_style.id_style WHERE encours = 1" +
+                            " ORDER BY id_need DESC LIMIT 3;"
+            );
+
+            resultSet = statement.executeQuery();
+            List<Result> results = new ArrayList<>();
+
+            while (resultSet.next()) {
+
+                int searchType = resultSet.getInt("search_type");
+                String postCode = resultSet.getString("postcode");
+                Long idStyle = resultSet.getLong("id_style");
+                Long idInstrument = resultSet.getLong("id_instrument");
+                int levelInstrument = resultSet.getInt("level");
+                String availabilityBand = resultSet.getString("availability");
+                String instrumentName = resultSet.getString("instrument.name");
+                long idBand = resultSet.getLong("id_band");
+                String bandName = resultSet.getString("band.name");
+                String bio = resultSet.getString("bio");
+                Long idMusician = resultSet.getLong("id_musician");
+                String style = resultSet.getString("style");
+
+                results.add(new Result(idMusician, 0l, searchType, postCode, idInstrument,
+                        instrumentName, levelInstrument, idBand, bandName, availabilityBand, bio, idStyle,
+                        style));
+            }
+            return results;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

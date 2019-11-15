@@ -190,6 +190,8 @@ public class ConnectedController {
     @GetMapping("/recherche")
     public String toSearch(Model model, HttpSession session) {
 
+        List<Result> news = resultRepository.getResultNews();
+        model.addAttribute("news", news);
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         Search search = searchRepository.getSearchByIdMusician(musicianLevelInstrument.getIdMusician());
         model.addAttribute("search", search);
