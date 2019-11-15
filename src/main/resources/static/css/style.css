@@ -770,6 +770,7 @@ header {
     .statutSession {
         grid-column: 2/3;
         justify-self: flex-end;
+        margin: 5px 30px 0 0;
     }
 
     .flexHeader {

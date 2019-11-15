@@ -60,7 +60,7 @@ public class ResultRepository {
                 if (checkAvailability(availability, availabilityBand)) {
                     availabilityBand = weekAvailability(availabilityBand);
                     results.add(new Result(idMusician, idSearch, searchType, postCode, idInstrument,
-                            instrumentName, levelInstrument, idBand, bandName, availability, bio, idStyle,
+                            instrumentName, levelInstrument, idBand, bandName, availabilityBand, bio, idStyle,
                             style));
                 }
             }

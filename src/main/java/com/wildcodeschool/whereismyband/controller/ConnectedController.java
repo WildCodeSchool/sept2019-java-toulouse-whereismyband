@@ -223,7 +223,7 @@ public class ConnectedController {
             bandLinkText = "Créer mon groupe";
         } else {
             bandLinkHref = "/gestion-groupe";
-            bandLinkText = "Gérer mon groupes et mes annonces";
+            bandLinkText = "Mon groupe";
         }
 
         model.addAttribute("bandLinkHref", bandLinkHref);
