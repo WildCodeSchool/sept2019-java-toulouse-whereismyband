@@ -110,7 +110,7 @@
         </div>
         <div class="searchResult">
             <h3>Mes annonces en cours</h3>
-            <div th:each="need : ${needs}" class="groupResult">
+            <div th:each="need : ${needs}" class="groupResults">
                 <p th:text="|Instrument recherché : ${need.getName()}|">$name</p>
                 <p th:text="|Niveau : ${need.getLevel()}|">$level</p>
                 <p th:text="|Disponibilités: ${need.getAvailability()}|">$disponibilité</p>
