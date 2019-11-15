@@ -109,7 +109,7 @@
                 </div>
             </form>
         </div>
-        <div>
+        <div class="searchResult">
             <h3>Mes annonces en cours</h3>
             <div th:each="need : ${needs}" class="groupResult">
                 <p th:text="|Instrument recherché : ${need.getName()}|">$name</p>
@@ -121,29 +121,32 @@
                 </form>
             </div>
         </div>
-        <div>
+        <div class="searchResult">
             <h3>Créer une annonce</h3>
             <form th:action="@{/creation-annonce}" method="post">
-                <div class="userSearchSpan">
-                    <span>Je recherche... </span>
+                <div class="blockUserInfo">
+                    <div class="userSingleInstrument">
+                        <label for="idInstrument">Rechercher un joueur de :</label>
+                        <select id="idInstrument" name="idInstrument" class="fieldInstrument">
+                            <option th:each="instrument : ${instruments}"
+                                    th:value="${instrument.idInstrument}"
+                                    th:text="${instrument.name}"
+                                    class="optionTh"
+                            ></option>
+                        </select>
+                    </div>
                 </div>
-                <div class="userSingleInstrument">
-                    <select id="idInstrument" name="idInstrument" class="fieldInstrument">
-                        <option th:each="instrument : ${instruments}"
-                                th:value="${instrument.idInstrument}"
-                                th:text="${instrument.name}"
-                                class="optionTh"
-                        ></option>
-                    </select>
-                </div>
-                <div class="userSingleInstrument">
-                    <select id="mainInstrumentLevelD" name="level" class="fieldLevel">
-                        <option value="0" disabled>Votre niveau</option>
-                        <option value="1">Débutant</option>
-                        <option value="2">Intermédiaire</option>
-                        <option value="3">Avancé</option>
-                        <option value="4">Pro</option>
-                    </select>
+                <div class="blockUserInstrument">
+                    <div class="userSingleInstrument">
+                        <label for="level">Avec un niveau :</label>
+                        <select id="level" name="level" class="fieldLevel">
+                            <option value="0" disabled>Votre niveau</option>
+                            <option value="1">Débutant</option>
+                            <option value="2">Intermédiaire</option>
+                            <option value="3">Avancé</option>
+                            <option value="4">Pro</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="blockUserWeek">
                     <span>Jours de disponibilité</span>
