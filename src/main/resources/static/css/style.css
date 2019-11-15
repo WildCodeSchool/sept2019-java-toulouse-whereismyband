@@ -458,17 +458,24 @@ header {
     font-family: 'Muli', sans-serif;
 }
 
-.groupResult {
+.groupResults {
     margin-top: 10px;
     width: 100%;
+    background-color: #393E46;
+    padding: 10px;
+    width: 96%;
 }
 
-.groupResult li {
+.groupResults li {
     background-color: #393E46;
     color: #FFFFFF;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 5px;
     border-radius: 10px;
+}
+
+.groupResults li:first-child {
+    margin-top: 0;
 }
 
 .searchResultName {
@@ -594,6 +601,10 @@ header {
         max-width: 80%;
     }
 
+    .blockMusicStyle {
+        max-width: 80%;
+    }
+
     .userBiography {
         grid-column: 1/3;
     }
@@ -695,7 +706,7 @@ header {
         margin: 0;
     }
 
-    .groupResult {
+    .groupResults {
         grid-row: 2 / 3;
         grid-column: 2 / 3;
         display: flex;
@@ -704,8 +715,24 @@ header {
         align-items: center;
     }
 
-    .groupResult li {
+    .groupResults {
+        margin-top: 10px;
+        background-color: #393E46;
+        padding: 10px;
+        width: 50%;
+    }
+
+    .groupResults li {
+        background-color: #393E46;
+        color: #FFFFFF;
+        font-size: 16px;
+        margin-top: 5px;
+        border-radius: 10px;
         width: 80%;
+    }
+
+    .groupResults li:first-child {
+        margin-top: 0;
     }
 
     .connectHeader {

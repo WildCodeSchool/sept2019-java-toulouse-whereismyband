@@ -56,7 +56,7 @@
             </form>
         </div>
         <a th:href="${bandLinkHref}"><p th:text="${bandLinkText}">Lien vers groupe</p></a>
-        <ul th:each="result : ${results}" class="groupResult">
+        <ul th:each="result : ${results}" class="groupResults">
             <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
             <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
             <li th:switch="${result.getSearchType()}">
