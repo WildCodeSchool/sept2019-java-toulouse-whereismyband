@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -105,7 +106,7 @@ public class ConnectedController {
                 }
                 break;
 
-                case 2: //profil
+            case 2: //profil
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
                 musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio,
@@ -144,7 +145,7 @@ public class ConnectedController {
                     }
                 }
                 Search verifSearch = searchRepository.getSearchByIdMusician(idMusician);
-                if(verifSearch == null) {
+                if (verifSearch == null) {
                     search = searchRepository.save(postcode, availability, searchType, mainInstrument,
                             mainInstrumentLevel, style, idMusician, secondInstrument, secondInstrumentLevel);
                 } else {
@@ -155,8 +156,8 @@ public class ConnectedController {
                 break;
 
             case 4: //login
-                if (musicianRepository.getMusicianLogIn(userMail, password) == null){
-                    model.addAttribute("errorMessage",true);
+                if (musicianRepository.getMusicianLogIn(userMail, password) == null) {
+                    model.addAttribute("errorMessage", true);
                     model.addAttribute("instruments", repository.findAllInstrument());
                     return "login";
                 }
@@ -202,10 +203,11 @@ public class ConnectedController {
                 search.getPostcode(), search.getIdStyle(), search.getIdInstrument(), search.getLevel(),
                 search.getAvailability(), search.getIdInstrument2(), search.getLevel2());
         boolean error = false;
-        if (results.size() == 0){
+        if (results.size() == 0) {
             error = true;
         }
-        model.addAttribute("error",error);
+
+        model.addAttribute("error", error);
         model.addAttribute("twoInstrument", twoInstrument);
         model.addAttribute("results", results);
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
