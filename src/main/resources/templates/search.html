@@ -23,13 +23,25 @@
         <div id="wrapper" class="grid-carousel">
             <ul class="rslides" id="slider1">
                 <li>
-                    <div class="news"><img src="images/musiqueimg.png"/></div>
+                    <div class="news">
+                        <h1>Nouveautés :</h1>
+                        <h2 th:text="${news.get(0).getBandName()}"></h2>
+                        <p th:text="|Recherche actuellement un(e) joueur(se) de :  ${news.get(0).getInstrumentName()}|"></p>
+                    </div>
                 </li>
                 <li>
-                    <div class="news"><img src="images/musiqueimg2.png"/></div>
+                    <div class="news">
+                        <h1>Nouveautés :</h1>
+                        <h2 th:text="${news.get(1).getBandName()}"></h2>
+                        <p th:text="|Recherche actuellement un(e) joueur(se) de :  ${news.get(1).getInstrumentName()}|"></p>
+                    </div>
                 </li>
                 <li>
-                    <div class="news"><img src="images/musiqueimg3.png"/></div>
+                    <div class="news">
+                        <h1>Nouveautés :</h1>
+                        <h2 th:text="${news.get(2).getBandName()}"></h2>
+                        <p th:text="|Recherche actuellement un(e) joueur(se) de :  ${news.get(2).getInstrumentName()}|"></p>
+                    </div>
                 </li>
             </ul>
         </div>
