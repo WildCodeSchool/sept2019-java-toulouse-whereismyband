@@ -27,12 +27,12 @@
                 <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" placeholder="Votre mot de passe"/>
+                <p class="resultError" th:if="${errorMessage == true}">Impossible de trouver le musicien</p>
                 <input type="hidden" name="comefromhere" value="4"/>
             </div>
             <div class="saveProfile">
                 <input type="submit" value="Se connecter" class="saveButton">
             </div>
-            <p th:if="${errorMessage == true}">Impossible de trouver le musicien</p>
         </form>
     </div>
     <footer th:replace="footer :: footer">

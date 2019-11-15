@@ -105,6 +105,7 @@ public class ConnectedController {
                             mainInstrumentLevel, style, idMusician, 0l, 0);
                 }
                 break;
+
             case 2: //profil
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
@@ -132,7 +133,7 @@ public class ConnectedController {
                         secondInstrumentLevel);
                 break;
 
-            case 3: //TODO : enregistrer dans la derniere recherche (on vient de la recherche)
+            case 3: //(on vient de la recherche)
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
                 if (secondInstrument != 0) {
@@ -144,7 +145,7 @@ public class ConnectedController {
                     }
                 }
                 Search verifSearch = searchRepository.getSearchByIdMusician(idMusician);
-                if(verifSearch == null) {
+                if (verifSearch == null) {
                     search = searchRepository.save(postcode, availability, searchType, mainInstrument,
                             mainInstrumentLevel, style, idMusician, secondInstrument, secondInstrumentLevel);
                 } else {
@@ -155,8 +156,14 @@ public class ConnectedController {
                 break;
 
             case 4: //login
+                if (musicianRepository.getMusicianLogIn(userMail, password) == null) {
+                    model.addAttribute("errorMessage", true);
+                    model.addAttribute("instruments", repository.findAllInstrument());
+                    return "login";
+                }
                 musician = musicianRepository.getMusicianLogIn(userMail, password);
                 idMusician = musician.getIdMusician();
+                break;
         }
 
         musician = musicianRepository.getMusicianById(idMusician);
@@ -182,7 +189,7 @@ public class ConnectedController {
 
     @GetMapping("/recherche")
     public String toSearch(Model model, HttpSession session) {
-        //TODO vérifer password et newpassword
+
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         Search search = searchRepository.getSearchByIdMusician(musicianLevelInstrument.getIdMusician());
         model.addAttribute("search", search);
@@ -195,6 +202,12 @@ public class ConnectedController {
         List<Result> results = resultRepository.getResult(search.getIdSearch(), search.getSearchType(),
                 search.getPostcode(), search.getIdStyle(), search.getIdInstrument(), search.getLevel(),
                 search.getAvailability(), search.getIdInstrument2(), search.getLevel2());
+        boolean error = false;
+        if (results.size() == 0) {
+            error = true;
+        }
+
+        model.addAttribute("error", error);
         model.addAttribute("twoInstrument", twoInstrument);
         model.addAttribute("results", results);
         model.addAttribute("levels", levelInstrumentRepository.getLevelInstrumentByIdMusician(musicianLevelInstrument.getIdMusician()));
