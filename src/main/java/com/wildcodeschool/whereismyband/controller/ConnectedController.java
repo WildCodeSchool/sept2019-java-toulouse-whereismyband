@@ -219,7 +219,7 @@ public class ConnectedController {
             bandLinkText = "Créer mon groupe";
         } else {
             bandLinkHref = "/gestion-groupe";
-            bandLinkText = "Gérer mes groupes";
+            bandLinkText = "Gérer mon groupes et mes annonces";
         }
 
         model.addAttribute("bandLinkHref", bandLinkHref);
@@ -243,8 +243,8 @@ public class ConnectedController {
                              @RequestParam(required = false) Long idMusician) {
 
         Band band = bandRepository.save(name, bio, searchType, postcode, idMusician);
-        BandStyle bandStyle = bandStyleRepository.save(band.getIdBand(), style);
-        return "band";
+        BandStyle bandStyle = bandStyleRepository.save(style, band.getIdBand());
+        return "redirect:/gestion-groupe";
     }
 
     @GetMapping("/gestion-groupe")
