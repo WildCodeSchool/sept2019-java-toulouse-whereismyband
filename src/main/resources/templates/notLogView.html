@@ -33,8 +33,10 @@
             </section>
 
             <p class = "resultError" th:if="${erreur} == true">Aucun résultat ou code postal incorrect</p>
-            <ul class="groupResult" th:each="result : ${results}">
+
+            <ul class="groupResults groupResultsNotLog" th:each="result : ${results}">
                 <li th:text="|Nom du groupe: ${result.getBandName()}|">$bandName</li>
+                <li th:text="|Style: ${result.getStyle()}|">$style</li>
                 <li th:text="|Code Postal: ${result.getPostCode()}|">$postCode</li>
                 <li th:switch="${result.getSearchType()}">
                     <p th:case="1">Type de recherche : session jam</p>
@@ -50,6 +52,7 @@
                 </li>
                 <li th:text="|Disponibilité: ${result.getAvailability()}|">$availability</li>
             </ul>
+
         </div>
     </div>
     <footer th:replace="footer :: footer">

@@ -464,6 +464,7 @@ header {
     background-color: #393E46;
     padding: 10px;
     width: 96%;
+    border-radius: 3px;
 }
 
 .groupResults li {
@@ -596,6 +597,17 @@ header {
     font-weight: bolder;
 }
 
+.resultFlow {
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.groupResultsSearch {
+    width: 90%;
+    border-radius: 3px;
+}
+
 @media screen and (min-width: 761px) {
     .medQProfil {
         display: grid;
@@ -725,7 +737,17 @@ header {
         margin-top: 10px;
         background-color: #393E46;
         padding: 10px;
-        width: 50%;
+        width: 100%;
+        border-radius: 3px;
+    }
+
+    .groupResultsNotLog {
+        width: 40%;
+    }
+
+    .groupResultsSearch {
+        width: 80%;
+        height: 190px;
     }
 
     .groupResults li {
