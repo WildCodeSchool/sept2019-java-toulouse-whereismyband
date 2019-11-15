@@ -26,7 +26,7 @@ public class SearchRepository {
             statement.setInt(5, level);
             statement.setLong(6, idStyle);
             statement.setLong(7, idMusician);
-            statement.setLong(8, idInstrument);
+            statement.setLong(8, idInstrument2);
             statement.setInt(9, level2);
 
             if (statement.executeUpdate() != 1) {
