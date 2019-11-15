@@ -218,10 +218,10 @@ public class ConnectedController {
         BandAndStyle band = bandAndStyleRepository.getBandsByIdMusician(musicianLevelInstrument.getIdMusician());
         if (band == null) {
             bandLinkHref = "/creation-groupe";
-            bandLinkText = "Créer mon groupe | ";
+            bandLinkText = "Créer mon groupe";
         } else {
             bandLinkHref = "/gestion-groupe";
-            bandLinkText = "Mon groupe | ";
+            bandLinkText = "Mon groupe";
         }
 
         model.addAttribute("bandLinkHref", bandLinkHref);

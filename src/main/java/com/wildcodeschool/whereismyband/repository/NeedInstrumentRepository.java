@@ -28,12 +28,38 @@ public class NeedInstrumentRepository {
                 Long idInstrument = resultSet.getLong("id_instrument");
                 String availability = resultSet.getString("availability");
                 int level = resultSet.getInt("level");
-                needs.add(new NeedInstrument(idNeed, idInstrument, idBand, availability, level, name));
+                needs.add(new NeedInstrument(idNeed, idInstrument, idBand, this.weekAvailability(availability), level, name));
             }
             return needs;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String weekAvailability(String availability) {
+        StringBuilder s = new StringBuilder();
+        if (availability.charAt(0) == '1') {
+            s.append("Lun ");
+        }
+        if (availability.charAt(1) == '1') {
+            s.append("Mar ");
+        }
+        if (availability.charAt(2) == '1') {
+            s.append("Mer ");
+        }
+        if (availability.charAt(3) == '1') {
+            s.append("Jeu ");
+        }
+        if (availability.charAt(4) == '1') {
+            s.append("Ven ");
+        }
+        if (availability.charAt(5) == '1') {
+            s.append("Sam ");
+        }
+        if (availability.charAt(6) == '1') {
+            s.append("Dim ");
+        }
+        return s.toString();
     }
 }
