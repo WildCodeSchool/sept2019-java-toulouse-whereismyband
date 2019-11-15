@@ -104,7 +104,8 @@ public class ConnectedController {
                             mainInstrumentLevel, style, idMusician, 0l, 0);
                 }
                 break;
-            case 2: //profil
+
+                case 2: //profil
                 searchType = formatSearchType(jam, band);
                 availability = formatAvailability(week);
                 musician = musicianRepository.update(idMusician, password, alias, userMail, postcode, bio,
@@ -187,7 +188,7 @@ public class ConnectedController {
 
     @GetMapping("/recherche")
     public String toSearch(Model model, HttpSession session) {
-        //TODO vérifer password et newpassword
+
         MusicianLevelInstrument musicianLevelInstrument = (MusicianLevelInstrument) session.getAttribute("musicianLevelInstrument");
         Search search = searchRepository.getSearchByIdMusician(musicianLevelInstrument.getIdMusician());
         model.addAttribute("search", search);
