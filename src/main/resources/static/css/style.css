@@ -458,17 +458,25 @@ header {
     font-family: 'Muli', sans-serif;
 }
 
-.groupResult {
+.groupResults {
     margin-top: 10px;
     width: 100%;
+    background-color: #393E46;
+    padding: 10px;
+    width: 96%;
+    border-radius: 3px;
 }
 
-.groupResult li {
+.groupResults li {
     background-color: #393E46;
     color: #FFFFFF;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 5px;
     border-radius: 10px;
+}
+
+.groupResults li:first-child {
+    margin-top: 0;
 }
 
 .searchResultName {
@@ -589,6 +597,17 @@ header {
     font-weight: bolder;
 }
 
+.resultFlow {
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.groupResultsSearch {
+    width: 90%;
+    border-radius: 3px;
+}
+
 @media screen and (min-width: 761px) {
     .medQProfil {
         display: grid;
@@ -597,6 +616,10 @@ header {
     }
 
     .blockUserInfo, .blockUserInstrument, .userBiography, .blockUserWeek, .userPostCode {
+        max-width: 80%;
+    }
+
+    .blockMusicStyle {
         max-width: 80%;
     }
 
@@ -701,7 +724,7 @@ header {
         margin: 0;
     }
 
-    .groupResult {
+    .groupResults {
         grid-row: 2 / 3;
         grid-column: 2 / 3;
         display: flex;
@@ -710,8 +733,34 @@ header {
         align-items: center;
     }
 
-    .groupResult li {
+    .groupResults {
+        margin-top: 10px;
+        background-color: #393E46;
+        padding: 10px;
+        width: 100%;
+        border-radius: 3px;
+    }
+
+    .groupResultsNotLog {
+        width: 40%;
+    }
+
+    .groupResultsSearch {
         width: 80%;
+        height: 190px;
+    }
+
+    .groupResults li {
+        background-color: #393E46;
+        color: #FFFFFF;
+        font-size: 16px;
+        margin-top: 5px;
+        border-radius: 10px;
+        width: 80%;
+    }
+
+    .groupResults li:first-child {
+        margin-top: 0;
     }
 
     .connectHeader {
