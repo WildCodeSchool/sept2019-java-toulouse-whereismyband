@@ -110,9 +110,14 @@
         </div>
         <div class="searchResult">
             <h3>Mes annonces en cours</h3>
-            <div th:each="need : ${needs}" class="groupResults">
+            <div th:each="need : ${needs}" class="searchAnnunce">
                 <p th:text="|Instrument recherché : ${need.getName()}|">$name</p>
-                <p th:text="|Niveau : ${need.getLevel()}|">$level</p>
+                <ul><li th:switch="${need.getLevel()}">
+                    <p th:case="1">Débutant</p>
+                    <p th:case="2">Intermédiaire</p>
+                    <p th:case="3">Avancé</p>
+                    <p th:case="4">Pro</p>
+                </li></ul>
                 <p th:text="|Disponibilités: ${need.getAvailability()}|">$disponibilité</p>
                 <form th:action="@{/desactiver-annonce}" method="post">
                     <input type="hidden" name="idNeed" th:value="${need.getIdNeed()}"/>
