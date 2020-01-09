@@ -9,10 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.wildcodeschool</groupId>
-	<artifactId>Where-Is-My-Band</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>whereismyband</artifactId>
+	<version>1.0</version>
 	<name>Where-Is-My-Band</name>
 	<description>Where Is My Band</description>
+	<packaging>war</packaging>
 
 	<properties>
 		<java.version>11</java.version>
