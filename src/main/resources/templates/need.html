@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <script src="js/modernizr.custom.js"></script>
+    <title>WhereIsMyBand</title>
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="js/responsiveslides.min.js"></script>
+</head>
+<body>
+<div class="globalContainer">
+    <header th:replace="connectHeader :: connectheader">
+    </header>
+    <div class="mainContent mainContent-Search">
+        <!-- mobile-->
+        <div class="searchResultMobile">
+            <div class="container">
+                <section>
+                    <button id="trigger-overlay" type="button">Gérer mon groupe</button>
+                </section>
+            </div>
+            <div class="overlay overlay-slidedown">
+                <button type="button" class="overlay-close">Fermer</button>
+                <nav>
+                    <h3>Gérer mon groupe</h3>
+                    <form method="post" th:action="@{/gestion-groupe}">
+                        <div class="blockUserInfo">
+                            <label for="name">Nom du groupe</label>
+                            <input type="text" id="name" name="name" th:value="${band.getName()}"/>
+                            <label for="postcode">Code postal</label>
+                            <input type="text" id="postcode" name="postcode" class="fieldAccountInfo"
+                                   th:value="${band.getPostcode()}">
+                            <label for="searchType">Vous jouez ?</label>
+                            <select id="searchType" name="searchType" class="fieldInstrument">
+                                <option value="1" class="optionTh" th:selected="${band.getSearchType() == 1}">En
+                                    session
+                                </option>
+                                <option value="2" class="optionTh" th:selected="${band.getSearchType() == 2}">En
+                                    groupe
+                                </option>
+                                <option value="3" class="optionTh" th:selected="${band.getSearchType() == 3}">Les deux
+                                </option>
+                            </select>
+                            <label for="style">Votre style</label>
+                            <select id="style" name="style" class="fieldInstrument">
+                                <option th:each="style : ${styles}"
+                                        th:value="${style.idStyle}"
+                                        th:text="${style.style}"
+                                        th:selected="${style.idStyle == band.getIdStyle()}"
+                                        class="optionTh"
+                                ></option>
+                            </select>
+                            <label for="bio">Votre groupe</label>
+                            <textarea id="bio" name="bio" class="fieldUserBiography"
+                                      th:text="${band.getBio()}"></textarea>
+                            <input type="hidden" name="idMusician" th:value="${band.getIdMusician()}"/>
+                            <input type="hidden" name="idBand" th:value="${band.getIdBand()}"/>
+                        </div>
+                        <div class="saveProfile">
+                            <input type="submit" value="Valider" class="saveButton">
+                        </div>
+                    </form>
+                </nav>
+            </div>
+        </div>
+        <!-- desktop -->
+        <div class="searchResultDesktop">
+            <h3>Gérer mon groupe</h3>
+            <form method="post" th:action="@{/gestion-groupe}">
+                <div class="blockUserInfo">
+                    <label for="name">Nom du groupe</label>
+                    <input type="text" id="name" name="name" th:value="${band.getName()}"/>
+                    <label for="postcode">Code postal</label>
+                    <input type="text" id="postcode" name="postcode" class="fieldAccountInfo"
+                           th:value="${band.getPostcode()}">
+                    <label for="searchType">Vous jouez ?</label>
+                    <select id="searchType" name="searchType" class="fieldInstrument">
+                        <option value="1" class="optionTh" th:selected="${band.getSearchType() == 1}">En session
+                        </option>
+                        <option value="2" class="optionTh" th:selected="${band.getSearchType() == 2}">En groupe</option>
+                        <option value="3" class="optionTh" th:selected="${band.getSearchType() == 3}">Les deux</option>
+                    </select>
+                    <label for="style">Votre style</label>
+                    <select id="style" name="style" class="fieldInstrument">
+                        <option th:each="style : ${styles}"
+                                th:value="${style.idStyle}"
+                                th:text="${style.style}"
+                                th:selected="${style.idStyle == band.getIdStyle()}"
+                                class="optionTh"
+                        ></option>
+                    </select>
+                    <label for="bio">Votre groupe</label>
+                    <textarea id="bio" name="bio" class="fieldUserBiography"
+                              th:text="${band.getBio()}"></textarea>
+                    <input type="hidden" name="idMusician" th:value="${band.getIdMusician()}"/>
+                    <input type="hidden" name="idBand" th:value="${band.getIdBand()}"/>
+                </div>
+                <div class="saveProfile">
+                    <input type="submit" value="Valider" class="saveButton">
+                </div>
+            </form>
+        </div>
+        <div class="searchResult">
+            <h3>Mes annonces en cours</h3>
+            <div th:each="need : ${needs}" class="searchAnnunce">
+                <p th:text="|Instrument recherché : ${need.getName()}|">$name</p>
+                <ul><li th:switch="${need.getLevel()}">
+                    <p th:case="1">Débutant</p>
+                    <p th:case="2">Intermédiaire</p>
+                    <p th:case="3">Avancé</p>
+                    <p th:case="4">Pro</p>
+                </li></ul>
+                <p th:text="|Disponibilités: ${need.getAvailability()}|">$disponibilité</p>
+                <form th:action="@{/desactiver-annonce}" method="post">
+                    <input type="hidden" name="idNeed" th:value="${need.getIdNeed()}"/>
+                    <input type="submit" value="Désactiver cette annonce"/>
+                </form>
+            </div>
+        </div>
+        <div class="searchResult">
+            <h3>Créer une annonce</h3>
+            <form th:action="@{/creation-annonce}" method="post">
+                <div class="blockUserInfo">
+                    <div class="userSingleInstrument">
+                        <label for="idInstrument">Rechercher un joueur de :</label>
+                        <select id="idInstrument" name="idInstrument" class="fieldInstrument">
+                            <option th:each="instrument : ${instruments}"
+                                    th:value="${instrument.idInstrument}"
+                                    th:text="${instrument.name}"
+                                    class="optionTh"
+                            ></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="blockUserInstrument">
+                    <div class="userSingleInstrument">
+                        <label for="level">Avec un niveau :</label>
+                        <select id="level" name="level" class="fieldLevel">
+                            <option value="0" disabled>Votre niveau</option>
+                            <option value="1">Débutant</option>
+                            <option value="2">Intermédiaire</option>
+                            <option value="3">Avancé</option>
+                            <option value="4">Pro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="blockUserWeek">
+                    <span>Jours de disponibilité</span>
+                    <div class="blockUserDays">
+                        <div class="eachDay">
+                            <label for="monday">Lu</label>
+                            <input type="checkbox" id="monday" name="monday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="tuesday">Ma</label>
+                            <input type="checkbox" id="tuesday" name="tuesday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="wednesday">Me</label>
+                            <input type="checkbox" id="wednesday" name="wednesday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="thursday">Je</label>
+                            <input type="checkbox" id="thursday" name="thursday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="friday">Ve</label>
+                            <input type="checkbox" id="friday" name="friday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="saturday">Sa</label>
+                            <input type="checkbox" id="saturday" name="saturday" class="checkbox">
+                        </div>
+                        <div class="eachDay">
+                            <label for="sunday">Di</label>
+                            <input type="checkbox" id="sunday" name="sunday" class="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="saveProfile">
+                    <input type="hidden" name="idBand" th:value="${band.getIdBand()}"/>
+                    <input type="submit" value="Valider" class="saveButton"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="footer :: footer">
+</footer>
+<script src="js/classie.js"></script>
+<script src="js/demo1.js"></script>
+<script>
+    $(function () {
+        // Slideshow 1
+        $("#slider1").responsiveSlides({
+            maxwidth: 800,
+            speed: 800
+        });
+        // Slideshow 2
+        $("#slider2").responsiveSlides({
+            auto: false,
+            pager: true,
+            speed: 300,
+            maxwidth: 540
+        });
+        // Slideshow 3
+        $("#slider3").responsiveSlides({
+            manualControls: '#slider3-pager',
+            maxwidth: 540
+        });
+        // Slideshow 4
+        $("#slider4").responsiveSlides({
+            auto: false,
+            pager: false,
+            nav: true,
+            speed: 500,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+    });
+</script>
+</body>
+</html>

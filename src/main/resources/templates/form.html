@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Antoine Zudas - Laurent Rous - Olivier Nocaudie">
+    <meta name="description" content="WhereIsMyBand">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link th:href="@{css/style.css}" href="../static/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <title>WhereIsMyBand</title>
+</head>
+<body>
+<form th:action="@{/creation-session-recherche}" method="post" th:fragment="form">
+    <div class="userSearch">
+        <div class="userSearchSpan">
+            <span>Je recherche... </span>
+        </div>
+        <div class="test">
+            <div class="searchCheckbox">
+                <input type="checkbox" id="jamD" name="jam" class="checkbox" th:checked="${jam}">
+                <label for="jamD">une Jam Session !</label>
+            </div>
+            <div class="searchCheckbox">
+                <input type="checkbox" id="groupeD" name="band" class="checkbox" th:checked="${band}">
+                <label for="groupeD">un Groupe !</label>
+            </div>
+        </div>
+    </div>
+    <div class="userPostCode">
+        <label for="postcodeD">Code postal</label>
+        <input type="text" id="postcodeD" name="postcode" class="fieldPostCode"
+               th:value="${search.getPostcode()}"/>
+    </div>
+    <div class="blockMusicStyle">
+        <label for="searchStyleD">Style</label>
+        <div class="musicStyle">
+            <select id="searchStyleD" name="style" class="fieldStyle">
+                <option th:each="style : ${styles}"
+                        th:value="${style.idStyle}"
+                        th:text="${style.style}"
+                        th:selected="${style.idStyle == search.getIdStyle()}"
+                        class="optionTh">
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="blockUserInstrument">
+        <div class="userSingleInstrument">
+            <select id="mainInstrumentD" name="mainInstrument" class="fieldInstrument">
+                <option th:each="instrument : ${instruments}"
+                        th:value="${instrument.idInstrument}"
+                        th:text="${instrument.name}"
+                        th:selected="${instrument.idInstrument == search.getIdInstrument()}" class="optionTh"
+                ></option>
+            </select>
+            <select id="mainInstrumentLevelD" name="mainInstrumentLevel" class="fieldLevel">
+                <option value="0" disabled th:selected="${search.getLevel() == 0 }">Votre niveau</option>
+                <option value="1" th:selected="${search.getLevel() == 1 }">Débutant</option>
+                <option value="2" th:selected="${search.getLevel() == 2 }">Intermédiaire</option>
+                <option value="3" th:selected="${search.getLevel() == 3 }">Avancé</option>
+                <option value="4" th:selected="${search.getLevel() == 4 }">Pro</option>
+            </select>
+        </div>
+        <div th:if="${twoInstrument == false}" class="userSingleInstrument">
+            <select id="secondInstrumentD" name="secondInstrument" class="fieldInstrument">
+                <option value="0" selected>Votre instrument secondaire</option>
+                <option th:each="instrument : ${instruments}"
+                        th:value="${instrument.idInstrument}"
+                        th:text="${instrument.name}"></option>
+            </select>
+            <select id="secondInstrumentLevelD" name="secondInstrumentLevel" class="fieldLevel">
+                <option value="0" selected>Votre niveau</option>
+                <option value="1">Débutant</option>
+                <option value="2">Intermédiaire</option>
+                <option value="3">Avancé</option>
+                <option value="4">Pro</option>
+            </select>
+        </div>
+        <div th:if="${twoInstrument == true}" class="userSingleInstrument">
+            <select id="secondInstrumentDT" name="secondInstrument" class="fieldInstrument">
+                <option value="0" selected>Votre instrument secondaire</option>
+                <option th:each="instrument : ${instruments}"
+                        th:value="${instrument.idInstrument}"
+                        th:text="${instrument.name}"
+                        th:selected="${instrument.idInstrument == search.getIdInstrument2()}"></option>
+            </select>
+            <select id="secondInstrumentLevelDT" name="secondInstrumentLevel" class="fieldLevel">
+                <option value="0" th:selected="${search.getLevel() == 0 }">Votre niveau</option>
+                <option value="1" th:selected="${search.getLevel2() == 1 }">Débutant</option>
+                <option value="2" th:selected="${search.getLevel2() == 2 }">Intermédiaire</option>
+                <option value="3" th:selected="${search.getLevel2() == 3 }">Avancé</option>
+                <option value="4" th:selected="${search.getLevel2() == 4 }">Pro</option>
+            </select>
+        </div>
+    </div>
+    <div class="blockUserWeek">
+        <span>Jours de disponibilité</span>
+        <div class="blockUserDays">
+            <div class="eachDay">
+                <label for="monday">Lu</label>
+                <input type="checkbox" id="monday" name="monday" class="checkbox" th:checked="${monday}">
+            </div>
+            <div class="eachDay">
+                <label for="tuesday">Ma</label>
+                <input type="checkbox" id="tuesday" name="tuesday" class="checkbox" th:checked="${tuesday}">
+            </div>
+            <div class="eachDay">
+                <label for="wednesday">Me</label>
+                <input type="checkbox" id="wednesday" name="wednesday" class="checkbox" th:checked="${wednesday}">
+            </div>
+            <div class="eachDay">
+                <label for="thursday">Je</label>
+                <input type="checkbox" id="thursday" name="thursday" class="checkbox" th:checked="${thursday}">
+            </div>
+            <div class="eachDay">
+                <label for="friday">Ve</label>
+                <input type="checkbox" id="friday" name="friday" class="checkbox" th:checked="${friday}">
+            </div>
+            <div class="eachDay">
+                <label for="saturday">Sa</label>
+                <input type="checkbox" id="saturday" name="saturday" class="checkbox" th:checked="${saturday}">
+            </div>
+            <div class="eachDay">
+                <label for="sunday">Di</label>
+                <input type="checkbox" id="sunday" name="sunday" class="checkbox" th:checked="${sunday}">
+            </div>
+        </div>
+    </div>
+    <div class="saveProfile">
+        <input type="hidden" name="idMusician" th:value="${session.musicianLevelInstrument.getIdMusician()}"/>
+        <input type="hidden" name="comefromhere" value="3"/>
+        <input type="hidden" name="password" th:value="${session.musicianLevelInstrument.getPassword()}"/>
+        <input type="hidden" name="userMail" th:value="${session.musicianLevelInstrument.getEmail()}"/>
+        <input type="submit" value="Valider" class="saveButton"/>
+    </div>
+</form>
+</body>
+</html>

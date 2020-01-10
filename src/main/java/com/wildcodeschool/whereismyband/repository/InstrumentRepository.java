@@ -25,7 +25,7 @@ public class InstrumentRepository {
             List<Instrument> instruments = new ArrayList<>();
 
             while (resultSet.next()) {
-                int id_instrument = resultSet.getInt("id_instrument");
+                Long id_instrument = resultSet.getLong("id_instrument");
                 String name = resultSet.getString("name");
                 if (name.length() > 35) {
                     name = name.substring(0, 35) + "...";
@@ -33,6 +33,29 @@ public class InstrumentRepository {
                 instruments.add(new Instrument(id_instrument, name));
             }
             return instruments;
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Instrument getInstrumentById(long idInstrument) {
+        try {
+            Connection connection = DriverManager.getConnection(
+                    DB_URL, DB_USER, DB_PASSWORD
+            );
+            PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM instrument WHERE id_instrument = ?;"
+            );
+
+            statement.setLong(1, idInstrument);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String name = resultSet.getString("name");
+                return new Instrument(idInstrument, name);
+            }
         } catch (
                 SQLException e) {
             e.printStackTrace();

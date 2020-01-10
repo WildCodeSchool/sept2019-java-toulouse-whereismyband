@@ -20,22 +20,24 @@
         <div class="blockUserInfo">
             <a th:href="@{/connexion}">J'ai déjà un compte</a>
         </div>
-        <form method="post" th:action="@{/recherche}">
+        <form method="post" th:action="@{/creation-session-recherche}">
             <div class="blockUserInfo">
                 <label for="userMail">Email</label>
                 <input type="email" id="userMail" name="userMail" placeholder="Votre email"/>
+                <p class="resultError" th:if="${checkEmail == false}">Mauvais format de mail (abcd123_@abcd.bc)</p>
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" class="fieldAccountInfo"
                        placeholder="Mot de passe">
                 <input type="password" id="newpassword" name="newpassword" class="fieldAccountInfo"
-                       placeholder="Confirmer le mot de passe">
+                       placeholder="Confirmer le mot de passe"/>
+                <p class="resultError" th:if="${checkPassword == false}">Les mots de passes ne correspondent pas</p>
             </div>
             <div class="blockUserInstrument">
                 <div class="userSingleInstrument">
                     <select id="mainInstrument" name="mainInstrument" class="fieldInstrument">
                         <option value="0" disabled selected>Votre instrument principal</option>
                         <option th:each="instrument : ${instruments}"
-                                th:value="${instrument.id_instrument}"
+                                th:value="${instrument.idInstrument}"
                                 th:text="${instrument.name}" class="optionTh"></option>
                     </select>
                     <select id="mainInstrumentLevel" name="mainInstrumentLevel" class="fieldLevel">
@@ -50,7 +52,7 @@
                     <select id="secondInstrument" name="secondInstrument" class="fieldInstrument">
                         <option value="0" disabled selected>Votre instrument secondaire</option>
                         <option th:each="instrument : ${instruments}"
-                                th:value="${instrument.id_instrument}"
+                                th:value="${instrument.idInstrument}"
                                 th:text="${instrument.name}"></option>
                     </select>
                     <select id="secondInstrumentLevel" name="secondInstrumentLevel" class="fieldLevel">
@@ -66,6 +68,8 @@
                 <label for="postcode">Code postal</label>
                 <input type="text" id="postcode" name="postcode" class="fieldPostCode"
                        placeholder="Votre code postal">
+                <p class="resultError" th:if="${checkPostcode == false}">Le format du code postal ne correspond pas (12345)</p>
+                <input type="hidden" name="comefromhere" value="1"/>
             </div>
             <div class="saveProfile">
                 <input type="submit" value="Valider" class="saveButton">
